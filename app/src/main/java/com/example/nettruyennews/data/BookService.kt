@@ -2,6 +2,7 @@ package com.example.nettruyennews.data
 
 import com.example.nettruyennews.model.Book
 import com.example.nettruyennews.model.DescriptionBook
+import com.example.nettruyennews.util.Constant
 
 interface BookService {
 
@@ -10,4 +11,8 @@ interface BookService {
     suspend fun description(book: Book): DescriptionBook
 
     suspend fun detail(currentChapter: Int, descriptionBook: DescriptionBook): List<String>
+
+    suspend fun category(url: String = Constant.URL): List<Pair<String, String>>
+
+    suspend fun ranking(url: String = Constant.URL): List<Pair<String, String>>
 }

@@ -1,42 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+        <variable
+            name="viewModel"
+            type="com.example.nettruyennews.viewmodel.HomeViewModel" />
+    </data>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/swipeRefreshLayout"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
 
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/searchViewBook"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10sp"
-                android:focusable="false"
-                android:orientation="vertical"
-                android:theme="@style/AppSearchView"
-                app:defaultQueryHint="Tìm kiếm truyện"
-                app:iconifiedByDefault="false" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rcvBook"
-                android:layout_width="match_parent"
-                android:layout_height="0sp"
-                android:layout_weight="1"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:context=".ui.fragment.HomeFragment" />
+                android:layout_height="match_parent"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical">
 
 
-        </LinearLayout>
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/searchViewBook"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10sp"
+                    android:focusable="false"
+                    android:orientation="vertical"
+                    android:theme="@style/AppSearchView"
+                    app:defaultQueryHint="Tìm kiếm truyện"
+                    app:iconifiedByDefault="false" />
+
+                <Button
+                    android:id="@+id/btnMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:onClick="@{()->viewModel.onClickMenu()}"
+                    android:text="Menu" />
+
+                <Button
+                    android:id="@+id/btnRanking"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:onClick="@{()->viewModel.onClickRanking()}"
+                    android:text="Ranking" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcvBook"
+                    android:layout_width="match_parent"
+                    android:layout_height="0sp"
+                    android:layout_weight="1"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:context=".ui.fragment.HomeFragment" />
+
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.example.nettruyennews.R
 
@@ -56,3 +57,19 @@ fun Context.showDialog(
         .show()
 }
 
+
+fun <T> Context.showDialog(
+    title: String,
+    data: List<T>,
+    onClick: ((Int) -> Unit)?
+): AlertDialog? {
+    val builder = AlertDialog.Builder(this)
+    builder.setTitle(title)
+    val arrayAdapter = ArrayAdapter(this, android.R.layout.select_dialog_item, data)
+    builder.setAdapter(arrayAdapter) { _, position ->
+        if (onClick != null) {
+            onClick(position)
+        }
+    }
+    return builder.show()
+}

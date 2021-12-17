@@ -4,8 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.example.nettruyennews.data.BookDao
 import com.example.nettruyennews.data.ChapterDao
+import com.example.nettruyennews.data.converter.Converters
 import com.example.nettruyennews.model.room.BookRoom
 import com.example.nettruyennews.model.room.ChapterRoom
 import com.example.nettruyennews.util.Constant
@@ -16,6 +18,7 @@ import com.example.nettruyennews.util.Constant
     version = Constant.VERSION,
     exportSchema = false
 )
+@TypeConverters(Converters::class)
 abstract class BookDatabase : RoomDatabase() {
     abstract val bookDao: BookDao
     abstract val chapterDao: ChapterDao

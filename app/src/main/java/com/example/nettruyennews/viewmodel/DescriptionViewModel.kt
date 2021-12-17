@@ -1,11 +1,13 @@
 package com.example.nettruyennews.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.example.nettruyennews.model.Book
 import com.example.nettruyennews.model.DescriptionBook
+import com.example.nettruyennews.model.room
 import com.example.nettruyennews.model.room.BookRoom
 import com.example.nettruyennews.model.room.ChapterRoom
 import com.example.nettruyennews.repository.DescriptionRepository
@@ -28,12 +30,13 @@ constructor(
         get() = descriptionCurrent!!
 
     val chapterCurrent = MutableLiveData<Int>()
-
     val isBookFavorite = MutableLiveData(false)
     val isReadedBook = MutableLiveData(false)
-    private var chapterReaded: ChapterRoom? = null
-
     val notification = MutableLiveData<String>()
+
+    private var chapterReaded: ChapterRoom? = null
+    private var bookRoom: BookRoom? = null
+
 
     fun getDescription(book: Book) = liveData(Dispatchers.IO) {
         emit(Resource.loading())
@@ -46,55 +49,53 @@ constructor(
     }
 
     fun getBookFromDatabase() = viewModelScope.launch {
-        val book =
+        bookRoom =
             withContext(Dispatchers.IO) {
                 descriptionRepository.getBookByLink(description.book.link)
             }.firstOrNull()
-        isBookFavorite.value = book?.categories?.contains(BookRoom.FAVORITE)
-        isReadedBook.value = book?.categories?.contains(BookRoom.READED)
 
+        isBookFavorite.value = bookRoom?.categories?.contains(BookRoom.FAVORITE)
+        isReadedBook.value = bookRoom?.categories?.contains(BookRoom.READED)
 
-    }
+        Log.d(
+            "huy111",
+            "getBookFromDatabase: ${bookRoom?.title} - ${bookRoom?.categories.toString()}"
+        )
 
-
-    fun isFavorite() = viewModelScope.launch {
-        descriptionCurrent?.let {
-            val bookByTitleDeferred = async { descriptionRepository.getBookByLink(it.book.link) }
-
-            val bookByTitle = bookByTitleDeferred.await()
-
-            isBookFavorite.value = bookByTitle.isNotEmpty()
-        }
     }
 
     fun isReaded() = viewModelScope.launch {
         descriptionCurrent?.let {
             val chapterDeferred = async { descriptionRepository.getChapterByLink(it.book.link) }
             val chapter = chapterDeferred.await()
-            isReadedBook.value = chapter.isNotEmpty()
             chapterReaded = chapter.firstOrNull()
         }
     }
 
-    fun handleBookToDatabase() = viewModelScope.launch {
-
-        if (isBookFavorite.value != null && descriptionCurrent != null) {
-
-            val wasSave = isBookFavorite.value!!
-            val description = descriptionCurrent!!
-
-
-            val resultDeferred = if (wasSave) {
-                async { descriptionRepository.deleteBook(description.book.title) }
-            } else {
-                async { descriptionRepository.saveBook(description.book).toInt() }
+    private fun handleBookToDatabase(type: Int) = viewModelScope.launch {
+        val resultDeferred = if (bookRoom == null) {
+            async {
+                descriptionRepository.saveBook(
+                    description.book.room().apply { categories.add(type) }).toInt()
             }
-
-            notificationBook(wasSave, resultDeferred.await())
-
-            isBookFavorite.value = !wasSave
+        } else if (bookRoom!!.categories.contains(type)) {
+            if (bookRoom!!.categories.size == 1) {
+                async { descriptionRepository.deleteBook(bookRoom!!) }
+            } else {
+                async {
+                    descriptionRepository.updateBook(bookRoom!!.apply {
+                        categories.remove(
+                            type
+                        )
+                    })
+                }
+            }
         } else {
-            notification.value = "Something wrong here...."
+            async { descriptionRepository.updateBook(bookRoom!!.apply { categories.add(type) }) }
+        }
+
+        if (resultDeferred.await() > 0) {
+            getBookFromDatabase()
         }
     }
 
@@ -110,23 +111,17 @@ constructor(
 
 
     private fun saveChapter(value: Int) = viewModelScope.launch {
-
-        val book = description.book
-
-        val bookByLink =
-            withContext(Dispatchers.IO) {
-                descriptionRepository.getBookByLink(book.link)
-            }.firstOrNull()
-
-        //if dont get anybook then we create type readed
-        if (bookByLink == null) {
-            descriptionRepository.saveBook(BookRoom(book))
-        }
+        handleBookToDatabase(BookRoom.READED)
 
         descriptionRepository.saveChapter(
             description.book.link,
             description.chapter[value]
         )
+    }
+
+
+    fun onClickFavorite() {
+        viewModelScope.launch { handleBookToDatabase(BookRoom.FAVORITE) }
     }
 
     fun onClickChapter(value: Int) {

@@ -5,6 +5,7 @@ import com.example.nettruyennews.model.Book
 import com.example.nettruyennews.model.Chapter
 import com.example.nettruyennews.model.DescriptionBook
 import com.example.nettruyennews.network.OkHttpHtml
+import com.example.nettruyennews.util.Constant
 import org.jsoup.Jsoup
 
 class JsoupNetTruyen() : BookService {
@@ -26,7 +27,7 @@ class JsoupNetTruyen() : BookService {
                 val linkBook = infoBook.attr("href")
                 val imageBook = infoBook.select("img").attr("data-original")
 
-                val book = Book(title = titleBook, link =  linkBook, image =  imageBook)
+                val book = Book(title = titleBook, link = linkBook, image = imageBook)
 
                 books.add(book)
             }
@@ -118,6 +119,54 @@ class JsoupNetTruyen() : BookService {
 
 
         return images
+    }
+
+    override suspend fun category(url: String): List<Pair<String, String>> {
+        val html = OkHttpHtml.webToHtml(url)
+        val documented = Jsoup.parse(html)
+        val categories = mutableListOf<Pair<String, String>>()
+        val rootMenu = documented
+            .getElementsByClass("container")[1]
+            .getElementsByClass("nav navbar-nav main-menu")[0]
+            .getElementsByClass("dropdown")[0]
+            .getElementsByClass("dropdown-menu megamenu")[0]
+            .select("li")
+
+        for ((index, treeMenu) in rootMenu.withIndex()) {
+
+            if (index == 0) continue
+
+            val link = treeMenu.select("a").attr("href")
+            val text = treeMenu.text()
+
+            categories.add(link to text)
+        }
+
+        return categories
+    }
+
+    override suspend fun ranking(url: String): List<Pair<String, String>> {
+        val html = OkHttpHtml.webToHtml(url)
+        val documented = Jsoup.parse(html)
+        val rank = mutableListOf<Pair<String, String>>()
+        val rootMenu = documented
+            .getElementsByClass("container")[1]
+            .getElementsByClass("nav navbar-nav main-menu")[0]
+            .getElementsByClass("dropdown")[1]
+            .select("a")
+
+
+        for ((index, treeMenu) in rootMenu.withIndex()) {
+
+            if (index == 0) continue
+
+            val link = treeMenu.select("a").attr("href")
+            val text = treeMenu.text()
+
+            rank.add(Constant.URL_ORIGNAL + link to text)
+        }
+
+        return rank
     }
 
 

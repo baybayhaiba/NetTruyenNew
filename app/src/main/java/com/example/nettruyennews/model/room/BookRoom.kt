@@ -13,7 +13,7 @@ class BookRoom constructor(
     title: String,
     link: String,
     image: String,
-    val categories: List<Int> = emptyList()
+    var categories: MutableList<Int> = mutableListOf()
 ) : Book(title, link, image) {
 
     constructor(book: Book) : this(

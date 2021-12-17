@@ -37,3 +37,12 @@ fun Fragment.showDialog(
 ) {
     activity?.showDialog(title, message, okDialog, cancelDialog)
 }
+
+
+fun <T> Fragment.showDialog(
+    title: String,
+    data: List<T>,
+    onClick: ((Int) -> Unit)?
+): AlertDialog? {
+    return activity?.showDialog(title, data, onClick)
+}

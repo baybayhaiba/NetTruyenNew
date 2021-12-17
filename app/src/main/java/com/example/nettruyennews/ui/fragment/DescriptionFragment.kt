@@ -14,7 +14,6 @@ import com.example.nettruyennews.model.DescriptionBook
 import com.example.nettruyennews.ui.base.BaseFragment
 import com.example.nettruyennews.util.Status
 import com.example.nettruyennews.util.showLoading
-import com.example.nettruyennews.util.showToast
 import com.example.nettruyennews.viewmodel.DescriptionViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -43,10 +42,10 @@ class DescriptionFragment : BaseFragment<DescriptionViewModel, FragmentDescripti
                 rcvChapter.adapter = adapterChapter
                 //val bundle = DescriptionFragmentArgs.fromBundle(arguments!!)
                 activity?.intent?.getParcelableExtra<Book>(BOOK)?.let { book ->
+
                     mViewModel.getDescription(book).observe(this@DescriptionFragment) {
                         when (it.status) {
                             Status.ERROR -> {
-                                showToast(it.message)
                                 loading?.dismiss()
                             }
                             Status.LOADING -> loading?.show()
@@ -73,9 +72,9 @@ class DescriptionFragment : BaseFragment<DescriptionViewModel, FragmentDescripti
 
     private fun setupData(descriptionBook: DescriptionBook?) {
         if (descriptionBook == null) return
+
         mViewModel.descriptionCurrent = descriptionBook
-        mViewModel.isReaded()
-        mViewModel.isFavorite()
+        mViewModel.getBookFromDatabase()
         mViewBinding?.description = descriptionBook
         mViewBinding?.lifecycleOwner = this
         mViewBinding?.viewModel = mViewModel

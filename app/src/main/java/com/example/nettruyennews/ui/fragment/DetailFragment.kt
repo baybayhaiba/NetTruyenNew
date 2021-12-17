@@ -31,9 +31,9 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>() {
             adapterImage = AdapterImage { onClickImage(it) }
 
             binding.rcvImage.adapter = adapterImage
+            binding.rcvImage.isNestedScrollingEnabled = false
             binding.viewModel = mViewModel
             binding.lifecycleOwner = this
-
 
             DetailFragmentArgs.fromBundle(requireArguments()).let {
                 val description = it.book

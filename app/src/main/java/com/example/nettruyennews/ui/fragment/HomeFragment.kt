@@ -34,6 +34,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         showLoading()
     }
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,8 +47,10 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             mViewBinding = FragmentHomeBinding.inflate(inflater, container, false)
             setupSearchView()
             adapter = AdapterBook { onClick(it) }
-            mViewBinding?.rcvBook?.adapter = adapter
-            mViewBinding?.swipeRefreshLayout?.setOnRefreshListener { mViewModel.getBooks() }
+            binding.rcvBook.adapter = adapter
+            binding.rcvBook.isNestedScrollingEnabled = false
+            binding.viewModel = mViewModel
+            binding.swipeRefreshLayout.setOnRefreshListener { mViewModel.getBooks() }
 
             mViewModel.loading.observe(this) {
                 if (it) {
@@ -64,13 +67,21 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             mViewModel.error.observe(this) {
                 show(it)
             }
+
+            (mViewModel.menu + mViewModel.ranking).observer(this) { data ->
+                val (link, text) = data.unzip()
+
+                showDialog("Information", text, onClick = {
+                    mViewModel.getBooks(link[it])
+                })
+            }
         }
 
 
         return mViewBinding!!.root
     }
 
-    private fun dismiss(){
+    private fun dismiss() {
         loading?.dismiss()
         mViewBinding?.swipeRefreshLayout?.isRefreshing = false
     }
