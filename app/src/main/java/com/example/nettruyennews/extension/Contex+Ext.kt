@@ -4,10 +4,12 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import com.example.nettruyennews.R
 
 fun Context.showToast(text: String?) {
@@ -72,4 +74,25 @@ fun <T> Context.showDialog(
         }
     }
     return builder.show()
+}
+
+
+fun Activity.requestPermission(permissions: Array<String>) {
+    ActivityCompat.requestPermissions(
+        this,
+        permissions,
+        Constant.VALUE_PERMISSION
+    )
+}
+
+fun Activity.checkPermission(permissions: Array<String>): Boolean {
+    var isGrantedAll = true
+
+    for (permission in permissions) {
+        if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
+            isGrantedAll = false
+        }
+    }
+
+    return isGrantedAll
 }

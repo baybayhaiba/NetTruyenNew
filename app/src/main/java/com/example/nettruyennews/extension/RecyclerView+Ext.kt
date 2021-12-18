@@ -1,4 +1,4 @@
-package com.example.nettruyennews.util
+package com.example.nettruyennews.extension
 
 import android.util.Log
 import androidx.core.widget.NestedScrollView

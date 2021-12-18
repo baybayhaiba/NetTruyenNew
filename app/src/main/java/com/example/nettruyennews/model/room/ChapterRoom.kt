@@ -8,9 +8,9 @@ import java.util.*
 @Entity(tableName = ChapterRoom.TABLE_NAME)
 class ChapterRoom(
     @PrimaryKey
-    override val title: String,
     val root: String,
     var timeAgoSave: Long = Date().time,
+    title: String,
     link: String,
     timeAgo: String,
     view: String

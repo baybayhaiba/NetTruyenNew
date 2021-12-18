@@ -1,11 +1,13 @@
 package com.example.nettruyennews.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nettruyennews.databinding.BookItemBinding
 import com.example.nettruyennews.model.Book
+import com.example.nettruyennews.model.room.BookRoom
 
 class AdapterBook(private val onClick: (Book) -> Unit) :
     RecyclerView.Adapter<AdapterBook.ViewHolderBook>() {
@@ -23,6 +25,7 @@ class AdapterBook(private val onClick: (Book) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(book: Book, onClick: (Book) -> Unit) {
+
             binding.apply { this.book = book }.root.setOnClickListener { onClick(book) }
         }
     }

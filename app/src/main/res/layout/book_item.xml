@@ -23,10 +23,10 @@
             android:orientation="vertical">
 
             <ImageView
-                app:imageGlide="@{book.image}"
                 android:layout_width="match_parent"
                 android:layout_height="200sp"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                app:imageGlide="@{book}" />
 
             <TextView
                 android:layout_width="match_parent"

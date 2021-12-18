@@ -7,6 +7,7 @@ import com.example.nettruyennews.model.Book
 import com.example.nettruyennews.model.Chapter
 import com.example.nettruyennews.model.room.BookRoom
 import com.example.nettruyennews.model.room.ChapterRoom
+import com.example.nettruyennews.util.FileUtil
 
 class DescriptionRepository(
     private val jsoupService: JsoupNetTruyen,
@@ -17,7 +18,6 @@ class DescriptionRepository(
     suspend fun saveBook(bookRoom: BookRoom) = bookDao.saveBook(bookRoom)
     suspend fun updateBook(bookRoom: BookRoom) = bookDao.updateBook(bookRoom)
     suspend fun deleteBook(bookRoom: BookRoom) = bookDao.deleteBook(bookRoom)
-
 
     suspend fun getBookByLink(link: String) = bookDao.getBookByLink(link)
     suspend fun getChapterByLink(link: String) = chapterDao.chapterByLink(link)

@@ -6,12 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import com.bumptech.glide.Glide
 import com.example.nettruyennews.adapter.AdapterImage
 import com.example.nettruyennews.databinding.FragmentDetailBinding
 import com.example.nettruyennews.ui.base.BaseFragment
 import com.example.nettruyennews.util.*
 import com.example.nettruyennews.viewmodel.DetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>() {
@@ -66,7 +70,21 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>() {
 
     private fun reloadChapter() {
         binding.layoutButton.visibility = View.GONE
+        adapterImage.submit(emptyList())
+        clearCache()
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        clearCache()
+    }
+
+    private fun clearCache() = runBlocking {
+        withContext(Dispatchers.IO) {
+            activity?.applicationContext?.let { Glide.get(it).clearDiskCache() }
+        }
+    }
+
 
     private fun setupData(images: List<String>?) {
         if (images == null) return

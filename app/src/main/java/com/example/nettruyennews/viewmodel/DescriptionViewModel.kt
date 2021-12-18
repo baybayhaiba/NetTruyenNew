@@ -11,6 +11,7 @@ import com.example.nettruyennews.model.room
 import com.example.nettruyennews.model.room.BookRoom
 import com.example.nettruyennews.model.room.ChapterRoom
 import com.example.nettruyennews.repository.DescriptionRepository
+import com.example.nettruyennews.util.FileUtil
 import com.example.nettruyennews.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -57,11 +58,6 @@ constructor(
         isBookFavorite.value = bookRoom?.categories?.contains(BookRoom.FAVORITE)
         isReadedBook.value = bookRoom?.categories?.contains(BookRoom.READED)
 
-        Log.d(
-            "huy111",
-            "getBookFromDatabase: ${bookRoom?.title} - ${bookRoom?.categories.toString()}"
-        )
-
     }
 
     fun isReaded() = viewModelScope.launch {
@@ -69,16 +65,19 @@ constructor(
             val chapterDeferred = async { descriptionRepository.getChapterByLink(it.book.link) }
             val chapter = chapterDeferred.await()
             chapterReaded = chapter.firstOrNull()
+
+            Log.d("huy112", "isReaded: ${chapterReaded?.title}")
         }
     }
 
     private fun handleBookToDatabase(type: Int) = viewModelScope.launch {
         val resultDeferred = if (bookRoom == null) {
             async {
+                FileUtil.saveImageToDevice(book = description.book)
                 descriptionRepository.saveBook(
                     description.book.room().apply { categories.add(type) }).toInt()
             }
-        } else if (bookRoom!!.categories.contains(type)) {
+        } else if (bookRoom!!.categories.contains(type) && type == BookRoom.FAVORITE) {
             if (bookRoom!!.categories.size == 1) {
                 async { descriptionRepository.deleteBook(bookRoom!!) }
             } else {
@@ -117,6 +116,7 @@ constructor(
             description.book.link,
             description.chapter[value]
         )
+
     }
 
 

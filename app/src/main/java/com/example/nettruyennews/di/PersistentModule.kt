@@ -2,6 +2,7 @@ package com.example.nettruyennews.di
 
 import android.app.Application
 import com.example.nettruyennews.data.database.BookDatabase
+import com.example.nettruyennews.util.FileUtil
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -6,6 +6,8 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.nettruyennews.R
+import com.example.nettruyennews.util.Constant
+import com.example.nettruyennews.util.requestPermission
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,6 +25,7 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavigationView.setupWithNavController(navController)
 
+        requestPermission(Constant.ALL_PERMISSION_ACTIVITY)
 
     }
 }
