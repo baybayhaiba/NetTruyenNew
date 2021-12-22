@@ -2,7 +2,6 @@ package com.example.nettruyennews.ui.fragment
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,11 +44,14 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         AdapterCategory(onClickCategory = ::onClickCategories)
     }
 
+    private val adapterBook: AdapterBook by lazy {
+        AdapterBook(onClick = ::onClick)
+    }
+
     private val pagingBook: RemoteBookPager by lazy {
         RemoteBookPager(onClick = ::onClick)
     }
 
-    private lateinit var adapter: AdapterBook
     private val loading: AlertDialog? by lazy {
         showLoading()
     }
@@ -66,10 +68,10 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             navController = navHostFragment.navController
             mViewBinding = FragmentHomeBinding.inflate(inflater, container, false)
             setupSearchView()
-            adapter = AdapterBook { onClick(it) }
 
             binding.rcvCategories.adapter = adapterCategories
             binding.rcvCategories.isNestedScrollingEnabled = false
+            //binding.rcvBook.adapter = adapterBook
             binding.rcvBook.adapter = pagingBook
             binding.rcvBook.isNestedScrollingEnabled = false
             binding.viewModel = mViewModel
@@ -84,11 +86,15 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             }
 
             lifecycleScope.launch(Dispatchers.IO) {
-                mViewModel.books?.distinctUntilChanged()?.collectLatest {
+                mViewModel.fetchBookPaging().distinctUntilChanged().collectLatest {
                     pagingBook.submitData(it)
-                    dismiss()
                 }
             }
+
+
+//            mViewModel.books.observe(this) {
+//                adapterBook.submit(it)
+//            }
 
             mViewModel.error.observe(this) {
                 show(it)
@@ -108,13 +114,10 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         return mViewBinding!!.root
     }
 
+
     private fun dismiss() {
         loading?.dismiss()
         mViewBinding?.swipeRefreshLayout?.isRefreshing = false
-    }
-
-    private fun getBooks(books: List<Book>) {
-        adapter.submit(books)
     }
 
     private fun setupSearchView() {

@@ -1,6 +1,5 @@
 package com.example.nettruyennews.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,15 +16,19 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val homeRepository: HomeRepository) : ViewModel() {
     val loading = MutableLiveData<Boolean>()
-    var books :  Flow<PagingData<Book>>? = null
+    val books = MutableLiveData<List<Book>>()
     val error = MutableLiveData<String>()
 
     val menu = MutableLiveData<List<Pair<String, String>>>()
     val ranking = MutableLiveData<List<Pair<String, String>>>()
 
-    init {
-        getBooks()
-    }
+    var URL_CURRENT = Constant.URL
+
+//    init {
+//        getBooks("${URL_CURRENT}1")
+//    }
+
+    fun fetchBookPaging() = homeRepository.bookPagingFlow(url = "${URL_CURRENT}1")
 
     private fun getMenu() = viewModelScope.launch(Dispatchers.IO) {
         loading.postValue(true)
@@ -50,12 +53,11 @@ class HomeViewModel @Inject constructor(private val homeRepository: HomeReposito
     }
 
 
-    fun getBooks(url: String = "${Constant.URL}1") =
+    fun getBooks(url: String = Constant.URL) =
         viewModelScope.launch(Dispatchers.IO) {
-
             loading.postValue(true)
             try {
-                books = homeRepository.bookPagingFlow(url = url)
+                books.postValue(homeRepository.home(url))
             } catch (e: Exception) {
                 error.postValue(e.message.toString())
             } finally {
@@ -71,5 +73,4 @@ class HomeViewModel @Inject constructor(private val homeRepository: HomeReposito
     fun onClickRanking() {
         getRanking()
     }
-
 }
