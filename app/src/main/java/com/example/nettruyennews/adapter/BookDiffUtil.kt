@@ -19,7 +19,7 @@ class BookDiffUtil(private val oldBooks: List<Book>, private val newBooks: List<
         if (oldBooks[oldItemPosition] is BookRoom && newBooks[newItemPosition] is BookRoom) {
             val oldBook = oldBooks[oldItemPosition] as BookRoom
             val newBook = newBooks[newItemPosition] as BookRoom
-            
+
             return oldBook.id == newBook.id
         }
 

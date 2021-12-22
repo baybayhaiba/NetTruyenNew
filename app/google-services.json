@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "581877327091",
+    "project_id": "nettruyenfakes",
+    "storage_bucket": "nettruyenfakes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:581877327091:android:f1b6ac4a6ec1cb53498386",
+        "android_client_info": {
+          "package_name": "com.example.nettruyennews"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "581877327091-nh8rja4rcgt36adf1tb5d0jtg776b14i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCt8pT_lABCSumnlZgft8IEkS3FefxOMsM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "581877327091-nh8rja4rcgt36adf1tb5d0jtg776b14i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,22 +2,33 @@ package com.example.nettruyennews.ui.fragment
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.example.nettruyennews.R
 import com.example.nettruyennews.adapter.AdapterBook
+import com.example.nettruyennews.adapter.AdapterCategory
+import com.example.nettruyennews.adapter.RemoteBookPager
+import com.example.nettruyennews.data.BookService
 import com.example.nettruyennews.databinding.FragmentHomeBinding
+import com.example.nettruyennews.extension.observer
+import com.example.nettruyennews.extension.plus
 import com.example.nettruyennews.model.Book
-import com.example.nettruyennews.ui.DetailActivity
 import com.example.nettruyennews.ui.base.BaseFragment
 import com.example.nettruyennews.util.*
 import com.example.nettruyennews.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -29,6 +40,15 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         get() = mViewBinding!!
 
     private lateinit var navController: NavController
+
+    private val adapterCategories: AdapterCategory by lazy {
+        AdapterCategory(onClickCategory = ::onClickCategories)
+    }
+
+    private val pagingBook: RemoteBookPager by lazy {
+        RemoteBookPager(onClick = ::onClick)
+    }
+
     private lateinit var adapter: AdapterBook
     private val loading: AlertDialog? by lazy {
         showLoading()
@@ -47,7 +67,10 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             mViewBinding = FragmentHomeBinding.inflate(inflater, container, false)
             setupSearchView()
             adapter = AdapterBook { onClick(it) }
-            binding.rcvBook.adapter = adapter
+
+            binding.rcvCategories.adapter = adapterCategories
+            binding.rcvCategories.isNestedScrollingEnabled = false
+            binding.rcvBook.adapter = pagingBook
             binding.rcvBook.isNestedScrollingEnabled = false
             binding.viewModel = mViewModel
             binding.swipeRefreshLayout.setOnRefreshListener { mViewModel.getBooks() }
@@ -60,8 +83,11 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 }
             }
 
-            mViewModel.books.observe(this) {
-                getBooks(it)
+            lifecycleScope.launch(Dispatchers.IO) {
+                mViewModel.books?.distinctUntilChanged()?.collectLatest {
+                    pagingBook.submitData(it)
+                    dismiss()
+                }
             }
 
             mViewModel.error.observe(this) {
@@ -72,7 +98,8 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 val (link, text) = data.unzip()
 
                 showDialog("Information", text, onClick = {
-                    mViewModel.getBooks(link[it])
+                    val link = "${link[it]}?page=${BookService.DEFAULT_PAGE_INDEX}"
+                    mViewModel.getBooks(link)
                 })
             }
         }
@@ -117,10 +144,28 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
 
     private fun onClick(book: Book) {
-        val bundle = Bundle()
-        bundle.putParcelable(DescriptionFragment.BOOK, book)
-        startActivity<DetailActivity>(bundle)
-//        val action = HomeFragmentDirections.actionHomeFragmentToDescriptionFragment(book)
-//        findNavController().navigate(action)
+//        val bundle = Bundle()
+//        bundle.putParcelable(DescriptionFragment.BOOK, book)
+//        startActivity<DetailActivity>(bundle)
+        val action = HomeFragmentDirections.actionHomeFragmentToDescriptionFragment(book)
+        findNavController().navigate(action)
+    }
+
+    private fun onClickCategories(imageResource: Int) {
+        when (imageResource) {
+            R.drawable.ranking -> mViewModel.onClickRanking()
+            R.drawable.menu -> mViewModel.onClickMenu()
+            R.drawable.save -> {
+                val action =
+                    HomeFragmentDirections.actionHomeFragmentToSaveFragment()
+                findNavController().navigate(action)
+            }
+
+            R.drawable.man -> {
+                val action =
+                    HomeFragmentDirections.actionHomeFragmentToUserFragment()
+                findNavController().navigate(action)
+            }
+        }
     }
 }

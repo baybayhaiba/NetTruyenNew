@@ -1,6 +1,7 @@
 package com.example.nettruyennews
 
 import android.app.Application
+import android.provider.Settings
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
@@ -22,5 +23,9 @@ class BookApp : Application() {
 
             return instance!!
         }
+    }
+
+    public val UUID_DEVICE: String by lazy {
+        Settings.Secure.getString(instance?.contentResolver, Settings.Secure.ANDROID_ID)
     }
 }

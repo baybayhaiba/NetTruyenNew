@@ -1,4 +1,4 @@
-package com.example.nettruyennews.util
+package com.example.nettruyennews.extension
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData

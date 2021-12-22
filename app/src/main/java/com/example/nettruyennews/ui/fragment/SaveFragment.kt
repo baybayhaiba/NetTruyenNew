@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.nettruyennews.adapter.AdapterBook
 import com.example.nettruyennews.data.database.BookDatabase
 import com.example.nettruyennews.databinding.FragmentSaveBinding
@@ -25,6 +26,7 @@ class SaveFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentSaveBinding.inflate(inflater, container, false)
         binding.rcvBook.adapter = adapter
+        binding.toolbar.setNavigationOnClickListener {  requireActivity().onBackPressed() }
 
         val bookDB = BookDatabase.getInstance(requireContext())
         bookDB.bookDao.getBooks().observe(this) {
@@ -34,10 +36,14 @@ class SaveFragment : Fragment() {
         return binding.root
     }
 
+
     private fun onClick(book: Book) {
-        val bundle = Bundle()
-        bundle.putParcelable(DescriptionFragment.BOOK, book)
-        startActivity<DetailActivity>(bundle)
+//        val bundle = Bundle()
+//        bundle.putParcelable(DescriptionFragment.BOOK, book)
+//        startActivity<DetailActivity>(bundle)
+
+        val action = SaveFragmentDirections.actionSaveFragmentToDescriptionFragment(book)
+        findNavController().navigate(action)
     }
 
 }

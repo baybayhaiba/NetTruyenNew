@@ -12,6 +12,8 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.example.nettruyennews.R
 
+
+
 fun Context.showToast(text: String?) {
     Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
 }

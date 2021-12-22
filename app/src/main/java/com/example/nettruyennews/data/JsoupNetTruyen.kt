@@ -1,6 +1,7 @@
 package com.example.nettruyennews.data
 
 import Util
+import android.util.Log
 import com.example.nettruyennews.model.Book
 import com.example.nettruyennews.model.Chapter
 import com.example.nettruyennews.model.DescriptionBook
@@ -9,9 +10,11 @@ import com.example.nettruyennews.util.Constant
 import org.jsoup.Jsoup
 
 class JsoupNetTruyen() : BookService {
-    override suspend fun home(url: String): List<Book> {
+    override suspend fun home(url: String, page: Int): List<Book> {
 
-        val html = OkHttpHtml.webToHtml(url)
+        val urlText = url + page
+
+        val html = OkHttpHtml.webToHtml("$url$page")
 
         val document = Jsoup.parse(html)
         val books = mutableListOf<Book>()

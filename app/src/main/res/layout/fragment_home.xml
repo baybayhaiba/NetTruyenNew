@@ -39,21 +39,15 @@
                     app:defaultQueryHint="Tìm kiếm truyện"
                     app:iconifiedByDefault="false" />
 
-                <Button
-                    android:id="@+id/btnMenu"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_margin="5sp"
+                    android:id="@+id/rcvCategories"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5sp"
-                    android:onClick="@{()->viewModel.onClickMenu()}"
-                    android:text="Menu" />
-
-                <Button
-                    android:id="@+id/btnRanking"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5sp"
-                    android:onClick="@{()->viewModel.onClickRanking()}"
-                    android:text="Ranking" />
+                    android:layout_gravity="center_horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:spanCount="4"
+                    tools:listitem="@layout/category_item" />
 
 
                 <androidx.recyclerview.widget.RecyclerView
