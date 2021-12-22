@@ -13,12 +13,56 @@
         <action
             android:id="@+id/action_homeFragment_to_descriptionFragment"
             app:destination="@id/descriptionFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_saveFragment"
+            app:launchSingleTop="true"
+            app:destination="@id/saveFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_userFragment"
+            app:destination="@id/userFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/saveFragment"
         android:name="com.example.nettruyennews.ui.fragment.SaveFragment"
         android:label="fragment_save"
-        tools:layout="@layout/fragment_save" />
+        tools:layout="@layout/fragment_save" >
+        <action
+            android:id="@+id/action_saveFragment_to_descriptionFragment"
+            app:destination="@id/descriptionFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/descriptionFragment"
+        android:name="com.example.nettruyennews.ui.fragment.DescriptionFragment"
+        android:label="DescriptionFragment">
+
+
+        <action
+            android:id="@+id/action_descriptionFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+
+        <argument
+            android:name="book"
+            app:argType="com.example.nettruyennews.model.Book" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.nettruyennews.ui.fragment.DetailFragment"
+        android:label="DetailFragment">
+
+        <argument
+            android:name="book"
+            app:argType="com.example.nettruyennews.model.DescriptionBook" />
+
+        <argument
+            android:name="chapterCurrent"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.example.nettruyennews.ui.fragment.UserFragment"
+        android:label="UserFragment" />
 
 </navigation>

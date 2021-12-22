@@ -5,14 +5,13 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
+import android.provider.MediaStore
 import android.util.Log
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.example.nettruyennews.BookApp
-import com.example.nettruyennews.data.database.BookDatabase
 import com.example.nettruyennews.model.Book
-import kotlinx.coroutines.runBlocking
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -34,7 +33,7 @@ object FileUtil {
                         resource: Bitmap,
                         transition: Transition<in Bitmap>?
                     ) {
-                         saveToInternalStorage(
+                        saveToInternalStorage(
                             bitmapImage = resource,
                             name = book.title
                         )
@@ -92,5 +91,37 @@ object FileUtil {
         } else {
             null
         }
+    }
+
+    fun getImages(context: Context): MutableList<String> {
+        val contentResolver = context.contentResolver
+        val images = mutableListOf<String>()
+
+        val uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        val projection = null
+        val selection = null
+        val selectionArgs = null
+        val sort = "${MediaStore.Images.ImageColumns.DATE_TAKEN}" //DESC LIMIT 2 OFFSET 2"
+
+        val cursor = contentResolver.query(uri, projection, selection, selectionArgs, sort)
+
+        cursor?.let {
+            if (it.moveToFirst()) {
+                //index folder -> la ten folder chua file, neu file nam trong thu muc goc thi se null
+                val indexFolder =
+                    it.getColumnIndex(MediaStore.Images.ImageColumns.BUCKET_DISPLAY_NAME)
+
+                //index path -> la duong dan den file
+                val indexPath = it.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
+
+                do {
+                    images.add(it.getString(indexPath))
+                } while (it.moveToNext());
+
+                cursor.close()
+            }
+        }
+
+        return images;
     }
 }

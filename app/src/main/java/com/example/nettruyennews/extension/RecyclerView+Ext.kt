@@ -8,6 +8,16 @@ enum class DIRECTION {
     UP, DOWN, NOTSCROLL
 }
 
+fun RecyclerView.isLastItem(newItems: ((Boolean) -> Unit)) {
+    addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            super.onScrollStateChanged(recyclerView, newState)
+            if (!recyclerView.canScrollVertically(1)) {
+                newItems(true)
+            }
+        }
+    })
+}
 
 fun RecyclerView.direction(listener: (direction: DIRECTION) -> Unit) {
     this.addOnScrollListener(object : RecyclerView.OnScrollListener() {

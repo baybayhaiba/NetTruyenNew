@@ -3,11 +3,13 @@ package com.example.nettruyennews.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
 import com.example.nettruyennews.model.Book
 import com.example.nettruyennews.repository.HomeRepository
 import com.example.nettruyennews.util.Constant
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,9 +22,13 @@ class HomeViewModel @Inject constructor(private val homeRepository: HomeReposito
     val menu = MutableLiveData<List<Pair<String, String>>>()
     val ranking = MutableLiveData<List<Pair<String, String>>>()
 
-    init {
-        getBooks()
-    }
+    var URL_CURRENT = Constant.URL
+
+//    init {
+//        getBooks("${URL_CURRENT}1")
+//    }
+
+    fun fetchBookPaging() = homeRepository.bookPagingFlow(url = "${URL_CURRENT}1")
 
     private fun getMenu() = viewModelScope.launch(Dispatchers.IO) {
         loading.postValue(true)

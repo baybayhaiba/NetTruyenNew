@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.nettruyennews.adapter.AdapterChapter
 import com.example.nettruyennews.databinding.FragmentDescriptionBinding
-import com.example.nettruyennews.model.Book
 import com.example.nettruyennews.model.DescriptionBook
 import com.example.nettruyennews.ui.base.BaseFragment
 import com.example.nettruyennews.util.Status
@@ -40,21 +39,20 @@ class DescriptionFragment : BaseFragment<DescriptionViewModel, FragmentDescripti
             mViewBinding?.apply {
                 rcvChapter.isNestedScrollingEnabled = false
                 rcvChapter.adapter = adapterChapter
-                //val bundle = DescriptionFragmentArgs.fromBundle(arguments!!)
-                activity?.intent?.getParcelableExtra<Book>(BOOK)?.let { book ->
-
-                    mViewModel.getDescription(book).observe(this@DescriptionFragment) {
-                        when (it.status) {
-                            Status.ERROR -> {
-                                loading?.dismiss()
-                            }
-                            Status.LOADING -> loading?.show()
-                            Status.SUCCESS -> {
-                                setupData(it.data)
-                            }
+                val bundle = DescriptionFragmentArgs.fromBundle(arguments!!)
+                val book = bundle.book
+                mViewModel.getDescription(book).observe(this@DescriptionFragment) {
+                    when (it.status) {
+                        Status.ERROR -> {
+                            loading?.dismiss()
+                        }
+                        Status.LOADING -> loading?.show()
+                        Status.SUCCESS -> {
+                            setupData(it.data)
                         }
                     }
                 }
+
                 mViewModel.chapterCurrent.observe(this@DescriptionFragment) {
                     val action =
                         DescriptionFragmentDirections.actionDescriptionFragmentToDetailFragment(

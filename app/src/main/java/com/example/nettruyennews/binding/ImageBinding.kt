@@ -34,6 +34,14 @@ object ImageBinding {
         }
     }
 
+    @JvmStatic
+    @BindingAdapter("imageLocal")
+    fun bindingImageLocal(view: View, resource: Int) {
+        if (view is ImageView) {
+            view.setImageResource(resource)
+        }
+    }
+
 
     @JvmStatic
     @BindingAdapter("imageRequest")

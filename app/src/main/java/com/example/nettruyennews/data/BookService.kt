@@ -6,7 +6,12 @@ import com.example.nettruyennews.util.Constant
 
 interface BookService {
 
-    suspend fun home(url: String): List<Book>
+    companion object {
+        const val DEFAULT_PAGE_INDEX = 1
+    }
+
+
+    suspend fun home(url: String = Constant.URL, page: Int = DEFAULT_PAGE_INDEX): List<Book>
 
     suspend fun description(book: Book): DescriptionBook
 
