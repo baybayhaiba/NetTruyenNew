@@ -7,26 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.paging.PagingData
 import com.example.nettruyennews.R
-import com.example.nettruyennews.adapter.AdapterBook
 import com.example.nettruyennews.adapter.AdapterCategory
-import com.example.nettruyennews.adapter.RemoteBookPager
-import com.example.nettruyennews.data.BookService
+import com.example.nettruyennews.adapter.Paging.LoaderStateAdapter
+import com.example.nettruyennews.adapter.Paging.RemoteBookPager
 import com.example.nettruyennews.databinding.FragmentHomeBinding
-import com.example.nettruyennews.extension.observer
-import com.example.nettruyennews.extension.plus
 import com.example.nettruyennews.model.Book
 import com.example.nettruyennews.ui.base.BaseFragment
 import com.example.nettruyennews.util.*
 import com.example.nettruyennews.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
 
@@ -43,13 +39,12 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     private val adapterCategories: AdapterCategory by lazy {
         AdapterCategory(onClickCategory = ::onClickCategories)
     }
-
-    private val adapterBook: AdapterBook by lazy {
-        AdapterBook(onClick = ::onClick)
-    }
-
     private val pagingBook: RemoteBookPager by lazy {
         RemoteBookPager(onClick = ::onClick)
+    }
+
+    private val loaderState: LoaderStateAdapter by lazy {
+        LoaderStateAdapter(::retry)
     }
 
     private val loading: AlertDialog? by lazy {
@@ -72,10 +67,9 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             binding.rcvCategories.adapter = adapterCategories
             binding.rcvCategories.isNestedScrollingEnabled = false
             //binding.rcvBook.adapter = adapterBook
-            binding.rcvBook.adapter = pagingBook
-            binding.rcvBook.isNestedScrollingEnabled = false
+            binding.rcvBook.adapter = pagingBook.withLoadStateFooter(loaderState)
+            binding.rcvBook.isNestedScrollingEnabled = true
             binding.viewModel = mViewModel
-            binding.swipeRefreshLayout.setOnRefreshListener { mViewModel.getBooks() }
 
             mViewModel.loading.observe(this) {
                 if (it) {
@@ -85,26 +79,31 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 }
             }
 
-            lifecycleScope.launch(Dispatchers.IO) {
-                mViewModel.fetchBookPaging().distinctUntilChanged().collectLatest {
+            mViewModel.books.observe(this) {
+                mViewModel.viewModelScope.launch(Dispatchers.IO) {
+                    pagingBook.submitData(PagingData.from(emptyList()))
                     pagingBook.submitData(it)
                 }
             }
-
-
-//            mViewModel.books.observe(this) {
-//                adapterBook.submit(it)
-//            }
 
             mViewModel.error.observe(this) {
                 show(it)
             }
 
-            (mViewModel.menu + mViewModel.ranking).observer(this) { data ->
-                val (link, text) = data.unzip()
+            mViewModel.menu.observe(this) {
+                val (link, text) = it.unzip()
 
                 showDialog("Information", text, onClick = {
-                    val link = "${link[it]}?page=${BookService.DEFAULT_PAGE_INDEX}"
+                    val link = "${link[it]}?page="
+                    mViewModel.getBooks(link)
+                })
+            }
+
+            mViewModel.ranking.observe(this) {
+                val (link, text) = it.unzip()
+
+                showDialog("Information", text, onClick = {
+                    val link = "${link[it]}&page="
                     mViewModel.getBooks(link)
                 })
             }
@@ -117,7 +116,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
     private fun dismiss() {
         loading?.dismiss()
-        mViewBinding?.swipeRefreshLayout?.isRefreshing = false
     }
 
     private fun setupSearchView() {
@@ -130,7 +128,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 val url = if (p0.isNullOrBlank()) {
                     Constant.URL
                 } else {
-                    "http://www.nettruyengo.com/tim-truyen?keyword=${p0}"
+                    "http://www.nettruyengo.com/tim-truyen?keyword=${p0}&page="
                 }
                 mViewModel.getBooks(url)
                 clearSearchView()
@@ -145,11 +143,11 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         binding.searchViewBook.setQuery("", false)
     }
 
+    private fun retry() {
+        show("retry book !")
+    }
 
     private fun onClick(book: Book) {
-//        val bundle = Bundle()
-//        bundle.putParcelable(DescriptionFragment.BOOK, book)
-//        startActivity<DetailActivity>(bundle)
         val action = HomeFragmentDirections.actionHomeFragmentToDescriptionFragment(book)
         findNavController().navigate(action)
     }
@@ -158,6 +156,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         when (imageResource) {
             R.drawable.ranking -> mViewModel.onClickRanking()
             R.drawable.menu -> mViewModel.onClickMenu()
+            R.drawable.ic_baseline_home_24 -> mViewModel.getBooks(mViewModel.URL_CURRENT)
             R.drawable.save -> {
                 val action =
                     HomeFragmentDirections.actionHomeFragmentToSaveFragment()

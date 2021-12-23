@@ -9,26 +9,27 @@ import com.example.nettruyennews.repository.HomeRepository
 import com.example.nettruyennews.util.Constant
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val homeRepository: HomeRepository) : ViewModel() {
     val loading = MutableLiveData<Boolean>()
-    val books = MutableLiveData<List<Book>>()
+    val books = MutableLiveData<PagingData<Book>>()
     val error = MutableLiveData<String>()
 
     val menu = MutableLiveData<List<Pair<String, String>>>()
     val ranking = MutableLiveData<List<Pair<String, String>>>()
 
-    var URL_CURRENT = Constant.URL
+    val URL_CURRENT = Constant.URL
 
-//    init {
-//        getBooks("${URL_CURRENT}1")
-//    }
+    init {
+        getBooks(URL_CURRENT)
+    }
 
-    fun fetchBookPaging() = homeRepository.bookPagingFlow(url = "${URL_CURRENT}1")
+    fun fetchBookPaging(url: String) = homeRepository.bookPagingFlow(url = url)
 
     private fun getMenu() = viewModelScope.launch(Dispatchers.IO) {
         loading.postValue(true)
@@ -57,7 +58,11 @@ class HomeViewModel @Inject constructor(private val homeRepository: HomeReposito
         viewModelScope.launch(Dispatchers.IO) {
             loading.postValue(true)
             try {
-                books.postValue(homeRepository.home(url))
+                val newFlows = fetchBookPaging(url)
+                loading.postValue(false)
+                newFlows.distinctUntilChanged().collectLatest {
+                    books.postValue(it)
+                }
             } catch (e: Exception) {
                 error.postValue(e.message.toString())
             } finally {
