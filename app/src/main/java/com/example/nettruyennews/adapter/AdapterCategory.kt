@@ -7,6 +7,7 @@ import com.example.nettruyennews.extension.AdapterRecyclerView
 class AdapterCategory(val onClickCategory: ((Int) -> Unit)) :
     AdapterRecyclerView<Int, CategoryItemBinding>(
         data = mutableListOf(
+            R.drawable.ic_baseline_home_24,
             R.drawable.ranking,
             R.drawable.menu,
             R.drawable.save,

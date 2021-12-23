@@ -1,69 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <!--        https://stackoverflow.com/questions/54547780/paging-library-when-used-inside-a-nestedscrollview-loads-all-data-->
 
         <variable
             name="viewModel"
             type="com.example.nettruyennews.viewmodel.HomeViewModel" />
     </data>
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/swipeRefreshLayout"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/nestedScrollView"
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:background="@color/white">
 
-
-            <LinearLayout
+            <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:titleEnabled="false">
 
-
-                <androidx.appcompat.widget.SearchView
-                    android:id="@+id/searchViewBook"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10sp"
-                    android:focusable="false"
-                    android:orientation="vertical"
-                    android:theme="@style/AppSearchView"
-                    app:defaultQueryHint="Tìm kiếm truyện"
-                    app:iconifiedByDefault="false" />
+                    android:orientation="vertical">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_margin="5sp"
-                    android:id="@+id/rcvCategories"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    app:spanCount="4"
-                    tools:listitem="@layout/category_item" />
+                    <androidx.appcompat.widget.SearchView
+                        android:id="@+id/searchViewBook"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10sp"
+                        android:focusable="false"
+                        android:orientation="vertical"
+                        android:theme="@style/AppSearchView"
+                        app:defaultQueryHint="Tìm kiếm truyện"
+                        app:iconifiedByDefault="false" />
 
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rcvBook"
-                    android:layout_width="match_parent"
-                    android:layout_height="0sp"
-                    android:layout_weight="1"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:context=".ui.fragment.HomeFragment" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcvCategories"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="5sp"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:spanCount="5" />
 
 
-            </LinearLayout>
+                    <!-- Put here elements that you need above the recycler view -->
 
-        </androidx.core.widget.NestedScrollView>
+                </LinearLayout>
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
 
+        </com.google.android.material.appbar.AppBarLayout>
+        <!-- RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvBook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="true"
+            android:scrollbars="none"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

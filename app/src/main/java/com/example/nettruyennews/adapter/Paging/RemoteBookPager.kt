@@ -1,9 +1,10 @@
-package com.example.nettruyennews.adapter
+package com.example.nettruyennews.adapter.Paging
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import com.example.nettruyennews.adapter.AdapterBook
 import com.example.nettruyennews.databinding.BookItemBinding
 import com.example.nettruyennews.model.Book
 

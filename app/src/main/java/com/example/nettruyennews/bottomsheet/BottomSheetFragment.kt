@@ -97,7 +97,7 @@ open class BottomSheetFragment : BottomSheetDialogFragment() {
 
 
     private fun done() {
-        if (builder.images.isEmpty()) return
+        if (builder.images.isEmpty()) return dismiss()
 
         when (val listener = builder.imageListener) {
             is OnImageSelectedListener -> {
