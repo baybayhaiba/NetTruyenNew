@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:gravity="center"
-            android:text="Thanh Huy"
+            android:text="Undeveloped"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />

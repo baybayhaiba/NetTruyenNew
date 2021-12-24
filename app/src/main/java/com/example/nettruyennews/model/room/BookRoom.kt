@@ -2,6 +2,7 @@ package com.example.nettruyennews.model.room
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.Relation
 import com.example.nettruyennews.model.Book
 import java.util.*
 

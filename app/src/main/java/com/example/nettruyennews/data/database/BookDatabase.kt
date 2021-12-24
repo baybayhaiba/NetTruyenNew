@@ -16,7 +16,7 @@ import com.example.nettruyennews.util.Constant
 @Database(
     entities = [BookRoom::class, ChapterRoom::class],
     version = Constant.VERSION,
-    exportSchema = false
+    exportSchema = false,
 )
 @TypeConverters(Converters::class)
 abstract class BookDatabase : RoomDatabase() {
