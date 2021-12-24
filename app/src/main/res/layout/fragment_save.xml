@@ -25,13 +25,24 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcvBook"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0sp"
             android:layout_weight="1"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:context=".ui.fragment.HomeFragment" />
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvBook"
+                android:layout_width="match_parent"
+                android:layout_height="0sp"
+                android:layout_weight="1"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:context=".ui.fragment.HomeFragment" />
+
+            <include
+                android:id="@+id/layout_empty"
+                layout="@layout/layout_empty_view" />
+        </LinearLayout>
 
 
     </LinearLayout>

@@ -51,6 +51,8 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         showLoading()
     }
 
+    private val emptyPage = PagingData.from(emptyList<Book>())
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -81,7 +83,9 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
             mViewModel.books.observe(this) {
                 mViewModel.viewModelScope.launch(Dispatchers.IO) {
-                    pagingBook.submitData(PagingData.from(emptyList()))
+                    //refresh page
+                    pagingBook.submitData(emptyPage)
+                    //submit page
                     pagingBook.submitData(it)
                 }
             }

@@ -25,7 +25,7 @@ class RemoteBookPager(private val onClick: (Book) -> Unit) :
     }
 
     override fun onBindViewHolder(holder: AdapterBook.ViewHolderBook, position: Int) {
-        holder.bind(getItem(position), onClick)
+        holder.bind(getItem(position), onClick , longClick = null)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterBook.ViewHolderBook {
