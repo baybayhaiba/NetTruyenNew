@@ -71,6 +71,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             //binding.rcvBook.adapter = adapterBook
             binding.rcvBook.adapter = pagingBook.withLoadStateFooter(loaderState)
             binding.rcvBook.isNestedScrollingEnabled = true
+            binding.scrollToTop.setupWithRecyclerView(binding.rcvBook)
             binding.viewModel = mViewModel
 
             mViewModel.loading.observe(this) {

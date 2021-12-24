@@ -71,6 +71,19 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+        <com.mahdikh.vision.scrolltotop.widget.ScrollToTop
+            android:id="@+id/scrollToTop"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:layout_margin="10dp"
+            app:heavyCheckup="true"
+            app:layout_anchor="@id/rcvBook"
+            app:layout_anchorGravity="bottom|right"
+            app:minimumPosition="NO_POSITION"
+            app:minimumScroll="250dp"
+            app:rippleColor="#999999"
+            app:shortScroll="true"
+            app:smoothScroll="true" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
