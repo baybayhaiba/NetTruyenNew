@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ScrollToTop">
+        <attr name="minimumScroll" format="dimension" />
+        <attr name="minimumPosition" format="enum|integer">
+            <enum name="NO_POSITION" value="-1" />
+        </attr>
+        <attr name="heavyCheckup" format="boolean" />
+        <attr name="rippleColor" format="color" />
+        <attr name="smoothScroll" format="boolean" />
+        <attr name="shortScroll" format="boolean" />
+        <attr name="android:padding" />
+    </declare-styleable>
+</resources>

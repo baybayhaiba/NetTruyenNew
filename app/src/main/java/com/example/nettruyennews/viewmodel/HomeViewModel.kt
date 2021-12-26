@@ -1,9 +1,11 @@
 package com.example.nettruyennews.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import androidx.paging.map
 import com.example.nettruyennews.model.Book
 import com.example.nettruyennews.repository.HomeRepository
 import com.example.nettruyennews.util.Constant
@@ -12,6 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeout
 import javax.inject.Inject
 
 @HiltViewModel
@@ -56,10 +59,8 @@ class HomeViewModel @Inject constructor(private val homeRepository: HomeReposito
 
     fun getBooks(url: String = Constant.URL) =
         viewModelScope.launch(Dispatchers.IO) {
-            loading.postValue(true)
             try {
                 val newFlows = fetchBookPaging(url)
-                loading.postValue(false)
                 newFlows.distinctUntilChanged().collectLatest {
                     books.postValue(it)
                 }
