@@ -74,6 +74,10 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             binding.scrollToTop.setupWithRecyclerView(binding.rcvBook)
             binding.viewModel = mViewModel
 
+            pagingBook.addLoadStateListener {
+                mViewModel.loading.value = pagingBook.itemCount == 0
+            }
+
             mViewModel.loading.observe(this) {
                 if (it) {
                     loading?.show()
