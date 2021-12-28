@@ -11,6 +11,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import androidx.paging.PagingData
 import com.example.nettruyennews.R
 import com.example.nettruyennews.adapter.AdapterCategory
@@ -75,7 +76,14 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             binding.viewModel = mViewModel
 
             pagingBook.addLoadStateListener {
-                mViewModel.loading.value = pagingBook.itemCount == 0
+                val isError = it.source.refresh is LoadState.Error
+                val isLoading = it.source.refresh is LoadState.Loading
+
+                mViewModel.loading.value = isLoading
+
+                if (isError) {
+                    show(it.source.refresh.toString())
+                }
             }
 
             mViewModel.loading.observe(this) {
@@ -121,7 +129,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
         return mViewBinding!!.root
     }
-
 
     private fun dismiss() {
         loading?.dismiss()
@@ -178,5 +185,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 findNavController().navigate(action)
             }
         }
+
+        dismissKeyboard()
     }
 }
