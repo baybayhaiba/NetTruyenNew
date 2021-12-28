@@ -6,12 +6,12 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.example.nettruyennews.R
-
 
 
 fun Context.showToast(text: String?) {
@@ -97,4 +97,17 @@ fun Activity.checkPermission(permissions: Array<String>): Boolean {
     }
 
     return isGrantedAll
+}
+
+fun Activity.dismisKeyboard() {
+    val imm = this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    //Find the currently focused view, so we can grab the correct window token from it.
+    //Find the currently focused view, so we can grab the correct window token from it.
+    var view: View? = this.currentFocus
+    //If no view currently has focus, create a new one, just so we can grab a window token from it
+    //If no view currently has focus, create a new one, just so we can grab a window token from it
+    if (view == null) {
+        view = View(this)
+    }
+    imm.hideSoftInputFromWindow(view.windowToken, 0)
 }
