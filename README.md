@@ -28,4 +28,4 @@
 - [OkHttp](https://square.github.io/okhttp/) - Get from url to html
 - [Gson](https://github.com/google/gson) - Converter room object
 - [Glide](https://github.com/bumptech/glide) - Load image + save cache from network 
-- [Firebase](https://firebase.google.com/) -Not yet
+- [Firebase](https://firebase.google.com/) - Not yet
