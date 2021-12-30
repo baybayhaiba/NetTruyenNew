@@ -5,9 +5,9 @@
 
 <div class="row">
   <div class="column">
-    <img alt="Profile" src="https://github.com/baybayhaiba/NetTruyenNew/blob/master/media/Screenshot%202021-12-30%20104708.png" width="25%" height="500"/>
-    <img alt="Profile" src="https://github.com/baybayhaiba/NetTruyenNew/blob/master/media/Screenshot%202021-12-30%20104729.png" width="25%" height="500"/>
-     <img alt="Profile" src="https://github.com/baybayhaiba/NetTruyenNew/blob/master/media/Screenshot%202021-12-30%20104448.png" width="25%" height="500"/>
+    <img alt="Profile" src="https://github.com/baybayhaiba/NetTruyenNew/blob/master/media/Screenshot%202021-12-30%20104708.png" width="30%" height="500"/>
+    <img alt="Profile" src="https://github.com/baybayhaiba/NetTruyenNew/blob/master/media/Screenshot%202021-12-30%20104729.png" width="30%" height="500"/>
+     <img alt="Profile" src="https://github.com/baybayhaiba/NetTruyenNew/blob/master/media/Screenshot%202021-12-30%20104448.png" width="30%" height="500"/>
   </div>
 </div>
 
