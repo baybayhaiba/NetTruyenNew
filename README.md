@@ -21,6 +21,8 @@
   - [Navigation](https://developer.android.com/jetpack/androidx/releases/navigation) - Manage + Safe args Fragment.
   - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) - Observable data from network.
   - [Paging3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview) - Work with auto request next page.
+  - [DataBinding](https://developer.android.com/topic/libraries/view-binding) - Generates a binding class for each XML layout file present in that module and allows you to more easily write code that interacts with views.
+
   - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Store and manages the lifecycles of UI controllers.
 - Architecture
   - MVVM (View - Databinding - Model - ViewModel) 
