@@ -173,6 +173,8 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                     "http://www.nettruyengo.com/tim-truyen?keyword=${p0}&page="
                 }
                 mViewModel.getBooks(url)
+                dismissKeyboard()
+                searchView.clearFocus()
                 return true
             }
         })
