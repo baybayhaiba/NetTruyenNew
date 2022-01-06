@@ -3,11 +3,23 @@
 <h4>About App:</h4>
 <p>It simple crawl from Nettruyen . Android application 📱</p>
 
+<br>
+<h2><strike>Old picture from appp</strike></h2>
+
 <div class="row">
   <div class="column">
     <img alt="Profile" src="https://github.com/baybayhaiba/NetTruyenNew/blob/master/media/Screenshot%202021-12-30%20104708.png" width="30%" height="500"/>
     <img alt="Profile" src="https://github.com/baybayhaiba/NetTruyenNew/blob/master/media/Screenshot%202021-12-30%20104729.png" width="30%" height="500"/>
      <img alt="Profile" src="https://github.com/baybayhaiba/NetTruyenNew/blob/master/media/Screenshot%202021-12-30%20104448.png" width="30%" height="500"/>
+  </div>
+</div>
+
+<h2> New picture from app </h2>
+<div class="row">
+  <div class="column">
+    <img alt="Profile" src="https://github.com/baybayhaiba/NetTruyenNew/blob/Test/media/new_1.png" width="30%" height="500"/>
+    <img alt="Profile" src="https://github.com/baybayhaiba/NetTruyenNew/blob/Test/media/new_2.png" width="30%" height="500"/>
+     <img alt="Profile" src="https://github.com/baybayhaiba/NetTruyenNew/blob/Test/media/new_3.png" width="30%" height="500"/>
   </div>
 </div>
 
