@@ -13,7 +13,7 @@
         android:id="@+id/tv_chapter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/black"
+        android:background="@color/primary_2"
         android:fontFamily="monospace"
         android:orientation="vertical"
         android:padding="16sp"

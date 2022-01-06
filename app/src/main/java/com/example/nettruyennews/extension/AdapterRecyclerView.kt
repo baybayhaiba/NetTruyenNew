@@ -17,6 +17,7 @@ open class AdapterRecyclerView<T, VB : ViewBinding>(
     interface Delegate<in T, VB> {
         fun configBinding(data: T, binding: VB)
         fun onClick(data: T)
+        fun onLongClick(data: T): Boolean
     }
 
     inner class MyViewHolder(var binding: VB) :
@@ -26,6 +27,7 @@ open class AdapterRecyclerView<T, VB : ViewBinding>(
             if (delegate != null) {
                 delegate.configBinding(data, binding)
                 binding.root.setOnClickListener { delegate.onClick(data) }
+                binding.root.setOnLongClickListener { delegate.onLongClick(data) }
             }
         }
     }

@@ -7,6 +7,7 @@ import androidx.paging.PagingData
 import com.example.nettruyennews.model.Book
 import com.example.nettruyennews.repository.HomeRepository
 import com.example.nettruyennews.util.Constant
+import com.example.nettruyennews.util.TypeBook
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
@@ -28,6 +29,9 @@ class HomeViewModel @Inject constructor(private val homeRepository: HomeReposito
     init {
         getBooks(URL_CURRENT)
     }
+
+    val booksTest = MutableLiveData<Map<TypeBook, List<Book>>>()
+
 
     fun fetchBookPaging(url: String) = homeRepository.bookPagingFlow(url = url)
 

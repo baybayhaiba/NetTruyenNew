@@ -18,8 +18,6 @@ class BookPagingSource(private val bookService: BookService, val url: String) :
         return try {
             val response = bookService.home(url = url, page = page)
 
-            Log.d("huy12345", "load: $page - ${response.size} - ${url+page}")
-
             LoadResult.Page(
                 response, prevKey = if (page == DEFAULT_PAGE_INDEX) null else page - 1,
                 nextKey = if (response.isEmpty()) null else page + 1
