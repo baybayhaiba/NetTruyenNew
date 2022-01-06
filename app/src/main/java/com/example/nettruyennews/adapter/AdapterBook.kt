@@ -7,16 +7,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.nettruyennews.databinding.BookItemBinding
 import com.example.nettruyennews.model.Book
 
-class AdapterBook(private val onClick: ((Book) -> Unit), private val longClick: ((Book) -> Boolean)) :
+
+class AdapterBook(
+    private val onClick: ((Book) -> Unit),
+    private val longClick: ((Book) -> Boolean)
+) :
     RecyclerView.Adapter<AdapterBook.ViewHolderBook>() {
 
     private var books = mutableListOf<Book>()
 
-    fun submit(books: List<Book>) {
-        val diffResult = DiffUtil.calculateDiff(BookDiffUtil(this.books, books))
-        this.books.clear()
-        this.books.addAll(books)
-        diffResult.dispatchUpdatesTo(this)
+    fun submit(books: List<Book>?) {
+        if (books != null) {
+            val diffResult = DiffUtil.calculateDiff(BookDiffUtil(this.books, books))
+            this.books.clear()
+            this.books.addAll(books)
+            diffResult.dispatchUpdatesTo(this)
+        }
     }
 
     class ViewHolderBook(private val binding: BookItemBinding) :
@@ -29,7 +35,7 @@ class AdapterBook(private val onClick: ((Book) -> Unit), private val longClick: 
                     this.book = book
                     root.setOnClickListener { onClick(book) }
                     if (longClick != null) {
-                        root.setOnLongClickListener {  longClick(book) }
+                        root.setOnLongClickListener { longClick(book) }
                     }
                 }
             }
@@ -44,7 +50,7 @@ class AdapterBook(private val onClick: ((Book) -> Unit), private val longClick: 
     }
 
     override fun onBindViewHolder(holder: ViewHolderBook, position: Int) =
-        holder.bind(books[position], onClick,longClick)
+        holder.bind(books[position], onClick, longClick)
 
     override fun getItemCount(): Int = books.size
 }

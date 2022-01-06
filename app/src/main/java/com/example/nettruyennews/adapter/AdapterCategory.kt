@@ -1,5 +1,6 @@
 package com.example.nettruyennews.adapter
 
+import android.util.Log
 import com.example.nettruyennews.R
 import com.example.nettruyennews.databinding.CategoryItemBinding
 import com.example.nettruyennews.extension.AdapterRecyclerView
@@ -26,5 +27,10 @@ class AdapterCategory(val onClickCategory: ((Int) -> Unit)) :
 
     override fun onClick(data: Int) {
         this.onClickCategory(data)
+    }
+
+    override fun onLongClick(data: Int): Boolean {
+        Log.d("TAG", "onLongClick: ${data}")
+        return true
     }
 }

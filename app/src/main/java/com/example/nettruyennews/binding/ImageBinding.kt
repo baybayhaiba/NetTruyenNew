@@ -54,7 +54,7 @@ object ImageBinding {
             }
             Glide.with(view.context)
                 .load(glideUrl)
-                .placeholder(R.drawable.ic_baseline_preview_24)
+                .placeholder(R.drawable.loading)
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .into(view)
         }

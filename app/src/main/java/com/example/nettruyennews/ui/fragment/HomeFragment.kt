@@ -14,7 +14,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import com.example.nettruyennews.R
-import com.example.nettruyennews.adapter.AdapterCategory
 import com.example.nettruyennews.adapter.Paging.LoaderStateAdapter
 import com.example.nettruyennews.adapter.Paging.RemoteBookPager
 import com.example.nettruyennews.databinding.FragmentHomeBinding
@@ -37,9 +36,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
     private lateinit var navController: NavController
 
-    private val adapterCategories: AdapterCategory by lazy {
-        AdapterCategory(onClickCategory = ::onClickCategories)
-    }
     private val pagingBook: RemoteBookPager by lazy {
         RemoteBookPager(onClick = ::onClick)
     }
@@ -65,10 +61,8 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 activity?.supportFragmentManager?.findFragmentById(R.id.containerFragment) as NavHostFragment
             navController = navHostFragment.navController
             mViewBinding = FragmentHomeBinding.inflate(inflater, container, false)
-            setupSearchView()
+            setupToolbar()
 
-            binding.rcvCategories.adapter = adapterCategories
-            binding.rcvCategories.isNestedScrollingEnabled = false
             //binding.rcvBook.adapter = adapterBook
             binding.rcvBook.adapter = pagingBook.withLoadStateFooter(loaderState)
             binding.rcvBook.isNestedScrollingEnabled = true
@@ -126,7 +120,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             }
         }
 
-
         return mViewBinding!!.root
     }
 
@@ -134,8 +127,41 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         loading?.dismiss()
     }
 
-    private fun setupSearchView() {
-        binding.searchViewBook.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+    private fun setupToolbar() {
+        binding.toolbarHome.setOnMenuItemClickListener {
+            return@setOnMenuItemClickListener when (it.itemId) {
+                R.id.mnSave -> {
+                    val action =
+                        HomeFragmentDirections.actionHomeFragmentToSaveFragment()
+                    findNavController().navigate(action)
+                    false
+                }
+
+                R.id.mnAccount -> {
+                    val action =
+                        HomeFragmentDirections.actionHomeFragmentToUserFragment()
+                    findNavController().navigate(action)
+
+                    false
+                }
+                else -> {
+                    true
+                }
+            }
+        }
+
+        binding.toolbarHome.setNavigationOnClickListener {
+            mViewModel.onClickMenu()
+        }
+
+        val searchItem = binding.toolbarHome.menu.findItem(R.id.mnSearch)
+        val searchView = searchItem.actionView as SearchView
+
+        setupSearchView(searchView)
+    }
+
+    private fun setupSearchView(searchView: SearchView) {
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(p0: String?): Boolean {
                 return true
             }
@@ -147,17 +173,11 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                     "http://www.nettruyengo.com/tim-truyen?keyword=${p0}&page="
                 }
                 mViewModel.getBooks(url)
-                clearSearchView()
                 return true
             }
         })
     }
 
-    private fun clearSearchView() {
-        dismissKeyboard()
-        binding.searchViewBook.clearFocus()
-        binding.searchViewBook.setQuery("", false)
-    }
 
     private fun retry() {
         show("retry book !")
@@ -166,26 +186,5 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     private fun onClick(book: Book) {
         val action = HomeFragmentDirections.actionHomeFragmentToDescriptionFragment(book)
         findNavController().navigate(action)
-    }
-
-    private fun onClickCategories(imageResource: Int) {
-        when (imageResource) {
-            R.drawable.ranking -> mViewModel.onClickRanking()
-            R.drawable.menu -> mViewModel.onClickMenu()
-            R.drawable.ic_baseline_home_24 -> mViewModel.getBooks(mViewModel.URL_CURRENT)
-            R.drawable.save -> {
-                val action =
-                    HomeFragmentDirections.actionHomeFragmentToSaveFragment()
-                findNavController().navigate(action)
-            }
-
-            R.drawable.man -> {
-                val action =
-                    HomeFragmentDirections.actionHomeFragmentToUserFragment()
-                findNavController().navigate(action)
-            }
-        }
-
-        dismissKeyboard()
     }
 }

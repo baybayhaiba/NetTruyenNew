@@ -13,14 +13,14 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/primary">
 
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white">
+            android:layout_height="wrap_content">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
@@ -33,30 +33,22 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <androidx.appcompat.widget.SearchView
-                        android:id="@+id/searchViewBook"
+                    <com.google.android.material.appbar.MaterialToolbar
+                        android:id="@+id/toolbarHome"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+                        android:background="@color/primary_2"
                         android:layout_margin="10sp"
-                        android:focusable="false"
-                        android:orientation="vertical"
-                        android:theme="@style/AppSearchView"
-                        app:defaultQueryHint="Tìm kiếm truyện"
-                        app:iconifiedByDefault="false" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rcvCategories"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_margin="5sp"
-                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                        app:spanCount="5" />
+                        app:navigationIcon="@drawable/ic_baseline_table_rows_24"
+                        app:menu="@menu/menu_home" />
 
 
                     <!-- Put here elements that you need above the recycler view -->
 
                 </LinearLayout>
+
+
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -69,8 +61,9 @@
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="true"
             android:scrollbars="none"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:spanCount="2" />
 
         <com.mahdikh.vision.scrolltotop.widget.ScrollToTop
             android:id="@+id/scrollToTop"
