@@ -37,7 +37,6 @@ class DescriptionFragment : BaseFragment<DescriptionViewModel, FragmentDescripti
             adapterChapter = AdapterChapter { onClick(it) }
 
             mViewBinding?.apply {
-                rcvChapter.isNestedScrollingEnabled = false
                 rcvChapter.adapter = adapterChapter
                 val bundle = DescriptionFragmentArgs.fromBundle(arguments!!)
                 val book = bundle.book

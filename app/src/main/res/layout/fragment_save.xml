@@ -44,6 +44,7 @@
                 tools:context=".ui.fragment.HomeFragment" />
 
             <include
+                android:visibility="gone"
                 android:id="@+id/layout_empty"
                 layout="@layout/layout_empty_view" />
         </LinearLayout>

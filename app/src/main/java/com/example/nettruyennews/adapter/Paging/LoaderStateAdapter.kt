@@ -20,9 +20,13 @@ class LoaderStateAdapter(private val retry: () -> Unit) :
         fun bind(loadState: LoadState) {
             if (loadState is LoadState.Loading) {
                 binding.mlLoader.transitionToEnd()
-            } else {
-                binding.mlLoader.transitionToStart()
             }
+//            else {
+//                binding.mlLoader.transitionToStart()
+//
+//                val error = loadState as LoadState.Error
+//                binding.tvError.text = error.toString()
+//            }
         }
     }
 

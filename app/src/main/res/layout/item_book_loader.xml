@@ -1,51 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.constraintlayout.motion.widget.MotionLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/mlLoader"
+
+    <com.google.android.material.card.MaterialCardView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/gradient_favorite"
-        app:layoutDescription="@xml/item_book_loader_scene">
+        android:layout_margin="10sp"
+        app:cardCornerRadius="10sp"
+        app:cardUseCompatPadding="true">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnRetry"
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/gold_200"
-            android:text="Retry"
-            android:textColor="@android:color/white"
-            app:cornerRadius="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvError"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="Error maybe you should retry it !"
-            android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Header"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnRetry" />
+            <androidx.constraintlayout.motion.widget.MotionLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/mlLoader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/gradient_favorite"
+                app:layoutDescription="@xml/item_book_loader_scene">
 
-        <ProgressBar
-            android:id="@+id/pbLoader"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnRetry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/gold_200"
+                    android:text="Retry"
+                    android:textColor="@android:color/white"
+                    app:cornerRadius="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.motion.widget.MotionLayout>
+                <TextView
+                    android:id="@+id/tvError"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="Error maybe you should retry it !"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Header"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:padding="10sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btnRetry" />
+
+                <ProgressBar
+                    android:id="@+id/pbLoader"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.motion.widget.MotionLayout>
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
 
 </layout>
