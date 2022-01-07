@@ -2,7 +2,8 @@ package com.example.nettruyennews.util
 
 object Constant {
     const val VERSION = 1
-        const val URL = "http://www.nettruyengo.com/?page="
+    const val URL_HOME = "http://www.nettruyengo.com/?page="
+    const val URL_RANK = "http://www.nettruyengo.com/tim-truyen?status=-1&sort=10&page="
     const val URL_ORIGNAL = "http://www.nettruyengo.com/"
 
     const val VALUE_PERMISSION = 1

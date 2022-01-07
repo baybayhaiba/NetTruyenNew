@@ -2,6 +2,7 @@ package com.example.nettruyennews.ui.fragment
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -137,11 +138,8 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                     false
                 }
 
-                R.id.mnAccount -> {
-                    val action =
-                        HomeFragmentDirections.actionHomeFragmentToUserFragment()
-                    findNavController().navigate(action)
-
+                R.id.mnRanking -> {
+                    mViewModel.onClickRanking()
                     false
                 }
                 else -> {
@@ -168,7 +166,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 val url = if (p0.isNullOrBlank()) {
-                    Constant.URL
+                    Constant.URL_HOME
                 } else {
                     "http://www.nettruyengo.com/tim-truyen?keyword=${p0}&page="
                 }
@@ -182,7 +180,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
 
     private fun retry() {
-        show("retry book !")
+        mViewModel.getBooks(mViewModel.URL_CURRENT)
     }
 
     private fun onClick(book: Book) {

@@ -18,4 +18,6 @@ class NetworkModule {
     @Provides
     fun provideJsoup() = JsoupNetTruyen.getInstance()
 
+
+
 }

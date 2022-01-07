@@ -7,7 +7,6 @@ import androidx.paging.PagingData
 import com.example.nettruyennews.model.Book
 import com.example.nettruyennews.repository.HomeRepository
 import com.example.nettruyennews.util.Constant
-import com.example.nettruyennews.util.TypeBook
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
@@ -24,13 +23,11 @@ class HomeViewModel @Inject constructor(private val homeRepository: HomeReposito
     val menu = MutableLiveData<List<Pair<String, String>>>()
     val ranking = MutableLiveData<List<Pair<String, String>>>()
 
-    val URL_CURRENT = Constant.URL
+    var URL_CURRENT: String = ""
 
     init {
-        getBooks(URL_CURRENT)
+        getBooks()
     }
-
-    val booksTest = MutableLiveData<Map<TypeBook, List<Book>>>()
 
 
     fun fetchBookPaging(url: String) = homeRepository.bookPagingFlow(url = url)
@@ -58,8 +55,9 @@ class HomeViewModel @Inject constructor(private val homeRepository: HomeReposito
     }
 
 
-    fun getBooks(url: String = Constant.URL) =
+    fun getBooks(url: String = Constant.URL_HOME) =
         viewModelScope.launch(Dispatchers.IO) {
+            URL_CURRENT = url
             val newFlows = fetchBookPaging(url)
             newFlows.distinctUntilChanged().collectLatest {
                 books.postValue(it)
