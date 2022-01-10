@@ -204,6 +204,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:scrollbars="none"
+            android:layout_margin="16sp"
             android:nestedScrollingEnabled="true"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
