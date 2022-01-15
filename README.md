@@ -28,7 +28,7 @@
 - [Kotlin](https://kotlinlang.org/) - Languages.
 - [Jetpack](https://developer.android.com/jetpack)
   - [Coroutines](https://kotlinlang.org/docs/coroutines-basics.html) - For async and handle data.
-  - [Room](https://developer.android.com/training/data-storage/room) - Save data in locally.
+  - [Room](https://developer.android.com/training/data-storage/room) - Save data in local.
   - [Hilt](https://developer.android.com/training/dependency-injection/hilt-android) - Dependency injection.
   - [Navigation](https://developer.android.com/jetpack/androidx/releases/navigation) - Manage + Safe args Fragment.
   - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) - Observable data from network.
