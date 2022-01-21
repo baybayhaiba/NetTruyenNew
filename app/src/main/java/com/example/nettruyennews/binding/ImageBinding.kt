@@ -1,5 +1,6 @@
 package com.example.nettruyennews.binding
 
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -9,6 +10,7 @@ import com.bumptech.glide.load.model.GlideUrl
 import com.example.nettruyennews.R
 import com.example.nettruyennews.model.Book
 import com.example.nettruyennews.util.FileUtil
+import com.example.nettruyennews.util.show
 
 object ImageBinding {
 
@@ -52,10 +54,11 @@ object ImageBinding {
                     "Referer" to "http://www.nettruyengo.com/"
                 )
             }
+
             Glide.with(view.context)
                 .load(glideUrl)
                 .placeholder(R.drawable.loading)
-                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+               // dont need becacause it load all .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .into(view)
         }
     }
