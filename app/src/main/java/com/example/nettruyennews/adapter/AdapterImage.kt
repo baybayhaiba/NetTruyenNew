@@ -15,7 +15,7 @@ class AdapterImage(private val onClick: (String) -> Unit) :
     fun submit(images: List<String>) {
         this.images.clear()
         this.images.addAll(images)
-        this.notifyDataSetChanged()
+        notifyDataSetChanged()
     }
 
     inner class ViewHolderImage(private val binding: ImageItemBinding) :
@@ -23,8 +23,6 @@ class AdapterImage(private val onClick: (String) -> Unit) :
 
         fun onBind(image: String, onClick: (String) -> Unit) {
             binding.image = image
-
-            Log.d(TAG, "onBind: ${image}")
             binding.root.setOnClickListener { onClick(image) }
         }
     }

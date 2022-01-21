@@ -1,6 +1,7 @@
 package com.example.nettruyennews.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,7 +36,6 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>() {
             adapterImage = AdapterImage { onClickImage(it) }
 
             binding.rcvImage.adapter = adapterImage
-            binding.rcvImage.isNestedScrollingEnabled = false
             binding.viewModel = mViewModel
             binding.lifecycleOwner = this
 
@@ -71,19 +71,19 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>() {
     private fun reloadChapter() {
         binding.layoutButton.visibility = View.GONE
         adapterImage.submit(emptyList())
-        clearCache()
+        //clearCache()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        clearCache()
-    }
-
-    private fun clearCache() = runBlocking {
-        withContext(Dispatchers.IO) {
-            activity?.applicationContext?.let { Glide.get(it).clearDiskCache() }
-        }
-    }
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        clearCache()
+//    }
+//
+//    private fun clearCache() = runBlocking {
+//        withContext(Dispatchers.IO) {
+//            activity?.applicationContext?.let { Glide.get(it).clearDiskCache() }
+//        }
+//    }
 
 
     private fun setupData(images: List<String>?) {
