@@ -1,4 +1,4 @@
-package com.example.nettruyennews.extension
+package com.example.nettruyennews.util.extension
 
 import android.net.Uri
 import androidx.core.net.toUri

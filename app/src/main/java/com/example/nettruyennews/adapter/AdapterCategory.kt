@@ -3,7 +3,7 @@ package com.example.nettruyennews.adapter
 import android.util.Log
 import com.example.nettruyennews.R
 import com.example.nettruyennews.databinding.CategoryItemBinding
-import com.example.nettruyennews.extension.AdapterRecyclerView
+import com.example.nettruyennews.util.extension.AdapterRecyclerView
 
 class AdapterCategory(val onClickCategory: ((Int) -> Unit)) :
     AdapterRecyclerView<Int, CategoryItemBinding>(

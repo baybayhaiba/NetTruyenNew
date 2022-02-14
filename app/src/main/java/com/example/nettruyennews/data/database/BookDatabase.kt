@@ -5,8 +5,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.nettruyennews.data.BookDao
-import com.example.nettruyennews.data.ChapterDao
+import com.example.nettruyennews.data.remote.BookDao
+import com.example.nettruyennews.data.remote.ChapterDao
 import com.example.nettruyennews.data.converter.Converters
 import com.example.nettruyennews.model.room.BookRoom
 import com.example.nettruyennews.model.room.ChapterRoom

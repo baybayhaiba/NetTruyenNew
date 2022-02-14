@@ -1,4 +1,4 @@
-package com.example.nettruyennews.data
+package com.example.nettruyennews.data.remote
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

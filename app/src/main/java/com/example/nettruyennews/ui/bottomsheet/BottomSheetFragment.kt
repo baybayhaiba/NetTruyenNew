@@ -18,8 +18,8 @@ import com.example.myfile.adapter.Photo
 import com.example.myfile.adapter.PhotoAdapter
 import com.example.myfile.adapter.PhotoType
 import com.example.nettruyennews.R
-import com.example.nettruyennews.extension.getImageUri
-import com.example.nettruyennews.extension.toUriExtension
+import com.example.nettruyennews.util.extension.getImageUri
+import com.example.nettruyennews.util.extension.toUriExtension
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment

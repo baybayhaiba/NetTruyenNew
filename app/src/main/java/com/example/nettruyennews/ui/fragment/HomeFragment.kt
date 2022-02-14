@@ -1,11 +1,5 @@
 package com.example.nettruyennews.ui.fragment
 
-import android.app.AlertDialog
-import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
@@ -20,7 +14,10 @@ import com.example.nettruyennews.adapter.Paging.RemoteBookPager
 import com.example.nettruyennews.databinding.FragmentHomeBinding
 import com.example.nettruyennews.model.Book
 import com.example.nettruyennews.ui.base.BaseFragment
-import com.example.nettruyennews.util.*
+import com.example.nettruyennews.util.Constant
+import com.example.nettruyennews.util.dismissKeyboard
+import com.example.nettruyennews.util.show
+import com.example.nettruyennews.util.showDialog
 import com.example.nettruyennews.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -30,10 +27,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     override val mViewModel: HomeViewModel by viewModels()
-    override var mViewBinding: FragmentHomeBinding? = null
-
-    val binding: FragmentHomeBinding
-        get() = mViewBinding!!
+    override val layoutId: Int = R.layout.fragment_home
 
     private lateinit var navController: NavController
 
@@ -45,88 +39,73 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         LoaderStateAdapter(::retry)
     }
 
-    private val loading: AlertDialog? by lazy {
-        showLoading()
-    }
 
     private val emptyPage = PagingData.from(emptyList<Book>())
 
+    override fun observerScreen() {
+        val navHostFragment =
+            activity?.supportFragmentManager?.findFragmentById(R.id.containerFragment) as NavHostFragment
+        navController = navHostFragment.navController
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        if (mViewBinding == null) {
-            val navHostFragment =
-                activity?.supportFragmentManager?.findFragmentById(R.id.containerFragment) as NavHostFragment
-            navController = navHostFragment.navController
-            mViewBinding = FragmentHomeBinding.inflate(inflater, container, false)
-            setupToolbar()
+        setupToolbar()
 
-            //binding.rcvBook.adapter = adapterBook
-            binding.rcvBook.adapter = pagingBook.withLoadStateFooter(loaderState)
-            binding.rcvBook.isNestedScrollingEnabled = true
-            binding.scrollToTop.setupWithRecyclerView(binding.rcvBook)
-            binding.viewModel = mViewModel
+        //binding.rcvBook.adapter = adapterBook
+        binding.rcvBook.adapter = pagingBook.withLoadStateFooter(loaderState)
+        binding.rcvBook.isNestedScrollingEnabled = true
+        binding.scrollToTop.setupWithRecyclerView(binding.rcvBook)
+        binding.viewModel = mViewModel
 
-            pagingBook.addLoadStateListener {
-                val isError = it.source.refresh is LoadState.Error
-                val isLoading = it.source.refresh is LoadState.Loading
+        pagingBook.addLoadStateListener {
+            val isError = it.source.refresh is LoadState.Error
+            val isLoading = it.source.refresh is LoadState.Loading
 
-                mViewModel.loading.value = isLoading
+            mViewModel.loading.value = isLoading
 
-                if (isError) {
-                    show(it.source.refresh.toString())
-                }
-            }
-
-            mViewModel.loading.observe(this) {
-                if (it) {
-                    loading?.show()
-                } else {
-                    dismiss()
-                }
-            }
-
-            mViewModel.books.observe(this) {
-                mViewModel.viewModelScope.launch(Dispatchers.IO) {
-                    //refresh page
-                    pagingBook.submitData(emptyPage)
-                    //submit page
-                    pagingBook.submitData(it)
-                }
-            }
-
-            mViewModel.error.observe(this) {
-                show(it)
-            }
-
-            mViewModel.menu.observe(this) {
-                val (link, text) = it.unzip()
-
-                showDialog("Information", text, onClick = {
-                    val link = "${link[it]}?page="
-                    mViewModel.getBooks(link)
-                })
-            }
-
-            mViewModel.ranking.observe(this) {
-                val (link, text) = it.unzip()
-
-                showDialog("Information", text, onClick = {
-                    val link = "${link[it]}&page="
-                    mViewModel.getBooks(link)
-                })
+            if (isError) {
+                show(it.source.refresh.toString())
             }
         }
 
-        return mViewBinding!!.root
+        mViewModel.loading.observe(viewLifecycleOwner) {
+            if (it) {
+                loadingProgress?.show()
+            } else {
+                loadingProgress?.dismiss()
+            }
+        }
+
+        mViewModel.books.observe(viewLifecycleOwner) {
+            mViewModel.viewModelScope.launch(Dispatchers.IO) {
+                //refresh page
+                pagingBook.submitData(emptyPage)
+                //submit page
+                pagingBook.submitData(it)
+            }
+        }
+
+        mViewModel.error.observe(viewLifecycleOwner) {
+            show(it)
+        }
+
+        mViewModel.menu.observe(viewLifecycleOwner) {
+            val (link, text) = it.unzip()
+
+            showDialog("Information", text, onClick = {
+                val link = "${link[it]}?page="
+                mViewModel.getBooks(link)
+            })
+        }
+
+        mViewModel.ranking.observe(viewLifecycleOwner) {
+            val (link, text) = it.unzip()
+
+            showDialog("Information", text, onClick = {
+                val link = "${link[it]}&page="
+                mViewModel.getBooks(link)
+            })
+        }
     }
 
-    private fun dismiss() {
-        loading?.dismiss()
-    }
 
     private fun setupToolbar() {
         binding.toolbarHome.setOnMenuItemClickListener {
@@ -187,4 +166,5 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         val action = HomeFragmentDirections.actionHomeFragmentToDescriptionFragment(book)
         findNavController().navigate(action)
     }
+
 }

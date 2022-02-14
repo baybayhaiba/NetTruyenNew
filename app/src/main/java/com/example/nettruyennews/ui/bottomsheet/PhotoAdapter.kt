@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.nettruyennews.R
 import com.example.nettruyennews.databinding.PhotoItemBinding
-import com.example.nettruyennews.extension.toUriExtension
+import com.example.nettruyennews.util.extension.toUriExtension
 import com.example.nettruyennews.util.FileUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

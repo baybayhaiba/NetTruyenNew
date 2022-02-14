@@ -14,7 +14,7 @@ import com.example.custombottomsheet.BottomSheetImage
 import com.example.nettruyennews.BookApp
 import com.example.nettruyennews.R
 import com.example.nettruyennews.databinding.FragmentUserBinding
-import com.example.nettruyennews.extension.instanceStorage
+import com.example.nettruyennews.util.extension.instanceStorage
 import com.example.nettruyennews.util.show
 import com.google.firebase.ktx.Firebase
 

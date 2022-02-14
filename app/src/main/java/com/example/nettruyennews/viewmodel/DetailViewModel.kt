@@ -2,7 +2,8 @@ package com.example.nettruyennews.viewmodel
 
 import androidx.lifecycle.*
 import com.example.nettruyennews.model.DescriptionBook
-import com.example.nettruyennews.repository.DetailRepository
+import com.example.nettruyennews.repository.detail.DetailRepository
+import com.example.nettruyennews.repository.detail.DetailRepositoryImpl
 import com.example.nettruyennews.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -10,7 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailViewModel @Inject constructor(private val detailRepository: DetailRepository) :
+class DetailViewModel @Inject constructor(private val detailRepositoryImpl: DetailRepository) :
     ViewModel() {
 
     var currentIndex = MutableLiveData<Int>()
@@ -38,7 +39,7 @@ class DetailViewModel @Inject constructor(private val detailRepository: DetailRe
         emit(Resource.loading())
 
         try {
-            emit(Resource.success(detailRepository.detail(descriptionBook, currentIndex)))
+            emit(Resource.success(detailRepositoryImpl.detail(descriptionBook, currentIndex)))
         } catch (e: Exception) {
             emit(Resource.error(e.toString()))
         }
@@ -46,7 +47,7 @@ class DetailViewModel @Inject constructor(private val detailRepository: DetailRe
 
 
     private fun saveChapter() = viewModelScope.launch {
-        detailRepository.saveChapter(
+        detailRepositoryImpl.saveChapter(
             description.book.link,
             description.chapter[index]
         )

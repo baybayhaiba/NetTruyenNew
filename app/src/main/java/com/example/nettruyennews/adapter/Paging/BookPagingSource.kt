@@ -1,9 +1,8 @@
 package com.example.nettruyennews.adapter.Paging
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.nettruyennews.data.BookService
+import com.example.nettruyennews.data.remote.BookService
 import com.example.nettruyennews.model.Book
 import java.io.IOException
 

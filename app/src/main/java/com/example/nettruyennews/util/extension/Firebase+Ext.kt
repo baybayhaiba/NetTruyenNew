@@ -1,4 +1,4 @@
-package com.example.nettruyennews.extension
+package com.example.nettruyennews.util.extension
 
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage

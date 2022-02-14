@@ -56,6 +56,8 @@ object ImageBinding {
             }
 
             Glide.with(view.context)
+                .asBitmap()
+                .fitCenter()
                 .load(glideUrl)
                 .placeholder(R.drawable.loading)
                // dont need becacause it load all .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)

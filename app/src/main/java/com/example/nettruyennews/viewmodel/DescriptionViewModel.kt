@@ -10,7 +10,8 @@ import com.example.nettruyennews.model.DescriptionBook
 import com.example.nettruyennews.model.room
 import com.example.nettruyennews.model.room.BookRoom
 import com.example.nettruyennews.model.room.ChapterRoom
-import com.example.nettruyennews.repository.DescriptionRepository
+import com.example.nettruyennews.repository.description.DescriptionRepository
+import com.example.nettruyennews.repository.description.DescriptionRepositoryImpl
 import com.example.nettruyennews.util.FileUtil
 import com.example.nettruyennews.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,7 +24,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DescriptionViewModel @Inject
 constructor(
-    private val descriptionRepository: DescriptionRepository
+    private val descriptionRepositoryImpl: DescriptionRepository
 ) : ViewModel() {
     var descriptionCurrent: DescriptionBook? = null
 
@@ -43,7 +44,7 @@ constructor(
         emit(Resource.loading())
 
         try {
-            emit(Resource.success(descriptionRepository.description(book)))
+            emit(Resource.success(descriptionRepositoryImpl.description(book)))
         } catch (e: Exception) {
             emit(Resource.error(e.toString()))
         }
@@ -52,7 +53,7 @@ constructor(
     fun getBookFromDatabase() = viewModelScope.launch {
         bookRoom =
             withContext(Dispatchers.IO) {
-                descriptionRepository.getBookByLink(description.book.link)
+                descriptionRepositoryImpl.getBookByLink(description.book.link)
             }.firstOrNull()
 
         isBookFavorite.value = bookRoom?.categories?.contains(BookRoom.FAVORITE)
@@ -62,7 +63,7 @@ constructor(
 
     fun isReaded() = viewModelScope.launch {
         descriptionCurrent?.let {
-            val chapterDeferred = async { descriptionRepository.getChapterByLink(it.book.link) }
+            val chapterDeferred = async { descriptionRepositoryImpl.getChapterByLink(it.book.link) }
             val chapter = chapterDeferred.await()
             chapterReaded = chapter.firstOrNull()
 
@@ -74,15 +75,15 @@ constructor(
         val resultDeferred = if (bookRoom == null) {
             async {
                 FileUtil.saveImageToDevice(book = description.book)
-                descriptionRepository.saveBook(
+                descriptionRepositoryImpl.saveBook(
                     description.book.room().apply { categories.add(type) }).toInt()
             }
         } else if (bookRoom!!.categories.contains(type) && type == BookRoom.FAVORITE) {
             if (bookRoom!!.categories.size == 1) {
-                async { descriptionRepository.deleteBook(bookRoom!!) }
+                async { descriptionRepositoryImpl.deleteBook(bookRoom!!) }
             } else {
                 async {
-                    descriptionRepository.updateBook(bookRoom!!.apply {
+                    descriptionRepositoryImpl.updateBook(bookRoom!!.apply {
                         categories.remove(
                             type
                         )
@@ -90,7 +91,7 @@ constructor(
                 }
             }
         } else {
-            async { descriptionRepository.updateBook(bookRoom!!.apply { categories.add(type) }) }
+            async { descriptionRepositoryImpl.updateBook(bookRoom!!.apply { categories.add(type) }) }
         }
 
         if (resultDeferred.await() > 0) {
@@ -112,7 +113,7 @@ constructor(
     private fun saveChapter(value: Int) = viewModelScope.launch {
         handleBookToDatabase(BookRoom.READED)
 
-        descriptionRepository.saveChapter(
+        descriptionRepositoryImpl.saveChapter(
             description.book.link,
             description.chapter[value]
         )

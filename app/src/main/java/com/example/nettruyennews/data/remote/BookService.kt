@@ -1,4 +1,4 @@
-package com.example.nettruyennews.data
+package com.example.nettruyennews.data.remote
 
 import com.example.nettruyennews.model.Book
 import com.example.nettruyennews.model.DescriptionBook

@@ -1,11 +1,10 @@
-package com.example.nettruyennews.data
+package com.example.nettruyennews.data.remote
 
 import Util
-import android.util.Log
 import com.example.nettruyennews.model.Book
 import com.example.nettruyennews.model.Chapter
 import com.example.nettruyennews.model.DescriptionBook
-import com.example.nettruyennews.network.OkHttpHtml
+import com.example.nettruyennews.data.remote.network.OkHttpHtml
 import com.example.nettruyennews.util.Constant
 import org.jsoup.Jsoup
 

@@ -22,7 +22,7 @@ class SaveFragment : Fragment() {
         AdapterBook(onClick = ::onClick, longClick = ::longClick)
     }
     private val database: BookDatabase by lazy {
-        BookDatabase.getInstance(context!!)
+        BookDatabase.getInstance(requireContext())
     }
 
     override fun onCreateView(

@@ -5,7 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import com.example.nettruyennews.model.Book
-import com.example.nettruyennews.repository.HomeRepository
+import com.example.nettruyennews.repository.home.HomeRepository
+import com.example.nettruyennews.repository.home.HomeRepositoryImpl
 import com.example.nettruyennews.util.Constant
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -15,7 +16,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val homeRepository: HomeRepository) : ViewModel() {
+class HomeViewModel @Inject constructor(private val homeRepositoryImpl: HomeRepository) : ViewModel() {
     val loading = MutableLiveData<Boolean>()
     val books = MutableLiveData<PagingData<Book>>()
     val error = MutableLiveData<String>()
@@ -30,12 +31,12 @@ class HomeViewModel @Inject constructor(private val homeRepository: HomeReposito
     }
 
 
-    fun fetchBookPaging(url: String) = homeRepository.bookPagingFlow(url = url)
+    fun fetchBookPaging(url: String) = homeRepositoryImpl.pageFlow(url = url)
 
     private fun getMenu() = viewModelScope.launch(Dispatchers.IO) {
         loading.postValue(true)
         try {
-            menu.postValue(homeRepository.category())
+            menu.postValue(homeRepositoryImpl.category())
         } catch (e: Exception) {
             error.postValue(e.message.toString())
         } finally {
@@ -46,7 +47,7 @@ class HomeViewModel @Inject constructor(private val homeRepository: HomeReposito
     private fun getRanking() = viewModelScope.launch(Dispatchers.IO) {
         loading.postValue(true)
         try {
-            ranking.postValue(homeRepository.ranking())
+            ranking.postValue(homeRepositoryImpl.ranking())
         } catch (e: Exception) {
             error.postValue(e.message.toString())
         } finally {

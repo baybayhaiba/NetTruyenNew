@@ -1,12 +1,9 @@
 package com.example.nettruyennews.ui.fragment
 
 import android.app.AlertDialog
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.nettruyennews.R
 import com.example.nettruyennews.adapter.AdapterChapter
 import com.example.nettruyennews.databinding.FragmentDescriptionBinding
 import com.example.nettruyennews.model.DescriptionBook
@@ -18,63 +15,51 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DescriptionFragment : BaseFragment<DescriptionViewModel, FragmentDescriptionBinding>() {
-
+    override val layoutId: Int = R.layout.fragment_description
     override val mViewModel: DescriptionViewModel by viewModels()
-    override var mViewBinding: FragmentDescriptionBinding? = null
     private lateinit var adapterChapter: AdapterChapter
     private val loading: AlertDialog? by lazy {
         showLoading()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun observerScreen() {
         // Inflate the layout for this fragment
+        adapterChapter = AdapterChapter { onClick(it) }
 
-        if (mViewBinding == null) {
-            mViewBinding = FragmentDescriptionBinding.inflate(inflater, container, false)
-            adapterChapter = AdapterChapter { onClick(it) }
-
-            mViewBinding?.apply {
-                rcvChapter.adapter = adapterChapter
-                val bundle = DescriptionFragmentArgs.fromBundle(arguments!!)
-                val book = bundle.book
-                mViewModel.getDescription(book).observe(this@DescriptionFragment) {
-                    when (it.status) {
-                        Status.ERROR -> {
-                            loading?.dismiss()
-                        }
-                        Status.LOADING -> loading?.show()
-                        Status.SUCCESS -> {
-                            setupData(it.data)
-                        }
+        binding.apply {
+            rcvChapter.adapter = adapterChapter
+            val bundle = DescriptionFragmentArgs.fromBundle(requireArguments())
+            val book = bundle.book
+            mViewModel.getDescription(book).observe(viewLifecycleOwner) {
+                when (it.status) {
+                    Status.ERROR -> {
+                        loading?.dismiss()
+                    }
+                    Status.LOADING -> loading?.show()
+                    Status.SUCCESS -> {
+                        setupData(it.data)
                     }
                 }
+            }
 
-                mViewModel.chapterCurrent.observe(this@DescriptionFragment) {
-                    val action =
-                        DescriptionFragmentDirections.actionDescriptionFragmentToDetailFragment(
-                            description!!, it
-                        )
-                    findNavController().navigate(action)
-                }
+            mViewModel.chapterCurrent.observe(viewLifecycleOwner) {
+                val action =
+                    DescriptionFragmentDirections.actionDescriptionFragmentToDetailFragment(
+                        description!!, it
+                    )
+                findNavController().navigate(action)
             }
         }
-
-
-        return mViewBinding!!.root
     }
-
 
     private fun setupData(descriptionBook: DescriptionBook?) {
         if (descriptionBook == null) return
 
         mViewModel.descriptionCurrent = descriptionBook
         mViewModel.getBookFromDatabase()
-        mViewBinding?.description = descriptionBook
-        mViewBinding?.lifecycleOwner = this
-        mViewBinding?.viewModel = mViewModel
+        binding.description = descriptionBook
+        binding.lifecycleOwner = this
+        binding.viewModel = mViewModel
         adapterChapter.submit(descriptionBook.chapter)
         loading?.dismiss()
     }

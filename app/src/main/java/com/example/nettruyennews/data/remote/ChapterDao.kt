@@ -1,4 +1,4 @@
-package com.example.nettruyennews.data
+package com.example.nettruyennews.data.remote
 
 import androidx.room.Dao
 import androidx.room.Insert

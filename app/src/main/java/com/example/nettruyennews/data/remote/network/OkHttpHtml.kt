@@ -1,4 +1,4 @@
-package com.example.nettruyennews.network
+package com.example.nettruyennews.data.remote.network
 
 import com.example.kotlinmvvm_7.network.HttpRequestInterceptor
 import okhttp3.OkHttpClient
