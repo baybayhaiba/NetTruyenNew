@@ -2,12 +2,13 @@ package com.example.nettruyennews.ui.fragment
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -18,13 +19,14 @@ import com.example.nettruyennews.R
 import com.example.nettruyennews.adapter.Paging.LoaderStateAdapter
 import com.example.nettruyennews.adapter.Paging.RemoteBookPager
 import com.example.nettruyennews.databinding.FragmentHomeBinding
+import com.example.nettruyennews.extension.*
 import com.example.nettruyennews.model.Book
 import com.example.nettruyennews.ui.base.BaseFragment
 import com.example.nettruyennews.util.*
 import com.example.nettruyennews.viewmodel.HomeViewModel
+import com.facebook.shimmer.ShimmerFrameLayout
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 
 @AndroidEntryPoint
@@ -64,6 +66,23 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             mViewBinding = FragmentHomeBinding.inflate(inflater, container, false)
             setupToolbar()
 
+            val shimmer =
+                binding.viewShimmer.findViewById<ShimmerFrameLayout>(R.id.view_shimmer_container)
+
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+
+                interval(
+                    millisecond = 1200,
+                    onFinish = {
+                        shimmer.hideShimmer()
+                        binding.coordinatorLayout.isVisible = true
+                    },
+                    onChangeEachLoop = { mViewModel.loading.value != true },
+                    conditionStart = false
+                )
+            }
+
+
             //binding.rcvBook.adapter = adapterBook
             binding.rcvBook.adapter = pagingBook.withLoadStateFooter(loaderState)
             binding.rcvBook.isNestedScrollingEnabled = true
@@ -73,7 +92,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             pagingBook.addLoadStateListener {
                 val isError = it.source.refresh is LoadState.Error
                 val isLoading = it.source.refresh is LoadState.Loading
-
                 mViewModel.loading.value = isLoading
 
                 if (isError) {
@@ -81,15 +99,15 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 }
             }
 
-            mViewModel.loading.observe(this) {
-                if (it) {
-                    loading?.show()
-                } else {
-                    dismiss()
-                }
-            }
+//            mViewModel.loading.observe(viewLifecycleOwner) {
+//                if (it) {
+//                    loading?.show()
+//                } else {
+//                    dismiss()
+//                }
+//            }
 
-            mViewModel.books.observe(this) {
+            mViewModel.books.observe(viewLifecycleOwner) {
                 mViewModel.viewModelScope.launch(Dispatchers.IO) {
                     //refresh page
                     pagingBook.submitData(emptyPage)
@@ -98,24 +116,24 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 }
             }
 
-            mViewModel.error.observe(this) {
+            mViewModel.error.observe(viewLifecycleOwner) {
                 show(it)
             }
 
-            mViewModel.menu.observe(this) {
-                val (link, text) = it.unzip()
+            mViewModel.menu.observe(viewLifecycleOwner) { menuMap ->
+                val (link, text) = menuMap.unzip()
 
-                showDialog("Information", text, onClick = {
-                    val link = "${link[it]}?page="
+                showDialog("Information", text, onClick = { category ->
+                    val link = "${link[category]}?page="
                     mViewModel.getBooks(link)
                 })
             }
 
-            mViewModel.ranking.observe(this) {
-                val (link, text) = it.unzip()
+            mViewModel.ranking.observe(viewLifecycleOwner) { rankMap ->
+                val (link, text) = rankMap.unzip()
 
-                showDialog("Information", text, onClick = {
-                    val link = "${link[it]}&page="
+                showDialog("Information", text, onClick = { rank ->
+                    val link = "${link[rank]}&page="
                     mViewModel.getBooks(link)
                 })
             }
@@ -134,6 +152,12 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 R.id.mnSave -> {
                     val action =
                         HomeFragmentDirections.actionHomeFragmentToSaveFragment()
+                    findNavController().navigate(action)
+                    false
+                }
+
+                R.id.mnUser -> {
+                    val action = HomeFragmentDirections.actionHomeFragmentToUserFragment()
                     findNavController().navigate(action)
                     false
                 }

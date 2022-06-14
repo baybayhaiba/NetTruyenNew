@@ -1,7 +1,6 @@
 package com.example.nettruyennews.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +9,7 @@ import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.nettruyennews.adapter.AdapterImage
 import com.example.nettruyennews.databinding.FragmentDetailBinding
+import com.example.nettruyennews.extension.showToast
 import com.example.nettruyennews.ui.base.BaseFragment
 import com.example.nettruyennews.util.*
 import com.example.nettruyennews.viewmodel.DetailViewModel
@@ -17,6 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+
 
 @AndroidEntryPoint
 class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>() {
@@ -35,9 +36,13 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>() {
             mViewBinding = FragmentDetailBinding.inflate(inflater, container, false)
             adapterImage = AdapterImage { onClickImage(it) }
 
-            binding.rcvImage.adapter = adapterImage
-            binding.viewModel = mViewModel
-            binding.lifecycleOwner = this
+            registerRecyclerView()
+
+//            (activity as? AppCompatActivity)?.apply {
+//                setSupportActionBar(binding.toolbar)
+//                supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//            }
+
 
             DetailFragmentArgs.fromBundle(requireArguments()).let {
                 val description = it.book
@@ -47,10 +52,10 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>() {
                     this.descriptionBook = description
                     this.currentIndex.value = chapterCurrent
 
-                    currentIndex.observe(this@DetailFragment) {
+                    currentIndex.observe(viewLifecycleOwner) {
                         reloadChapter()
                         mViewModel.getImages(it, description)
-                            .observe(this@DetailFragment) { resource ->
+                            .observe(viewLifecycleOwner) { resource ->
                                 when (resource.status) {
                                     Status.LOADING -> showToast(resource.message)
                                     Status.ERROR -> showToast(resource.message)
@@ -67,29 +72,35 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>() {
         return binding.root
     }
 
-
-    private fun reloadChapter() {
-        binding.layoutButton.visibility = View.GONE
-        adapterImage.submit(emptyList())
-        //clearCache()
+    private fun registerRecyclerView() {
+        binding.rcvImage.adapter = adapterImage
+        binding.viewModel = mViewModel
+        binding.lifecycleOwner = this
     }
 
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        clearCache()
-//    }
-//
-//    private fun clearCache() = runBlocking {
-//        withContext(Dispatchers.IO) {
-//            activity?.applicationContext?.let { Glide.get(it).clearDiskCache() }
-//        }
-//    }
+
+    private fun reloadChapter() {
+        //binding.layoutButton.visibility = View.GONE
+        adapterImage.submit(emptyList())
+        clearCache()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        clearCache()
+    }
+
+    private fun clearCache() = runBlocking {
+        withContext(Dispatchers.IO) {
+            activity?.applicationContext?.let { Glide.get(it).clearDiskCache() }
+        }
+    }
 
 
     private fun setupData(images: List<String>?) {
         if (images == null) return
         adapterImage.submit(images)
-        binding.layoutButton.isVisible = true
+       // binding.layoutButton.isVisible = true
     }
 
     private fun onClickImage(image: String) {

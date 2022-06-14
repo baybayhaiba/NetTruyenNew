@@ -12,7 +12,7 @@ import com.example.nettruyennews.data.database.BookDatabase
 import com.example.nettruyennews.databinding.FragmentSaveBinding
 import com.example.nettruyennews.model.Book
 import com.example.nettruyennews.model.room.BookRoom
-import com.example.nettruyennews.util.showDialog
+import com.example.nettruyennews.extension.showDialog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

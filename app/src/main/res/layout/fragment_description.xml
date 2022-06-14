@@ -152,7 +152,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="10sp"
-                            android:backgroundTint="@android:color/holo_orange_dark"
+                            android:backgroundTint="@color/primary_2"
                             android:onClick="@{()->viewModel.onClickChapterReaded()}"
                             android:text="Đọc tiếp"
                             android:visibility="@{viewModel.isReadedBook ? View.VISIBLE : View.GONE}" />
@@ -166,22 +166,22 @@
                                 android:id="@+id/btnReadBegin"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="10sp"
+                                android:layout_margin="8sp"
                                 android:layout_weight="1"
-                                android:backgroundTint="@android:color/holo_orange_dark"
+                                android:backgroundTint="@color/primary_2"
                                 android:onClick="@{()->viewModel.onClickChapterFirst()}"
-                                android:text="Đọc từ đầu"
+                                android:text="Từ đầu"
                                 android:textSize="12sp" />
 
                             <Button
                                 android:id="@+id/btnReadLastest"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="10sp"
+                                android:layout_margin="8sp"
                                 android:layout_weight="1"
-                                android:backgroundTint="@android:color/holo_orange_dark"
+                                android:backgroundTint="@color/primary_2"
                                 android:onClick="@{()->viewModel.onClickChapterLast()}"
-                                android:text="Đọc mới nhất"
+                                android:text="Mới nhất"
                                 android:textSize="12sp" />
 
                         </LinearLayout>
@@ -202,10 +202,10 @@
             android:id="@+id/rcvChapter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:scrollbars="none"
             android:layout_margin="16sp"
             android:nestedScrollingEnabled="true"
+            android:orientation="vertical"
+            android:scrollbars="none"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 

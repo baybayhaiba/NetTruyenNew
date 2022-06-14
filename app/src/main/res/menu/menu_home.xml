@@ -1,21 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
     <item
         android:id="@+id/mnSearch"
         android:icon="@android:drawable/ic_menu_search"
+        android:title="search"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
-        app:showAsAction="ifRoom|collapseActionView"
-        android:title="search" />
-    <item android:id="@+id/mnSave"
-        android:title="Save"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/mnSave"
         android:icon="@drawable/ic_baseline_bookmark_added_24"
-        android:orderInCategory="100"
+        android:orderInCategory="1"
+        android:title="Save"
         app:showAsAction="always" />
 
-    <item android:id="@+id/mnRanking"
-        android:title="Ranking"
+    <item
+        android:id="@+id/mnRanking"
         android:icon="@drawable/ic_baseline_star_24"
-        android:orderInCategory="100"
+        android:orderInCategory="2"
+        android:title="Ranking"
+        app:showAsAction="always" />
+
+
+    <item
+        android:id="@+id/mnUser"
+        android:icon="@drawable/ic_baseline_account_circle_24"
+        android:title="User"
+        android:orderInCategory="3"
         app:showAsAction="always" />
 </menu>

@@ -25,7 +25,7 @@ class BookApp : Application() {
         }
     }
 
-    public val UUID_DEVICE: String by lazy {
+    val UUID_DEVICE: String by lazy {
         Settings.Secure.getString(instance?.contentResolver, Settings.Secure.ANDROID_ID)
     }
 }

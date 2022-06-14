@@ -9,10 +9,11 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.nettruyennews.adapter.AdapterChapter
 import com.example.nettruyennews.databinding.FragmentDescriptionBinding
+import com.example.nettruyennews.model.Book
 import com.example.nettruyennews.model.DescriptionBook
 import com.example.nettruyennews.ui.base.BaseFragment
 import com.example.nettruyennews.util.Status
-import com.example.nettruyennews.util.showLoading
+import com.example.nettruyennews.extension.showLoading
 import com.example.nettruyennews.viewmodel.DescriptionViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,6 +27,8 @@ class DescriptionFragment : BaseFragment<DescriptionViewModel, FragmentDescripti
         showLoading()
     }
 
+    lateinit var book: Book
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,10 +40,11 @@ class DescriptionFragment : BaseFragment<DescriptionViewModel, FragmentDescripti
             adapterChapter = AdapterChapter { onClick(it) }
 
             mViewBinding?.apply {
+                val bundle = DescriptionFragmentArgs.fromBundle(requireArguments())
+                book = bundle.book
                 rcvChapter.adapter = adapterChapter
-                val bundle = DescriptionFragmentArgs.fromBundle(arguments!!)
-                val book = bundle.book
-                mViewModel.getDescription(book).observe(this@DescriptionFragment) {
+
+                mViewModel.getDescription(book).observe(viewLifecycleOwner) {
                     when (it.status) {
                         Status.ERROR -> {
                             loading?.dismiss()
@@ -52,7 +56,7 @@ class DescriptionFragment : BaseFragment<DescriptionViewModel, FragmentDescripti
                     }
                 }
 
-                mViewModel.chapterCurrent.observe(this@DescriptionFragment) {
+                mViewModel.chapterCurrent.observe(viewLifecycleOwner) {
                     val action =
                         DescriptionFragmentDirections.actionDescriptionFragmentToDetailFragment(
                             description!!, it
@@ -65,7 +69,6 @@ class DescriptionFragment : BaseFragment<DescriptionViewModel, FragmentDescripti
 
         return mViewBinding!!.root
     }
-
 
     private fun setupData(descriptionBook: DescriptionBook?) {
         if (descriptionBook == null) return

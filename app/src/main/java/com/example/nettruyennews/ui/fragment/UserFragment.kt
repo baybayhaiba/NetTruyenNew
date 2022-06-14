@@ -15,7 +15,7 @@ import com.example.nettruyennews.BookApp
 import com.example.nettruyennews.R
 import com.example.nettruyennews.databinding.FragmentUserBinding
 import com.example.nettruyennews.extension.instanceStorage
-import com.example.nettruyennews.util.show
+import com.example.nettruyennews.extension.show
 import com.google.firebase.ktx.Firebase
 
 class UserFragment : Fragment() {

@@ -69,6 +69,7 @@ fun <T> Context.showDialog(
 ): AlertDialog? {
     val builder = AlertDialog.Builder(this)
     builder.setTitle(title)
+    builder.setCancelable(true)
     val arrayAdapter = ArrayAdapter(this, android.R.layout.select_dialog_item, data)
     builder.setAdapter(arrayAdapter) { _, position ->
         if (onClick != null) {

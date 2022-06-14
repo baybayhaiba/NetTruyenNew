@@ -1,6 +1,5 @@
 package com.example.nettruyennews.network
 
-import com.example.kotlinmvvm_7.network.HttpRequestInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
 
@@ -23,7 +22,7 @@ object OkHttpHtml {
             .url(url)
             .build()
 
-        val html = OkHttpHtml.getInstance()
+        val html = this.getInstance()
             .newCall(request).execute().body?.string()
 
         return html ?: ""

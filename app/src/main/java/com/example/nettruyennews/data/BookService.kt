@@ -6,7 +6,6 @@ import com.example.nettruyennews.util.Constant
 
 interface BookService {
 
-
     suspend fun home(url: String = Constant.URL_HOME, page: Int): List<Book>
 
     suspend fun description(book: Book): DescriptionBook
