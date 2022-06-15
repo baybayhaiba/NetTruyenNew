@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.example.nettruyennews.util.*
+import java.util.*
 
 fun Fragment.showToast(text: String?) {
     activity?.showToast(text)
@@ -26,6 +27,8 @@ suspend fun interval(
     conditionStart: Boolean?
 ) {
     var conditionLoop = conditionStart ?: onChangeEachLoop()
+
+    Log.d("hehehhee", "$conditionLoop ${Date()}")
     while (!conditionLoop) {
         delay(millisecond)
         conditionLoop = onChangeEachLoop()

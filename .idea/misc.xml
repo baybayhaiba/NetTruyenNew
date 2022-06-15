@@ -33,13 +33,17 @@
         <entry key="..\:/Android-Studio-Project/KotlinComeback/NetTruyenNews/app/src/main/res/layout/photo_item.xml" value="0.16621376811594202" />
         <entry key="..\:/Android-Studio-Project/KotlinComeback/NetTruyenNews/app/src/main/res/menu/menu_home.xml" value="0.18229166666666666" />
         <entry key="..\:/Android-Studio-Project/KotlinComeback/NetTruyenNews/app/src/main/res/xml/searchable.xml" value="0.18229166666666666" />
+        <entry key="app/src/main/res/drawable/bg_border_selected_button.xml" value="0.1175" />
         <entry key="app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.2675" />
+        <entry key="app/src/main/res/layout/book_item.xml" value="0.1703125" />
         <entry key="app/src/main/res/layout/book_placeholder.xml" value="0.1480978260869565" />
         <entry key="app/src/main/res/layout/fragment_description.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.13179347826086957" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.11524822695035461" />
+        <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_toolbar.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_toolbar_exit.xml" value="0.13179347826086957" />
+        <entry key="app/src/main/res/layout/item_book_loader.xml" value="0.18342391304347827" />
+        <entry key="app/src/main/res/layout/layout_empty_view.xml" value="0.18342391304347827" />
         <entry key="app/src/main/res/layout/shimmer_placeholder.xml" value="0.15291936978683968" />
         <entry key="app/src/main/res/menu/menu_home.xml" value="0.3390625" />
       </map>

@@ -1,6 +1,7 @@
 package com.example.nettruyennews.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,8 @@ import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.nettruyennews.adapter.AdapterImage
 import com.example.nettruyennews.databinding.FragmentDetailBinding
+import com.example.nettruyennews.extension.DIRECTION_VERTICAL
+import com.example.nettruyennews.extension.listenScroll
 import com.example.nettruyennews.extension.showToast
 import com.example.nettruyennews.ui.base.BaseFragment
 import com.example.nettruyennews.util.*
@@ -52,9 +55,9 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>() {
                     this.descriptionBook = description
                     this.currentIndex.value = chapterCurrent
 
-                    currentIndex.observe(viewLifecycleOwner) {
+                    currentIndex.observe(this@DetailFragment) { chapter ->
                         reloadChapter()
-                        mViewModel.getImages(it, description)
+                        mViewModel.getImages(chapter, description)
                             .observe(viewLifecycleOwner) { resource ->
                                 when (resource.status) {
                                     Status.LOADING -> showToast(resource.message)
@@ -74,6 +77,10 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>() {
 
     private fun registerRecyclerView() {
         binding.rcvImage.adapter = adapterImage
+        binding.rcvImage.listenScroll {
+            Log.d("hasagi guys", "registerRecyclerView: => $it")
+            binding.layoutButton.isVisible = it
+        }
         binding.viewModel = mViewModel
         binding.lifecycleOwner = this
     }
@@ -100,7 +107,7 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>() {
     private fun setupData(images: List<String>?) {
         if (images == null) return
         adapterImage.submit(images)
-       // binding.layoutButton.isVisible = true
+        // binding.layoutButton.isVisible = true
     }
 
     private fun onClickImage(image: String) {

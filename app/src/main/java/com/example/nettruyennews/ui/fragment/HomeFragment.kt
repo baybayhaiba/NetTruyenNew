@@ -1,11 +1,14 @@
 package com.example.nettruyennews.ui.fragment
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -23,10 +26,12 @@ import com.example.nettruyennews.extension.*
 import com.example.nettruyennews.model.Book
 import com.example.nettruyennews.ui.base.BaseFragment
 import com.example.nettruyennews.util.*
+import com.example.nettruyennews.util.Constant.URL_ORIGNAL
 import com.example.nettruyennews.viewmodel.HomeViewModel
 import com.facebook.shimmer.ShimmerFrameLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
+import java.util.*
 
 
 @AndroidEntryPoint
@@ -54,6 +59,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     private val emptyPage = PagingData.from(emptyList<Book>())
 
 
+    @SuppressLint("FragmentLiveDataObserve")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -66,25 +72,10 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             mViewBinding = FragmentHomeBinding.inflate(inflater, container, false)
             setupToolbar()
 
-            val shimmer =
-                binding.viewShimmer.findViewById<ShimmerFrameLayout>(R.id.view_shimmer_container)
-
-            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
-
-                interval(
-                    millisecond = 1200,
-                    onFinish = {
-                        shimmer.hideShimmer()
-                        binding.coordinatorLayout.isVisible = true
-                    },
-                    onChangeEachLoop = { mViewModel.loading.value != true },
-                    conditionStart = false
-                )
-            }
-
 
             //binding.rcvBook.adapter = adapterBook
-            binding.rcvBook.adapter = pagingBook.withLoadStateFooter(loaderState)
+            //binding.rcvBook.adapter = pagingBook.withLoadStateFooter(loaderState)
+            binding.rcvBook.adapter = pagingBook
             binding.rcvBook.isNestedScrollingEnabled = true
             binding.scrollToTop.setupWithRecyclerView(binding.rcvBook)
             binding.viewModel = mViewModel
@@ -99,15 +90,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 }
             }
 
-//            mViewModel.loading.observe(viewLifecycleOwner) {
-//                if (it) {
-//                    loading?.show()
-//                } else {
-//                    dismiss()
-//                }
-//            }
-
-            mViewModel.books.observe(viewLifecycleOwner) {
+            mViewModel.books.observe(this) {
                 mViewModel.viewModelScope.launch(Dispatchers.IO) {
                     //refresh page
                     pagingBook.submitData(emptyPage)
@@ -116,11 +99,17 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 }
             }
 
-            mViewModel.error.observe(viewLifecycleOwner) {
+            mViewModel.loading.observe(this) {
+                handleShimmer()
+            }
+
+            mViewModel.error.observe(this) {
                 show(it)
             }
 
-            mViewModel.menu.observe(viewLifecycleOwner) { menuMap ->
+
+
+            mViewModel.menu.observe(this) { menuMap ->
                 val (link, text) = menuMap.unzip()
 
                 showDialog("Information", text, onClick = { category ->
@@ -129,7 +118,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 })
             }
 
-            mViewModel.ranking.observe(viewLifecycleOwner) { rankMap ->
+            mViewModel.ranking.observe(this) { rankMap ->
                 val (link, text) = rankMap.unzip()
 
                 showDialog("Information", text, onClick = { rank ->
@@ -142,8 +131,26 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         return mViewBinding!!.root
     }
 
-    private fun dismiss() {
-        loading?.dismiss()
+    private fun handleShimmer() {
+        val shimmer =
+            binding.viewShimmer.findViewById<ShimmerFrameLayout>(R.id.view_shimmer_container)
+
+        if (!shimmer.isVisible) {
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+
+                interval(
+                    millisecond = 2000,
+                    onFinish = {
+                        shimmer.hideShimmer()
+                        shimmer.isGone = true
+                    },
+                    onChangeEachLoop = { mViewModel.loading.value != true },
+                    conditionStart = false
+                )
+            }
+        }
+
+
     }
 
     private fun setupToolbar() {
@@ -185,6 +192,12 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     private fun setupSearchView(searchView: SearchView) {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(p0: String?): Boolean {
+                if (p0.isNullOrBlank() && mViewModel.URL_CURRENT != Constant.URL_HOME) {
+                    Constant.URL_HOME
+                    mViewModel.getBooks(Constant.URL_HOME)
+                    dismissKeyboard()
+                    searchView.clearFocus()
+                }
                 return true
             }
 
@@ -192,7 +205,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 val url = if (p0.isNullOrBlank()) {
                     Constant.URL_HOME
                 } else {
-                    "http://www.nettruyengo.com/tim-truyen?keyword=${p0}&page="
+                    "${URL_ORIGNAL}/tim-truyen?keyword=${p0}&page="
                 }
                 mViewModel.getBooks(url)
                 dismissKeyboard()

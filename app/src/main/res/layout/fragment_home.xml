@@ -11,89 +11,89 @@
     </data>
 
 
-    <FrameLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <include
-            android:id="@+id/view_shimmer"
-            layout="@layout/shimmer_placeholder" />
+        android:layout_height="match_parent"
+        android:background="@color/primary">
 
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:id="@+id/coordinator_layout"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/primary"
-            android:visibility="gone">
+            android:layout_height="wrap_content">
 
-
-            <com.google.android.material.appbar.AppBarLayout
-                android:id="@+id/appbar_layout"
+            <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:titleEnabled="false">
 
-                <com.google.android.material.appbar.CollapsingToolbarLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                    app:titleEnabled="false">
+                    android:orientation="vertical">
 
-                    <LinearLayout
+
+                    <com.google.android.material.appbar.MaterialToolbar
+                        android:id="@+id/toolbarHome"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <com.google.android.material.appbar.MaterialToolbar
-                            android:id="@+id/toolbarHome"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10sp"
-                            android:background="@color/primary_2"
-                            android:theme="@style/ThemeOverlay.AppCompat.Dark"
-                            app:menu="@menu/menu_home"
-                            app:navigationIcon="@drawable/ic_baseline_table_rows_24" />
+                        android:layout_margin="10sp"
+                        android:background="@color/primary_2"
+                        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+                        app:menu="@menu/menu_home"
+                        app:navigationIcon="@drawable/ic_baseline_table_rows_24" />
 
 
-                        <!-- Put here elements that you need above the recycler view -->
+                    <!-- Put here elements that you need above the recycler view -->
 
-                    </LinearLayout>
+                </LinearLayout>
 
 
-                </com.google.android.material.appbar.CollapsingToolbarLayout>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-            </com.google.android.material.appbar.AppBarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <include
+                android:id="@+id/view_shimmer"
+                layout="@layout/shimmer_placeholder" />
 
             <!-- RecyclerView -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcvBook"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/primary"
                 android:nestedScrollingEnabled="true"
                 android:orientation="vertical"
-                android:scrollbars="none"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 app:spanCount="2" />
 
-            <com.mahdikh.vision.scrolltotop.widget.ScrollToTop
-                android:id="@+id/scrollToTop"
-                android:layout_width="50sp"
-                android:layout_height="50sp"
-                android:layout_margin="10dp"
-                app:heavyCheckup="true"
-                app:layout_anchor="@id/rcvBook"
-                app:layout_anchorGravity="bottom|right"
-                app:minimumPosition="NO_POSITION"
-                app:minimumScroll="250dp"
-                app:rippleColor="#999999"
-                app:shortScroll="true"
-                app:smoothScroll="true" />
-
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        </FrameLayout>
 
 
-    </FrameLayout>
+        <com.mahdikh.vision.scrolltotop.widget.ScrollToTop
+            android:id="@+id/scrollToTop"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:layout_margin="10dp"
+            app:heavyCheckup="true"
+            app:layout_anchor="@id/rcvBook"
+            app:layout_anchorGravity="bottom|right"
+            app:minimumPosition="NO_POSITION"
+            app:minimumScroll="250dp"
+            app:rippleColor="#999999"
+            app:shortScroll="true"
+            app:smoothScroll="true" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
 </layout>
