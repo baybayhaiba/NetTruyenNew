@@ -39,6 +39,7 @@
         <entry key="app/src/main/res/layout/book_placeholder.xml" value="0.1480978260869565" />
         <entry key="app/src/main/res/layout/fragment_description.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_flutter.xml" value="0.18177083333333333" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_toolbar.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_toolbar_exit.xml" value="0.13179347826086957" />

@@ -164,7 +164,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 }
 
                 R.id.mnUser -> {
-                    val action = HomeFragmentDirections.actionHomeFragmentToUserFragment()
+                    val action = HomeFragmentDirections.actionHomeFragmentToFlutterFragment()
                     findNavController().navigate(action)
                     false
                 }

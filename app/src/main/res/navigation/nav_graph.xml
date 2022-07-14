@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_homeFragment_to_userFragment"
             app:destination="@id/userFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_flutterFragment"
+            app:destination="@id/flutterFragment" />
     </fragment>
 
     <fragment
@@ -64,5 +67,9 @@
         android:id="@+id/userFragment"
         android:name="com.example.nettruyennews.ui.fragment.UserFragment"
         android:label="UserFragment" />
+    <fragment
+        android:id="@+id/flutterFragment"
+        android:name="com.example.nettruyennews.ui.fragment.FlutterFragment"
+        android:label="FlutterFragment" />
 
 </navigation>

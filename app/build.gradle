@@ -7,7 +7,6 @@ plugins {
     id 'kotlin-parcelize'
 }
 
-apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
 android {
@@ -48,6 +47,17 @@ kapt {
     correctErrorTypes = true
 }
 
+repositories {
+    maven {
+        url 'nettruyen/flutter_nettruyen/build/host/outputs/repo'
+        // This is relative to the location of the build.gradle file
+        // if using a relative path.
+    }
+    maven {
+        url 'https://storage.googleapis.com/download.flutter.io'
+    }
+}
+
 
 dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
@@ -57,8 +67,12 @@ dependencies {
     def room_version = "2.3.0"
     def paging_version = "3.1.0"
 
+
+
+    implementation project(':flutter')
     //paging
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+
 
     //firebase
     implementation platform('com.google.firebase:firebase-bom:29.0.3')

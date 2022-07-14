@@ -53,6 +53,7 @@ class DescriptionFragment : BaseFragment<DescriptionViewModel, FragmentDescripti
                         Status.SUCCESS -> {
                             setupData(it.data)
                         }
+                        else -> {}
                     }
                 }
 
