@@ -1,0 +1,6 @@
+framework module Pods_NettruyenIOS_NettruyenIOSUITests {
+  umbrella header "Pods-NettruyenIOS-NettruyenIOSUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

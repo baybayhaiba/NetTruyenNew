@@ -1,0 +1,28 @@
+PODS:
+  - Flutter (1.0.0)
+  - flutter_nettruyen (0.0.1):
+    - Flutter
+  - FlutterPluginRegistrant (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `../flutter_nettruyen/.ios/Flutter/engine`)
+  - flutter_nettruyen (from `../flutter_nettruyen/.ios/Flutter`)
+  - FlutterPluginRegistrant (from `../flutter_nettruyen/.ios/Flutter/FlutterPluginRegistrant`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: "../flutter_nettruyen/.ios/Flutter/engine"
+  flutter_nettruyen:
+    :path: "../flutter_nettruyen/.ios/Flutter"
+  FlutterPluginRegistrant:
+    :path: "../flutter_nettruyen/.ios/Flutter/FlutterPluginRegistrant"
+
+SPEC CHECKSUMS:
+  Flutter: bdfa2e8fe0e2880a2c6a58a0b1a8675c262a07af
+  flutter_nettruyen: 884551fba2a5d99afd16df337a7cd8781d08de6d
+  FlutterPluginRegistrant: 2afd5ea46d3a949472c9b7da6462d8fbf7d8b16e
+
+PODFILE CHECKSUM: 6641d0da2740244832757afbcd68be8ff2edc907
+
+COCOAPODS: 1.11.3

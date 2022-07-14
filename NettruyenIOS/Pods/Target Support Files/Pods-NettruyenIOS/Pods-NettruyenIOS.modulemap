@@ -1,0 +1,6 @@
+framework module Pods_NettruyenIOS {
+  umbrella header "Pods-NettruyenIOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

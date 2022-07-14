@@ -1,0 +1,775 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		16DA51FE68993DC4A49574EB /* Pods_NettruyenIOS_NettruyenIOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8829DBED205BBD67563B3B0 /* Pods_NettruyenIOS_NettruyenIOSUITests.framework */; };
+		53607046B6D34456540076AA /* Pods_NettruyenIOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33CEA90E7309C2ACB7635A5D /* Pods_NettruyenIOSTests.framework */; };
+		80E5243768A04B92393B9EF7 /* Pods_NettruyenIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18E3E3C84CF57723F8C5E35 /* Pods_NettruyenIOS.framework */; };
+		848CF26B28800F1C00C9FECE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848CF26A28800F1C00C9FECE /* AppDelegate.swift */; };
+		848CF26D28800F1C00C9FECE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848CF26C28800F1C00C9FECE /* SceneDelegate.swift */; };
+		848CF26F28800F1C00C9FECE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848CF26E28800F1C00C9FECE /* ViewController.swift */; };
+		848CF27228800F1C00C9FECE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848CF27028800F1C00C9FECE /* Main.storyboard */; };
+		848CF27428800F1E00C9FECE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 848CF27328800F1E00C9FECE /* Assets.xcassets */; };
+		848CF27728800F1E00C9FECE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848CF27528800F1E00C9FECE /* LaunchScreen.storyboard */; };
+		848CF28228800F1E00C9FECE /* NettruyenIOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848CF28128800F1E00C9FECE /* NettruyenIOSTests.swift */; };
+		848CF28C28800F1E00C9FECE /* NettruyenIOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848CF28B28800F1E00C9FECE /* NettruyenIOSUITests.swift */; };
+		848CF28E28800F1E00C9FECE /* NettruyenIOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848CF28D28800F1E00C9FECE /* NettruyenIOSUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		848CF27E28800F1E00C9FECE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 848CF25F28800F1C00C9FECE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 848CF26628800F1C00C9FECE;
+			remoteInfo = NettruyenIOS;
+		};
+		848CF28828800F1E00C9FECE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 848CF25F28800F1C00C9FECE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 848CF26628800F1C00C9FECE;
+			remoteInfo = NettruyenIOS;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		33CEA90E7309C2ACB7635A5D /* Pods_NettruyenIOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NettruyenIOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A5B64D34E605C2BD4062C65 /* Pods-NettruyenIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NettruyenIOS.release.xcconfig"; path = "Target Support Files/Pods-NettruyenIOS/Pods-NettruyenIOS.release.xcconfig"; sourceTree = "<group>"; };
+		407130C07E7950711EE8FB5E /* Pods-NettruyenIOS-NettruyenIOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NettruyenIOS-NettruyenIOSUITests.debug.xcconfig"; path = "Target Support Files/Pods-NettruyenIOS-NettruyenIOSUITests/Pods-NettruyenIOS-NettruyenIOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		7930C929BC92D411BE6CFC5F /* Pods-NettruyenIOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NettruyenIOSTests.debug.xcconfig"; path = "Target Support Files/Pods-NettruyenIOSTests/Pods-NettruyenIOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		848CF26728800F1C00C9FECE /* NettruyenIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NettruyenIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		848CF26A28800F1C00C9FECE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		848CF26C28800F1C00C9FECE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		848CF26E28800F1C00C9FECE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		848CF27128800F1C00C9FECE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		848CF27328800F1E00C9FECE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		848CF27628800F1E00C9FECE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		848CF27828800F1E00C9FECE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		848CF27D28800F1E00C9FECE /* NettruyenIOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NettruyenIOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		848CF28128800F1E00C9FECE /* NettruyenIOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NettruyenIOSTests.swift; sourceTree = "<group>"; };
+		848CF28728800F1E00C9FECE /* NettruyenIOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NettruyenIOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		848CF28B28800F1E00C9FECE /* NettruyenIOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NettruyenIOSUITests.swift; sourceTree = "<group>"; };
+		848CF28D28800F1E00C9FECE /* NettruyenIOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NettruyenIOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		A18E3E3C84CF57723F8C5E35 /* Pods_NettruyenIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NettruyenIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8829DBED205BBD67563B3B0 /* Pods_NettruyenIOS_NettruyenIOSUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NettruyenIOS_NettruyenIOSUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7B0E742FCE5EEF6A64E9A0C /* Pods-NettruyenIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NettruyenIOS.debug.xcconfig"; path = "Target Support Files/Pods-NettruyenIOS/Pods-NettruyenIOS.debug.xcconfig"; sourceTree = "<group>"; };
+		CBF67A04BC5DEC177038D333 /* Pods-NettruyenIOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NettruyenIOSTests.release.xcconfig"; path = "Target Support Files/Pods-NettruyenIOSTests/Pods-NettruyenIOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		FE4E46774E34066206949CFA /* Pods-NettruyenIOS-NettruyenIOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NettruyenIOS-NettruyenIOSUITests.release.xcconfig"; path = "Target Support Files/Pods-NettruyenIOS-NettruyenIOSUITests/Pods-NettruyenIOS-NettruyenIOSUITests.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		848CF26428800F1C00C9FECE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				80E5243768A04B92393B9EF7 /* Pods_NettruyenIOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		848CF27A28800F1E00C9FECE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				53607046B6D34456540076AA /* Pods_NettruyenIOSTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		848CF28428800F1E00C9FECE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				16DA51FE68993DC4A49574EB /* Pods_NettruyenIOS_NettruyenIOSUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		57E2214B832E01FA962E2CF8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C7B0E742FCE5EEF6A64E9A0C /* Pods-NettruyenIOS.debug.xcconfig */,
+				3A5B64D34E605C2BD4062C65 /* Pods-NettruyenIOS.release.xcconfig */,
+				407130C07E7950711EE8FB5E /* Pods-NettruyenIOS-NettruyenIOSUITests.debug.xcconfig */,
+				FE4E46774E34066206949CFA /* Pods-NettruyenIOS-NettruyenIOSUITests.release.xcconfig */,
+				7930C929BC92D411BE6CFC5F /* Pods-NettruyenIOSTests.debug.xcconfig */,
+				CBF67A04BC5DEC177038D333 /* Pods-NettruyenIOSTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		848CF25E28800F1C00C9FECE = {
+			isa = PBXGroup;
+			children = (
+				848CF26928800F1C00C9FECE /* NettruyenIOS */,
+				848CF28028800F1E00C9FECE /* NettruyenIOSTests */,
+				848CF28A28800F1E00C9FECE /* NettruyenIOSUITests */,
+				848CF26828800F1C00C9FECE /* Products */,
+				57E2214B832E01FA962E2CF8 /* Pods */,
+				956FE5F31B7D545E9E58C6DA /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		848CF26828800F1C00C9FECE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				848CF26728800F1C00C9FECE /* NettruyenIOS.app */,
+				848CF27D28800F1E00C9FECE /* NettruyenIOSTests.xctest */,
+				848CF28728800F1E00C9FECE /* NettruyenIOSUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		848CF26928800F1C00C9FECE /* NettruyenIOS */ = {
+			isa = PBXGroup;
+			children = (
+				848CF26A28800F1C00C9FECE /* AppDelegate.swift */,
+				848CF26C28800F1C00C9FECE /* SceneDelegate.swift */,
+				848CF26E28800F1C00C9FECE /* ViewController.swift */,
+				848CF27028800F1C00C9FECE /* Main.storyboard */,
+				848CF27328800F1E00C9FECE /* Assets.xcassets */,
+				848CF27528800F1E00C9FECE /* LaunchScreen.storyboard */,
+				848CF27828800F1E00C9FECE /* Info.plist */,
+			);
+			path = NettruyenIOS;
+			sourceTree = "<group>";
+		};
+		848CF28028800F1E00C9FECE /* NettruyenIOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				848CF28128800F1E00C9FECE /* NettruyenIOSTests.swift */,
+			);
+			path = NettruyenIOSTests;
+			sourceTree = "<group>";
+		};
+		848CF28A28800F1E00C9FECE /* NettruyenIOSUITests */ = {
+			isa = PBXGroup;
+			children = (
+				848CF28B28800F1E00C9FECE /* NettruyenIOSUITests.swift */,
+				848CF28D28800F1E00C9FECE /* NettruyenIOSUITestsLaunchTests.swift */,
+			);
+			path = NettruyenIOSUITests;
+			sourceTree = "<group>";
+		};
+		956FE5F31B7D545E9E58C6DA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A18E3E3C84CF57723F8C5E35 /* Pods_NettruyenIOS.framework */,
+				A8829DBED205BBD67563B3B0 /* Pods_NettruyenIOS_NettruyenIOSUITests.framework */,
+				33CEA90E7309C2ACB7635A5D /* Pods_NettruyenIOSTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		848CF26628800F1C00C9FECE /* NettruyenIOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 848CF29128800F1E00C9FECE /* Build configuration list for PBXNativeTarget "NettruyenIOS" */;
+			buildPhases = (
+				F8F32408A8598EC6C2001D65 /* [CP] Check Pods Manifest.lock */,
+				4AEA3E83A59B82A2842C2E70 /* [CP-User] Run Flutter Build flutter_nettruyen Script */,
+				848CF26328800F1C00C9FECE /* Sources */,
+				848CF26428800F1C00C9FECE /* Frameworks */,
+				848CF26528800F1C00C9FECE /* Resources */,
+				4DDE210091DD9737A6048734 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NettruyenIOS;
+			productName = NettruyenIOS;
+			productReference = 848CF26728800F1C00C9FECE /* NettruyenIOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		848CF27C28800F1E00C9FECE /* NettruyenIOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 848CF29428800F1E00C9FECE /* Build configuration list for PBXNativeTarget "NettruyenIOSTests" */;
+			buildPhases = (
+				4881BD8CB404DD56E2AABFB5 /* [CP] Check Pods Manifest.lock */,
+				848CF27928800F1E00C9FECE /* Sources */,
+				848CF27A28800F1E00C9FECE /* Frameworks */,
+				848CF27B28800F1E00C9FECE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				848CF27F28800F1E00C9FECE /* PBXTargetDependency */,
+			);
+			name = NettruyenIOSTests;
+			productName = NettruyenIOSTests;
+			productReference = 848CF27D28800F1E00C9FECE /* NettruyenIOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		848CF28628800F1E00C9FECE /* NettruyenIOSUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 848CF29728800F1E00C9FECE /* Build configuration list for PBXNativeTarget "NettruyenIOSUITests" */;
+			buildPhases = (
+				2FC632E496F3B82EEA3A6844 /* [CP] Check Pods Manifest.lock */,
+				848CF28328800F1E00C9FECE /* Sources */,
+				848CF28428800F1E00C9FECE /* Frameworks */,
+				848CF28528800F1E00C9FECE /* Resources */,
+				9FA89A93FCD4F20EAAA94BEF /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				848CF28928800F1E00C9FECE /* PBXTargetDependency */,
+			);
+			name = NettruyenIOSUITests;
+			productName = NettruyenIOSUITests;
+			productReference = 848CF28728800F1E00C9FECE /* NettruyenIOSUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		848CF25F28800F1C00C9FECE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1320;
+				LastUpgradeCheck = 1320;
+				TargetAttributes = {
+					848CF26628800F1C00C9FECE = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+					848CF27C28800F1E00C9FECE = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = 848CF26628800F1C00C9FECE;
+					};
+					848CF28628800F1E00C9FECE = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = 848CF26628800F1C00C9FECE;
+					};
+				};
+			};
+			buildConfigurationList = 848CF26228800F1C00C9FECE /* Build configuration list for PBXProject "NettruyenIOS" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 848CF25E28800F1C00C9FECE;
+			productRefGroup = 848CF26828800F1C00C9FECE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				848CF26628800F1C00C9FECE /* NettruyenIOS */,
+				848CF27C28800F1E00C9FECE /* NettruyenIOSTests */,
+				848CF28628800F1E00C9FECE /* NettruyenIOSUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		848CF26528800F1C00C9FECE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				848CF27728800F1E00C9FECE /* LaunchScreen.storyboard in Resources */,
+				848CF27428800F1E00C9FECE /* Assets.xcassets in Resources */,
+				848CF27228800F1C00C9FECE /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		848CF27B28800F1E00C9FECE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		848CF28528800F1E00C9FECE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2FC632E496F3B82EEA3A6844 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NettruyenIOS-NettruyenIOSUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4881BD8CB404DD56E2AABFB5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NettruyenIOSTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4AEA3E83A59B82A2842C2E70 /* [CP-User] Run Flutter Build flutter_nettruyen Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "[CP-User] Run Flutter Build flutter_nettruyen Script";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\nset -u\nsource \"${SRCROOT}/../flutter_nettruyen/.ios/Flutter/flutter_export_environment.sh\"\nexport VERBOSE_SCRIPT_LOGGING=1 && \"$FLUTTER_ROOT\"/packages/flutter_tools/bin/xcode_backend.sh build";
+		};
+		4DDE210091DD9737A6048734 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NettruyenIOS/Pods-NettruyenIOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NettruyenIOS/Pods-NettruyenIOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NettruyenIOS/Pods-NettruyenIOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9FA89A93FCD4F20EAAA94BEF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NettruyenIOS-NettruyenIOSUITests/Pods-NettruyenIOS-NettruyenIOSUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NettruyenIOS-NettruyenIOSUITests/Pods-NettruyenIOS-NettruyenIOSUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NettruyenIOS-NettruyenIOSUITests/Pods-NettruyenIOS-NettruyenIOSUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F8F32408A8598EC6C2001D65 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NettruyenIOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		848CF26328800F1C00C9FECE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				848CF26F28800F1C00C9FECE /* ViewController.swift in Sources */,
+				848CF26B28800F1C00C9FECE /* AppDelegate.swift in Sources */,
+				848CF26D28800F1C00C9FECE /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		848CF27928800F1E00C9FECE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				848CF28228800F1E00C9FECE /* NettruyenIOSTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		848CF28328800F1E00C9FECE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				848CF28C28800F1E00C9FECE /* NettruyenIOSUITests.swift in Sources */,
+				848CF28E28800F1E00C9FECE /* NettruyenIOSUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		848CF27F28800F1E00C9FECE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 848CF26628800F1C00C9FECE /* NettruyenIOS */;
+			targetProxy = 848CF27E28800F1E00C9FECE /* PBXContainerItemProxy */;
+		};
+		848CF28928800F1E00C9FECE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 848CF26628800F1C00C9FECE /* NettruyenIOS */;
+			targetProxy = 848CF28828800F1E00C9FECE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		848CF27028800F1C00C9FECE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				848CF27128800F1C00C9FECE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		848CF27528800F1E00C9FECE /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				848CF27628800F1E00C9FECE /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		848CF28F28800F1E00C9FECE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		848CF29028800F1E00C9FECE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		848CF29228800F1E00C9FECE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C7B0E742FCE5EEF6A64E9A0C /* Pods-NettruyenIOS.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HSQ72M4BMD;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NettruyenIOS/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = NettruyenHuy.NettruyenIOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		848CF29328800F1E00C9FECE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A5B64D34E605C2BD4062C65 /* Pods-NettruyenIOS.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HSQ72M4BMD;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NettruyenIOS/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = NettruyenHuy.NettruyenIOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		848CF29528800F1E00C9FECE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7930C929BC92D411BE6CFC5F /* Pods-NettruyenIOSTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HSQ72M4BMD;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = NettruyenHuy.NettruyenIOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NettruyenIOS.app/NettruyenIOS";
+			};
+			name = Debug;
+		};
+		848CF29628800F1E00C9FECE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CBF67A04BC5DEC177038D333 /* Pods-NettruyenIOSTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HSQ72M4BMD;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = NettruyenHuy.NettruyenIOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NettruyenIOS.app/NettruyenIOS";
+			};
+			name = Release;
+		};
+		848CF29828800F1E00C9FECE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 407130C07E7950711EE8FB5E /* Pods-NettruyenIOS-NettruyenIOSUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HSQ72M4BMD;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = NettruyenHuy.NettruyenIOSUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = NettruyenIOS;
+			};
+			name = Debug;
+		};
+		848CF29928800F1E00C9FECE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FE4E46774E34066206949CFA /* Pods-NettruyenIOS-NettruyenIOSUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HSQ72M4BMD;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = NettruyenHuy.NettruyenIOSUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = NettruyenIOS;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		848CF26228800F1C00C9FECE /* Build configuration list for PBXProject "NettruyenIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				848CF28F28800F1E00C9FECE /* Debug */,
+				848CF29028800F1E00C9FECE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		848CF29128800F1E00C9FECE /* Build configuration list for PBXNativeTarget "NettruyenIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				848CF29228800F1E00C9FECE /* Debug */,
+				848CF29328800F1E00C9FECE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		848CF29428800F1E00C9FECE /* Build configuration list for PBXNativeTarget "NettruyenIOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				848CF29528800F1E00C9FECE /* Debug */,
+				848CF29628800F1E00C9FECE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		848CF29728800F1E00C9FECE /* Build configuration list for PBXNativeTarget "NettruyenIOSUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				848CF29828800F1E00C9FECE /* Debug */,
+				848CF29928800F1E00C9FECE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 848CF25F28800F1C00C9FECE /* Project object */;
+}

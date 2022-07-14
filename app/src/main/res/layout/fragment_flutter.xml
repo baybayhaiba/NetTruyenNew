@@ -3,20 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_orange_dark"
     android:orientation="vertical">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/frame_container"
         android:layout_width="match_parent"
         android:layout_height="0sp"
-        android:layout_weight="1"
-        android:background="@android:color/holo_red_dark" />
+        android:layout_weight="1" />
 
 
 </LinearLayout>
