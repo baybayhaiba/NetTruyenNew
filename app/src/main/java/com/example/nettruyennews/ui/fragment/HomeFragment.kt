@@ -26,12 +26,13 @@ import com.example.nettruyennews.extension.*
 import com.example.nettruyennews.model.Book
 import com.example.nettruyennews.ui.base.BaseFragment
 import com.example.nettruyennews.util.*
-import com.example.nettruyennews.util.Constant.URL_ORIGNAL
+import com.example.nettruyennews.util.Constant.TAG
+import com.example.nettruyennews.util.Constant.URL_ORIGINAL
 import com.example.nettruyennews.viewmodel.HomeViewModel
 import com.facebook.shimmer.ShimmerFrameLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
-import java.util.*
+import kotlinx.coroutines.flow.collectLatest
 
 
 @AndroidEntryPoint
@@ -71,6 +72,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             navController = navHostFragment.navController
             mViewBinding = FragmentHomeBinding.inflate(inflater, container, false)
             setupToolbar()
+            handleShimmer()
 
 
             //binding.rcvBook.adapter = adapterBook
@@ -80,13 +82,17 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             binding.scrollToTop.setupWithRecyclerView(binding.rcvBook)
             binding.viewModel = mViewModel
 
-            pagingBook.addLoadStateListener {
-                val isError = it.source.refresh is LoadState.Error
-                val isLoading = it.source.refresh is LoadState.Loading
-                mViewModel.loading.value = isLoading
 
-                if (isError) {
-                    show(it.source.refresh.toString())
+
+            lifecycleScope.launch {
+                pagingBook.loadStateFlow.collectLatest {
+                    val isError = it.source.refresh is LoadState.Error
+                    val isLoading = it.source.refresh is LoadState.Loading
+                    mViewModel.loading.value = isLoading
+
+                    if (isError) {
+                        show(it.source.refresh.toString())
+                    }
                 }
             }
 
@@ -97,10 +103,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                     //submit page
                     pagingBook.submitData(it)
                 }
-            }
-
-            mViewModel.loading.observe(this) {
-                handleShimmer()
             }
 
             mViewModel.error.observe(this) {
@@ -135,19 +137,18 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         val shimmer =
             binding.viewShimmer.findViewById<ShimmerFrameLayout>(R.id.view_shimmer_container)
 
-        if (!shimmer.isVisible) {
-            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
 
-                interval(
-                    millisecond = 2000,
-                    onFinish = {
-                        shimmer.hideShimmer()
-                        shimmer.isGone = true
-                    },
-                    onChangeEachLoop = { mViewModel.loading.value != true },
-                    conditionStart = false
-                )
-            }
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+
+            interval(
+                millisecond = 1500,
+                onFinish = {
+                    shimmer.hideShimmer()
+                    binding.viewShimmer.isGone = true
+                },
+                onChangeEachLoop = { mViewModel.loading.value != true },
+                conditionStart = false
+            )
         }
 
 
@@ -205,7 +206,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 val url = if (p0.isNullOrBlank()) {
                     Constant.URL_HOME
                 } else {
-                    "${URL_ORIGNAL}/tim-truyen?keyword=${p0}&page="
+                    "${URL_ORIGINAL}/tim-truyen?keyword=${p0}&page="
                 }
                 mViewModel.getBooks(url)
                 dismissKeyboard()

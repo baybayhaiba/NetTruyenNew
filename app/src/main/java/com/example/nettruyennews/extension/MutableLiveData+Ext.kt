@@ -11,6 +11,8 @@ operator fun <T> MutableLiveData<T>.plus(anotherLiveData: MutableLiveData<T>): L
     return combineLiveData
 }
 
+
+
 fun <T> List<MutableLiveData<T>>.observer(lifecycler: LifecycleOwner, onClick: ((T) -> Unit)) {
 
     for (liveData in this) {

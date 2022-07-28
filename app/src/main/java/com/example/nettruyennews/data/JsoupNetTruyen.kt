@@ -1,7 +1,6 @@
 package com.example.nettruyennews.data
 
 import Util
-import android.util.Log
 import com.example.nettruyennews.model.Book
 import com.example.nettruyennews.model.Chapter
 import com.example.nettruyennews.model.DescriptionBook
@@ -166,7 +165,7 @@ class JsoupNetTruyen() : BookService {
             val link = treeMenu.select("a").attr("href")
             val text = treeMenu.text()
 
-            rank.add(Constant.URL_ORIGNAL + link to text)
+            rank.add(Constant.URL_ORIGINAL + link to text)
         }
 
         return rank

@@ -150,7 +150,7 @@ open class ScrollToTop : AppCompatImageView {
         }
 
         if (drawable == null) {
-            setImageResource(R.drawable.scroll)
+            setImageResource(R.drawable.arrow_scroll_to_top)
         }
 
         if (background == null) {

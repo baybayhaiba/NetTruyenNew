@@ -61,9 +61,6 @@
             android:scrollbars="none"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <include
-                android:id="@+id/view_shimmer"
-                layout="@layout/shimmer_placeholder" />
 
             <!-- RecyclerView -->
             <androidx.recyclerview.widget.RecyclerView
@@ -75,6 +72,10 @@
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="2" />
+
+            <include
+                android:id="@+id/view_shimmer"
+                layout="@layout/shimmer_placeholder" />
 
         </FrameLayout>
 

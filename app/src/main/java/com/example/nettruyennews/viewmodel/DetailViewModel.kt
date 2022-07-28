@@ -1,8 +1,10 @@
 package com.example.nettruyennews.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.nettruyennews.model.DescriptionBook
 import com.example.nettruyennews.repository.DetailRepository
+import com.example.nettruyennews.util.Constant.TAG
 import com.example.nettruyennews.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +25,9 @@ class DetailViewModel @Inject constructor(private val detailRepository: DetailRe
 
 
     val chapterCurrent = Transformations.map(currentIndex) {
+
+        Log.d(TAG, "hahahahahahaah: ${currentIndex.value != null && descriptionBook != null} ")
+        
         if (currentIndex.value != null && descriptionBook != null) {
             saveChapter()
 

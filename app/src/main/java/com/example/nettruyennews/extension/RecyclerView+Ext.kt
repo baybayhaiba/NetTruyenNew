@@ -49,6 +49,7 @@ fun RecyclerView.listenScroll(
 //                }
 //                dy < 0 -> {
 //                    //listener(DIRECTION_VERTICAL.UP)
+//                    isShow?.invoke(true)
 //                    //System.out.println("Scrolled Upwards");
 //                }
                 else -> {

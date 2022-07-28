@@ -10,11 +10,10 @@ import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.nettruyennews.adapter.AdapterImage
 import com.example.nettruyennews.databinding.FragmentDetailBinding
-import com.example.nettruyennews.extension.DIRECTION_VERTICAL
-import com.example.nettruyennews.extension.listenScroll
-import com.example.nettruyennews.extension.showToast
+import com.example.nettruyennews.extension.*
 import com.example.nettruyennews.ui.base.BaseFragment
 import com.example.nettruyennews.util.*
+import com.example.nettruyennews.util.Constant.TAG
 import com.example.nettruyennews.viewmodel.DetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -37,7 +36,11 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>() {
 
         if (mViewBinding == null) {
             mViewBinding = FragmentDetailBinding.inflate(inflater, container, false)
-            adapterImage = AdapterImage { onClickImage(it) }
+            adapterImage = AdapterImage(
+                onClick = {
+                    onClickImage(it)
+                }, viewModel = mViewModel
+            )
 
             registerRecyclerView()
 
@@ -51,7 +54,10 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>() {
                 val description = it.book
                 val chapterCurrent = it.chapterCurrent
 
+
                 mViewModel.apply {
+                    //just observer for register listen from layout
+                    this.chapterCurrent.observe(this@DetailFragment){}
                     this.descriptionBook = description
                     this.currentIndex.value = chapterCurrent
 
@@ -63,7 +69,7 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>() {
                                     Status.LOADING -> showToast(resource.message)
                                     Status.ERROR -> showToast(resource.message)
                                     Status.SUCCESS -> {
-                                        setupData(resource.data)
+                                        setupData(resource.data?.addMore(""))
                                     }
                                 }
                             }
@@ -77,10 +83,9 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>() {
 
     private fun registerRecyclerView() {
         binding.rcvImage.adapter = adapterImage
-        binding.rcvImage.listenScroll {
-            Log.d("hasagi guys", "registerRecyclerView: => $it")
-            binding.layoutButton.isVisible = it
-        }
+//        binding.rcvImage.listenScroll {
+//            binding.layoutButton.isVisible = it
+//        }
         binding.viewModel = mViewModel
         binding.lifecycleOwner = this
     }
@@ -106,6 +111,7 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>() {
 
     private fun setupData(images: List<String>?) {
         if (images == null) return
+
         adapterImage.submit(images)
         // binding.layoutButton.isVisible = true
     }
