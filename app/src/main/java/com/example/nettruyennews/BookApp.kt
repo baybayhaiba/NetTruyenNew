@@ -23,7 +23,7 @@ class BookApp : Application() {
 
     private fun loadEngineCache() {
         ///fragment one
-        val flutterEngine: FlutterEngine = FlutterEngine(this)
+        val flutterEngine = FlutterEngine(this)
         flutterEngine.dartExecutor.executeDartEntrypoint(DartExecutor.DartEntrypoint.createDefault())
 
         val dartEntrypoint =

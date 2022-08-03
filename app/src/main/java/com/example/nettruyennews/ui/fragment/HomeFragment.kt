@@ -137,9 +137,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         val shimmer =
             binding.viewShimmer.findViewById<ShimmerFrameLayout>(R.id.view_shimmer_container)
 
-
-        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
-
+        CoroutineScope(Dispatchers.Main).launch {
             interval(
                 millisecond = 1500,
                 onFinish = {

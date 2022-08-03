@@ -13,19 +13,17 @@ import 'constants/layout_constants.dart';
 
 //List<CameraDescription> cameras = [];
 
-Future<void> _getDocuments() async {
+enum CommandType { exit }
+
+Future<void> callToNative({required CommandType command}) async {
   MethodChannel _methodChannel =
       const MethodChannel('flutter/MethodChannelDemo');
-  List<dynamic> documentList = [""];
+
   try {
-    documentList = await _methodChannel.invokeMethod("Documents");
+    await _methodChannel.invokeMethod(command.name);
   } on PlatformException {
     print("exceptiong");
   }
-
-  documentList.forEach((document) {
-    print("Document: $document"); // seach in Logcat "Document"
-  });
 }
 
 Future<void> main() async {

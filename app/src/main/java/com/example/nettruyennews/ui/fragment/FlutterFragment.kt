@@ -8,15 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.FragmentContainerView
+import androidx.navigation.fragment.findNavController
 import com.example.nettruyennews.BookApp
 import com.example.nettruyennews.R
+import com.example.nettruyennews.util.Constant.TAG
 import io.flutter.embedding.android.FlutterFragment
 import io.flutter.plugin.common.MethodChannel
 
 class FlutterFragment : Fragment() {
 
-
-    var routeCurrent = "";
+    var flutterNeedExit: Boolean = false;
 
     private fun setupMethodChannel() {
         MethodChannel(
@@ -24,11 +25,14 @@ class FlutterFragment : Fragment() {
             "flutter/MethodChannelDemo"
         ).setMethodCallHandler { call, result ->
 
+
+            Log.d(TAG, "setupMethodChannel: ${call.method}");
             ///route_current : "main"
-            if (call.method.contains("route_current")) {
-                routeCurrent = call.method.split(":").last()
+            if (call.method == "exit") {
+                flutterNeedExit = true
+                requireActivity().onBackPressed()
             }
-            result.success("")
+            result.success(null)
         }
     }
 
@@ -54,16 +58,22 @@ class FlutterFragment : Fragment() {
         setupMethodChannel()
 
 
-        requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                flutterFragment.onBackPressed()
-            }
-        })
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (flutterNeedExit) {
+                        findNavController().navigateUp()
+
+
+                        return
+                    }
+                    flutterFragment.onBackPressed()
+                }
+            })
 
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_flutter, container, false)
     }
-
 
 }
