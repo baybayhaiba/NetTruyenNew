@@ -7,10 +7,13 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.example.nettruyennews.model.Book
 import com.example.nettruyennews.model.DescriptionBook
+import com.example.nettruyennews.model.linkBookRoom
 import com.example.nettruyennews.model.room
 import com.example.nettruyennews.model.room.BookRoom
 import com.example.nettruyennews.model.room.ChapterRoom
 import com.example.nettruyennews.repository.DescriptionRepository
+import com.example.nettruyennews.util.Constant
+import com.example.nettruyennews.util.Constant.TAG
 import com.example.nettruyennews.util.FileUtil
 import com.example.nettruyennews.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -52,7 +55,7 @@ constructor(
     fun getBookFromDatabase() = viewModelScope.launch {
         bookRoom =
             withContext(Dispatchers.IO) {
-                descriptionRepository.getBookByLink(description.book.link)
+                descriptionRepository.getBookByLink(description.book.linkBookRoom())
             }.firstOrNull()
 
         isBookFavorite.value = bookRoom?.categories?.contains(BookRoom.FAVORITE)
@@ -62,18 +65,16 @@ constructor(
 
     fun isReaded() = viewModelScope.launch {
         descriptionCurrent?.let {
-            val chapterDeferred = async { descriptionRepository.getChapterByLink(it.book.link) }
+            val chapterDeferred = async { descriptionRepository.getChapterByLink(it.book.linkBookRoom()) }
             val chapter = chapterDeferred.await()
             chapterReaded = chapter.firstOrNull()
-
-            Log.d("huy112", "isReaded: ${chapterReaded?.title}")
         }
     }
 
     private fun handleBookToDatabase(type: Int) = viewModelScope.launch {
         val resultDeferred = if (bookRoom == null) {
             async {
-                FileUtil.saveImageToDevice(book = description.book)
+                FileUtil.saveImageToDevice(book = description.book.room())
                 descriptionRepository.saveBook(
                     description.book.room().apply { categories.add(type) }).toInt()
             }
@@ -112,8 +113,13 @@ constructor(
     private fun saveChapter(value: Int) = viewModelScope.launch {
         handleBookToDatabase(BookRoom.READED)
 
+        ///case need replace is example : nettruyen.com/truyen-tranh/van-co-de-nhat-te-297820
+        ///when save we save like above so error link when web change domain
+        ///so just save /truyen-tranh/van-co-de-nhat-te-297820
+
+
         descriptionRepository.saveChapter(
-            description.book.link,
+            description.book.linkBookRoom(),
             description.chapter[value]
         )
 

@@ -26,16 +26,15 @@ class BookApp : Application() {
         val flutterEngine = FlutterEngine(this)
         flutterEngine.dartExecutor.executeDartEntrypoint(DartExecutor.DartEntrypoint.createDefault())
 
-        val dartEntrypoint =
-            DartExecutor.DartEntrypoint(
-                FlutterInjector.instance().flutterLoader().findAppBundlePath(), "bottomMain"
-            )
-
-        val flutterEngine2: FlutterEngine = engines.createAndRunEngine(this, dartEntrypoint)
+//        val dartEntrypoint =
+//            DartExecutor.DartEntrypoint(
+//                FlutterInjector.instance().flutterLoader().findAppBundlePath(), "")
+//
+//        val flutterEngine2: FlutterEngine = engines.createAndRunEngine(this, dartEntrypoint)
 
         ///fragment two
         flutterEngineCache.put("fragment", flutterEngine)
-        flutterEngineCache.put("fragment2", flutterEngine2)
+//        flutterEngineCache.put("fragment2", flutterEngine2)
     }
 
     companion object {

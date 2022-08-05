@@ -28,4 +28,10 @@ class BookRoom constructor(
         const val FAVORITE = 1
         const val READED = 2
     }
+
+    override fun toString(): String {
+        return "BookRoom(id=$id, timeAgo=$timeAgo, categories=$categories ${super.toString()})"
+    }
+
+
 }

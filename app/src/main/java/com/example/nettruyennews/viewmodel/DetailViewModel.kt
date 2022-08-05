@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.example.nettruyennews.model.DescriptionBook
 import com.example.nettruyennews.repository.DetailRepository
+import com.example.nettruyennews.util.Constant
 import com.example.nettruyennews.util.Constant.TAG
 import com.example.nettruyennews.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,8 +27,6 @@ class DetailViewModel @Inject constructor(private val detailRepository: DetailRe
 
     val chapterCurrent = Transformations.map(currentIndex) {
 
-        Log.d(TAG, "hahahahahahaah: ${currentIndex.value != null && descriptionBook != null} ")
-        
         if (currentIndex.value != null && descriptionBook != null) {
             saveChapter()
 
@@ -51,6 +50,7 @@ class DetailViewModel @Inject constructor(private val detailRepository: DetailRe
 
 
     private fun saveChapter() = viewModelScope.launch {
+
         detailRepository.saveChapter(
             description.book.link,
             description.chapter[index]

@@ -11,8 +11,6 @@ import org.jsoup.Jsoup
 class JsoupNetTruyen() : BookService {
     override suspend fun home(url: String, page: Int): List<Book> {
 
-        val urlText = url + page
-
         val html = OkHttpHtml.webToHtml("$url$page")
 
         val document = Jsoup.parse(html)

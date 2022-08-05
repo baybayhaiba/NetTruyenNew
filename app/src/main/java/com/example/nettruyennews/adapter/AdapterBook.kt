@@ -1,11 +1,15 @@
 package com.example.nettruyennews.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nettruyennews.databinding.BookItemBinding
 import com.example.nettruyennews.model.Book
+import com.example.nettruyennews.model.room.BookRoom
+import com.example.nettruyennews.util.Constant
+import com.example.nettruyennews.util.Constant.TAG
 
 
 class AdapterBook(
@@ -32,10 +36,20 @@ class AdapterBook(
 
             if (book != null) {
                 binding.apply {
-                    this.book = book
-                    root.setOnClickListener { onClick(book) }
+
+                    this.book = if (book is BookRoom) {
+                        BookRoom(
+                            link = "${Constant.URL_ORIGINAL}${book.link}",
+                            image = book.image,
+                            title = book.title
+                        )
+                    } else {
+                        book
+                    }
+
+                    root.setOnClickListener { onClick(this.book as Book) }
                     if (longClick != null) {
-                        root.setOnLongClickListener { longClick(book) }
+                        root.setOnLongClickListener { longClick(this.book as Book) }
                     }
                 }
             }
