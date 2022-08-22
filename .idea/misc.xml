@@ -34,8 +34,12 @@
         <entry key="..\:/Android-Studio-Project/KotlinComeback/NetTruyenNews/app/src/main/res/layout/photo_item.xml" value="0.16621376811594202" />
         <entry key="..\:/Android-Studio-Project/KotlinComeback/NetTruyenNews/app/src/main/res/menu/menu_home.xml" value="0.18229166666666666" />
         <entry key="..\:/Android-Studio-Project/KotlinComeback/NetTruyenNews/app/src/main/res/xml/searchable.xml" value="0.18229166666666666" />
+        <entry key="app/src/main/res/drawable/background_primary_2_bottom.xml" value="0.195" />
+        <entry key="app/src/main/res/drawable/background_primary_2_top.xml" value="0.195" />
         <entry key="app/src/main/res/drawable/bg_border_selected_button.xml" value="0.1175" />
+        <entry key="app/src/main/res/drawable/circle_image.xml" value="0.195" />
         <entry key="app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.2675" />
+        <entry key="app/src/main/res/drawable/oval_background.xml" value="0.195" />
         <entry key="app/src/main/res/layout/book_item.xml" value="0.1703125" />
         <entry key="app/src/main/res/layout/book_placeholder.xml" value="0.1480978260869565" />
         <entry key="app/src/main/res/layout/bottom_sheet.xml" value="0.34010416666666665" />
@@ -44,7 +48,7 @@
         <entry key="app/src/main/res/layout/fragment_description.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_flutter.xml" value="0.18177083333333333" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_save.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/layout/fragment_toolbar.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_toolbar_exit.xml" value="0.13179347826086957" />
@@ -57,6 +61,7 @@
         <entry key="app/src/main/res/layout/layout_loading_dialog.xml" value="0.34010416666666665" />
         <entry key="app/src/main/res/layout/photo_item.xml" value="0.34010416666666665" />
         <entry key="app/src/main/res/layout/shimmer_placeholder.xml" value="0.15291936978683968" />
+        <entry key="app/src/main/res/menu/menu_below_home.xml" value="0.19270833333333334" />
         <entry key="app/src/main/res/menu/menu_home.xml" value="0.3390625" />
       </map>
     </option>

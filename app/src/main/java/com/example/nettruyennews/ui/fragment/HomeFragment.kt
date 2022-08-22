@@ -82,6 +82,14 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             binding.scrollToTop.setupWithRecyclerView(binding.rcvBook)
             binding.viewModel = mViewModel
 
+            binding.refresh.apply {
+                setOnRefreshListener {
+                    mViewModel.loading.value = true
+                    handleShimmer()
+                    mViewModel.getBooks()
+                    isRefreshing = false
+                }
+            }
 
 
             lifecycleScope.launch {
@@ -137,6 +145,11 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         val shimmer =
             binding.viewShimmer.findViewById<ShimmerFrameLayout>(R.id.view_shimmer_container)
 
+        if (binding.viewShimmer.isGone) {
+            binding.viewShimmer.isGone = false
+            shimmer.showShimmer(true)
+        }
+
         CoroutineScope(Dispatchers.Main).launch {
             interval(
                 millisecond = 1500,
@@ -153,7 +166,8 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     }
 
     private fun setupToolbar() {
-        binding.toolbarHome.setOnMenuItemClickListener {
+
+        binding.toolbarBelowHome.setOnMenuItemClickListener {
             return@setOnMenuItemClickListener when (it.itemId) {
                 R.id.mnSave -> {
                     val action =

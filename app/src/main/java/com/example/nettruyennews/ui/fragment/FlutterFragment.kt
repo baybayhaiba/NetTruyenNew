@@ -17,7 +17,8 @@ import io.flutter.plugin.common.MethodChannel
 
 class FlutterFragment : Fragment() {
 
-    var flutterNeedExit: Boolean = false;
+    var flutterNeedExit: Boolean = false
+    var stopAllExit : Boolean = false
 
     private fun setupMethodChannel() {
         MethodChannel(
@@ -25,8 +26,6 @@ class FlutterFragment : Fragment() {
             "flutter/MethodChannelDemo"
         ).setMethodCallHandler { call, result ->
 
-
-            Log.d(TAG, "setupMethodChannel: ${call.method}");
             ///route_current : "main"
             if (call.method == "exit") {
                 flutterNeedExit = true
@@ -60,13 +59,20 @@ class FlutterFragment : Fragment() {
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
+
+
                 override fun handleOnBackPressed() {
+                    if(stopAllExit) return
+
+
                     if (flutterNeedExit) {
                         findNavController().navigateUp()
-
-
+                        stopAllExit = true
                         return
                     }
+
+
+
                     flutterFragment.onBackPressed()
                 }
             })
