@@ -18,58 +18,36 @@ import com.example.nettruyennews.R
 import com.mahdikh.vision.scrolltotop.animator.BaseAnimator
 import com.mahdikh.vision.scrolltotop.animator.FadeAnimator
 
+
+//use when override behavior app
+interface ScrollToTopListener {
+    fun onScrollToTop()
+}
+
 open class ScrollToTop : AppCompatImageView {
-    /**
-     * اگر برابر با true باشد به این معناست که اسکرول کوتاه فعال است
-     * اگر smoothScroll برابر با false باشد این بی اثر است
-     * زمانی که لیست اسکرول شود و بخواهیم به بالا برگردیم در این هنگام اگر
-     * مقدار smoothScroll و isShortScroll برابر با true باشد
-     * ابتدا به نزدیک ترین position که حالت smoothScroll را از بین نبرد اسکرول می شود و
-     * سپس بعد از آن از آن position تا بالای لیست به صورت smooth اسکرول می شود
-     */
+
     var isShortScroll = false
 
-    /**
-     * اگر true باشد عمل اسکرول به به صورت Smooth انجام می شود
-     */
+
     var isSmoothScroll = false
 
-    /**
-     * اگر برابر با true باشد به این معناست که هر بار با فراخوانی onScrolled تابع checkupScroll فراخوانی خواهد شد
-     * بدین صورت با تغییر حتی یک پیکسل در اسرول این تابع فراخوانی خواهد شد
-     * <p>
-     * مقدار پیشفرض false است و به طور پیشفرض تایع checkupScroll دز تابع onScrollStateChanged فراخوانی میشود
-     */
+
     var isHeavyCheckup = false
 
-    /**
-     * حداقل مقدار اسکرول که چهت نمایش ScrollToTop نیاز است
-     */
     var minimumScroll = 150
 
-    /**
-     * اگر مقدار غیر از RecyclerView.NO_POSITION داشته باشد به این معناست
-     * که نما در صورتی نمایان شود که عمل اسکرول این position را رد کرده باشد
-     */
     var minimumPosition = RecyclerView.NO_POSITION
 
     var reverseLayout = false
 
-    /**
-     * این متغییر جهت تشخیص وقفه و یا کامل شدن اسکرول با عمل کلیک ایجاد شده است
-     * اگر روی نما کلیک شود مقدار true می گیرد و در صورتی که در حین اسکرول توسط عمل Dragging
-     * اسکرول متقف شود یا اگر اسکرول کامل شد مقدار false خواهد گرفت
-     */
     private var performedClick = false
 
-    /**
-     * بااستفاده از متغییر singleRunFlag روندی را ایجاد کرده ام که تابع checkupScroll به طور هوشمند
-     * توابع show یا hide را فراخوانی کند
-     * وجود این متغییر از فراخوانی تکراری توابع نامبرده جلوگیری میکند
-     */
     private var callFlag = true
 
     private var recyclerView: RecyclerView? = null
+
+    private var listener: ScrollToTopListener? = null
+
 
     var animator: BaseAnimator? = FadeAnimator(0.8f)
         set(value) {
@@ -122,6 +100,11 @@ open class ScrollToTop : AppCompatImageView {
         defStyleAttr
     ) {
         initialization(context, attrs, defStyleAttr)
+    }
+
+
+    fun registerListener(listener: ScrollToTopListener) {
+        this.listener = listener
     }
 
     private fun initialization(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {
@@ -260,14 +243,12 @@ open class ScrollToTop : AppCompatImageView {
                     performedClick = true
                 }
             }
-            recyclerView?.smoothScrollToPosition(0)
+            listener?.onScrollToTop() ?: recyclerView?.smoothScrollToPosition(0)
         } else {
-            /*
-             * تابع scrollToPosition موجب فراخوانی تابع های onScrolled و onScrollStateChanged نمی شود
-             * بنابراین بایستی ب صورت شخصی این مورد را فراخوانی کرد
-             * */
+
+            listener?.onScrollToTop() ?: recyclerView?.smoothScrollToPosition(0)
+
             recyclerView?.let {
-                it.scrollToPosition(0)
                 scrollListener.onScrollStateChanged(
                     it,
                     RecyclerView.SCROLL_STATE_IDLE

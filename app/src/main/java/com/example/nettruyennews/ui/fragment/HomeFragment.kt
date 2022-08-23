@@ -30,13 +30,14 @@ import com.example.nettruyennews.util.Constant.TAG
 import com.example.nettruyennews.util.Constant.URL_ORIGINAL
 import com.example.nettruyennews.viewmodel.HomeViewModel
 import com.facebook.shimmer.ShimmerFrameLayout
+import com.mahdikh.vision.scrolltotop.widget.ScrollToTopListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collectLatest
 
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
+class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(), ScrollToTopListener {
     override val mViewModel: HomeViewModel by viewModels()
     override var mViewBinding: FragmentHomeBinding? = null
 
@@ -79,7 +80,10 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             //binding.rcvBook.adapter = pagingBook.withLoadStateFooter(loaderState)
             binding.rcvBook.adapter = pagingBook
             binding.rcvBook.isNestedScrollingEnabled = true
+
+            binding.scrollToTop.registerListener(this)
             binding.scrollToTop.setupWithRecyclerView(binding.rcvBook)
+
             binding.viewModel = mViewModel
 
             binding.refresh.apply {
@@ -236,5 +240,15 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     private fun onClick(book: Book) {
         val action = HomeFragmentDirections.actionHomeFragmentToDescriptionFragment(book)
         findNavController().navigate(action)
+    }
+
+    override fun onScrollToTop() {
+        binding.rcvBook.smoothScrollToPosition(0)
+        lifecycleScope.launch{
+            delay(300)
+            binding.appbarLayout.setExpanded(true, true)
+        }
+
+
     }
 }

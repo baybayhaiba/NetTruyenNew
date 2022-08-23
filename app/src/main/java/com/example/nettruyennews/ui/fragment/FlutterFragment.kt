@@ -18,20 +18,22 @@ import io.flutter.plugin.common.MethodChannel
 class FlutterFragment : Fragment() {
 
     var flutterNeedExit: Boolean = false
-    var stopAllExit : Boolean = false
+    var stopAllExit: Boolean = false
 
     private fun setupMethodChannel() {
-        MethodChannel(
-            BookApp.flutterEngineCache.get("fragment")?.dartExecutor,
-            "flutter/MethodChannelDemo"
-        ).setMethodCallHandler { call, result ->
+        BookApp.flutterEngineCache.get("fragment")?.dartExecutor?.let {
+            MethodChannel(
+                it,
+                "flutter/MethodChannelDemo"
+            ).setMethodCallHandler { call, result ->
 
-            ///route_current : "main"
-            if (call.method == "exit") {
-                flutterNeedExit = true
-                requireActivity().onBackPressed()
+                ///route_current : "main"
+                if (call.method == "exit") {
+                    flutterNeedExit = true
+                    requireActivity().onBackPressed()
+                }
+                result.success(null)
             }
-            result.success(null)
         }
     }
 
@@ -62,7 +64,7 @@ class FlutterFragment : Fragment() {
 
 
                 override fun handleOnBackPressed() {
-                    if(stopAllExit) return
+                    if (stopAllExit) return
 
 
                     if (flutterNeedExit) {
