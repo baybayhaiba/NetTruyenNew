@@ -1,12 +1,9 @@
 package com.example.nettruyennews.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.nettruyennews.model.DescriptionBook
 import com.example.nettruyennews.repository.DetailRepository
-import com.example.nettruyennews.util.Constant
-import com.example.nettruyennews.util.Constant.TAG
-import com.example.nettruyennews.util.Resource
+import com.example.nettruyennews.util.data.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

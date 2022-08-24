@@ -1,4 +1,4 @@
-package com.example.nettruyennews.util
+package com.example.nettruyennews.util.file
 
 import android.app.Application
 import android.content.Context

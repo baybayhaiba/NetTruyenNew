@@ -12,7 +12,7 @@ import com.example.nettruyennews.databinding.FragmentDescriptionBinding
 import com.example.nettruyennews.model.Book
 import com.example.nettruyennews.model.DescriptionBook
 import com.example.nettruyennews.ui.base.BaseFragment
-import com.example.nettruyennews.util.Status
+import com.example.nettruyennews.util.data.Status
 import com.example.nettruyennews.extension.showLoading
 import com.example.nettruyennews.viewmodel.DescriptionViewModel
 import dagger.hilt.android.AndroidEntryPoint

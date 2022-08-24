@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.nettruyennews"
-        minSdk 23
+        minSdk 21
         targetSdk 31
         versionCode 1
         versionName "1.0"
@@ -47,16 +47,7 @@ kapt {
     correctErrorTypes = true
 }
 
-repositories {
-    maven {
-        url 'nettruyen/flutter_nettruyen/build/host/outputs/repo'
-        // This is relative to the location of the build.gradle file
-        // if using a relative path.
-    }
-    maven {
-        url 'https://storage.googleapis.com/download.flutter.io'
-    }
-}
+
 
 
 dependencies {

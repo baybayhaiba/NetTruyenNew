@@ -1,7 +1,6 @@
 package com.example.nettruyennews.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -12,7 +11,7 @@ import com.example.nettruyennews.R
 import com.example.nettruyennews.adapter.Paging.RemoteBookPager
 import com.example.nettruyennews.databinding.HeaderBookBinding
 import com.example.nettruyennews.model.Book
-import com.example.nettruyennews.util.TypeBook
+import com.example.nettruyennews.util.data.TypeBook
 
 class AdapterHeader(
     private val context: Context?,

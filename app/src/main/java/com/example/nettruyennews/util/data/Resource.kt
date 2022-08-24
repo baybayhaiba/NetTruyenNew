@@ -1,4 +1,4 @@
-package com.example.nettruyennews.util
+package com.example.nettruyennews.util.data
 
 data class Resource<out T>(val status: Status, val data: T?, val message: String) {
     companion object {

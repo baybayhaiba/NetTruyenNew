@@ -1,6 +1,5 @@
 package com.example.nettruyennews.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
@@ -12,10 +11,8 @@ import com.example.nettruyennews.model.room
 import com.example.nettruyennews.model.room.BookRoom
 import com.example.nettruyennews.model.room.ChapterRoom
 import com.example.nettruyennews.repository.DescriptionRepository
-import com.example.nettruyennews.util.Constant
-import com.example.nettruyennews.util.Constant.TAG
-import com.example.nettruyennews.util.FileUtil
-import com.example.nettruyennews.util.Resource
+import com.example.nettruyennews.util.file.FileUtil
+import com.example.nettruyennews.util.data.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async

@@ -1,19 +1,16 @@
 package com.example.nettruyennews.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.nettruyennews.adapter.AdapterImage
 import com.example.nettruyennews.databinding.FragmentDetailBinding
 import com.example.nettruyennews.extension.*
 import com.example.nettruyennews.ui.base.BaseFragment
-import com.example.nettruyennews.util.*
-import com.example.nettruyennews.util.Constant.TAG
+import com.example.nettruyennews.util.data.Status
 import com.example.nettruyennews.viewmodel.DetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers

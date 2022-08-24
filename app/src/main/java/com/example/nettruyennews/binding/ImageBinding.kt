@@ -9,7 +9,7 @@ import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.request.target.Target
 import com.example.nettruyennews.R
 import com.example.nettruyennews.model.Book
-import com.example.nettruyennews.util.FileUtil
+import com.example.nettruyennews.util.file.FileUtil
 
 object ImageBinding {
 
