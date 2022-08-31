@@ -22,19 +22,20 @@ class BookApp : Application() {
 
 
     private fun loadEngineCache() {
-        ///fragment one
-        val flutterEngine = FlutterEngine(this)
-        flutterEngine.dartExecutor.executeDartEntrypoint(DartExecutor.DartEntrypoint.createDefault())
+        val flutterEngine = FlutterEngine(this).apply {
+            dartExecutor.executeDartEntrypoint(DartExecutor.DartEntrypoint.createDefault())
+        }
+
+
+        flutterEngineCache.put(fragmentFlutterMain, flutterEngine)
 
 //        val dartEntrypoint =
 //            DartExecutor.DartEntrypoint(
 //                FlutterInjector.instance().flutterLoader().findAppBundlePath(), "")
 //
 //        val flutterEngine2: FlutterEngine = engines.createAndRunEngine(this, dartEntrypoint)
-
-        ///fragment two
-        flutterEngineCache.put("fragment", flutterEngine)
-//        flutterEngineCache.put("fragment2", flutterEngine2)
+//
+//        flutterEngineCache.put(fragmentFlutterMain, flutterEngine2)
     }
 
     companion object {
@@ -43,16 +44,17 @@ class BookApp : Application() {
         lateinit var flutterEngineCache: FlutterEngineCache
         lateinit var engines: FlutterEngineGroup
 
-        public fun getInstance(): BookApp {
-            if (instance == null) {
-                instance = BookApp()
-            }
 
-            return instance!!
+        const val fragmentFlutterMain = "flutter_main"
+        const val method_channel_main = "flutter/MethodChannelDemo"
+
+        fun getInstance(): BookApp = instance ?: synchronized(this){
+            instance = BookApp()
+            instance!!
         }
     }
 
-    val UUID_DEVICE: String by lazy {
+    val uuid: String by lazy {
         Settings.Secure.getString(instance?.contentResolver, Settings.Secure.ANDROID_ID)
     }
 }

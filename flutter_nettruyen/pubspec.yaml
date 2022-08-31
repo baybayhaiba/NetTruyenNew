@@ -36,6 +36,7 @@ dev_dependencies:
   equatable: ^2.0.3
   json_serializable: ^6.1.5
   uuid: 3.0.6
+  pigeon: 3.2.6
   google_fonts: ^2.3.1
   cached_network_image: ^3.2.0
   build_runner: ^1.0.0

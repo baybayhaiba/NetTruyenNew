@@ -31,7 +31,7 @@ class UserFragment : Fragment() {
     ): View? {
 
         val ref = Firebase.instanceStorage().reference
-        val imageRef = ref.child("${BookApp.getInstance().UUID_DEVICE}.png")
+        val imageRef = ref.child("${BookApp.getInstance().uuid}.png")
         // Inflate the layout for this fragment
         binding = FragmentUserBinding.inflate(inflater, container, false)
         binding.imgUser.startAnimation(animation)

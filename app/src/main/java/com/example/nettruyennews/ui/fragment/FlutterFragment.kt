@@ -21,10 +21,10 @@ class FlutterFragment : Fragment() {
     var stopAllExit: Boolean = false
 
     private fun setupMethodChannel() {
-        BookApp.flutterEngineCache.get("fragment")?.dartExecutor?.let {
+        BookApp.flutterEngineCache.get(BookApp.fragmentFlutterMain)?.dartExecutor?.let {
             MethodChannel(
                 it,
-                "flutter/MethodChannelDemo"
+                BookApp.method_channel_main
             ).setMethodCallHandler { call, result ->
 
                 ///route_current : "main"
@@ -49,7 +49,7 @@ class FlutterFragment : Fragment() {
         //setupMethodChannel()
 
         val flutterFragment: FlutterFragment =
-            FlutterFragment.withCachedEngine("fragment").build()
+            FlutterFragment.withCachedEngine(BookApp.fragmentFlutterMain).build()
 
         fragmentManager
             ?.beginTransaction()

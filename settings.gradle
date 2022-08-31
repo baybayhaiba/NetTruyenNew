@@ -17,5 +17,5 @@ include ':app'
 setBinding(new Binding([gradle: this]))
 evaluate(new File(
         settingsDir.parentFile,
-        'nettruyen/flutter_nettruyen/.android/include_flutter.groovy'
+        'app/flutter_nettruyen/.android/include_flutter.groovy'
 ))
