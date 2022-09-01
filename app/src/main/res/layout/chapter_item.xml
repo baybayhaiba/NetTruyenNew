@@ -13,12 +13,10 @@
         android:id="@+id/tv_chapter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/primary_2"
-        android:fontFamily="monospace"
         android:orientation="vertical"
         android:padding="16sp"
+        style="@style/TextAppearance.MdcTypographyStyles.Caption"
         android:text="@{title}"
-        android:textColor="@color/white"
         android:textSize="14sp">
 
     </TextView>

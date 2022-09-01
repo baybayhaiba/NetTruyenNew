@@ -14,8 +14,7 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/primary">
+        android:layout_height="match_parent">
 
 
         <com.google.android.material.appbar.AppBarLayout
@@ -43,10 +42,7 @@
                         android:layout_marginStart="10sp"
                         android:layout_marginTop="10sp"
                         android:layout_marginEnd="10sp"
-                        android:background="@drawable/background_primary_2_top"
-                        android:theme="@style/ThemeOverlay.AppCompat.Dark"
                         app:menu="@menu/menu_home"
-
                         app:navigationIcon="@drawable/ic_baseline_table_rows_24" />
 
 
@@ -57,12 +53,10 @@
                         android:layout_marginStart="10sp"
                         android:layout_marginEnd="10sp"
                         android:layout_marginBottom="10sp"
-                        android:background="@drawable/background_primary_2_bottom"
-                        android:theme="@style/ThemeOverlay.AppCompat.Dark"
                         app:menu="@menu/menu_below_home"
-                        app:title="@string/app_name_underline"
-                        app:titleTextAppearance="@style/toolbar_under"
-                        app:titleTextColor="@color/white" />
+                        app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                        app:titleTextColor="@color/md_theme_dark_secondary"
+                        app:title="@string/app_name_underline" />
 
 
                     <!-- Put here elements that you need above the recycler view -->
@@ -90,7 +84,6 @@
                     android:id="@+id/rcvBook"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/primary"
                     android:nestedScrollingEnabled="true"
                     android:orientation="vertical"
                     android:scrollbars="vertical"
@@ -112,6 +105,7 @@
             android:layout_width="50sp"
             android:layout_height="50sp"
             android:layout_margin="10dp"
+            android:contentDescription="ScrollUp"
             app:heavyCheckup="true"
             app:layout_anchor="@id/rcvBook"
             app:layout_anchorGravity="bottom|right"

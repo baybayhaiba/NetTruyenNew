@@ -133,11 +133,11 @@ open class ScrollToTop : AppCompatImageView {
         }
 
         if (drawable == null) {
-            setImageResource(R.drawable.arrow_scroll_to_top)
+            setImageResource(R.drawable.ic_scroll_to_top_v2)
         }
 
         if (background == null) {
-            setBackgroundResource(R.drawable.oval_background)
+            setBackgroundResource(R.drawable.rectangle_cornor_background)
             if (a.hasValue(R.styleable.ScrollToTop_rippleColor)) {
                 val rippleColor = a.getColor(R.styleable.ScrollToTop_rippleColor, Color.DKGRAY)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

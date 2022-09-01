@@ -18,6 +18,7 @@ import com.example.nettruyennews.extension.instanceStorage
 import com.example.nettruyennews.extension.show
 import com.google.firebase.ktx.Firebase
 
+
 class UserFragment : Fragment() {
 
     private lateinit var binding: FragmentUserBinding

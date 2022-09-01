@@ -30,7 +30,7 @@ class HomeViewModel @Inject constructor(private val homeRepository: HomeReposito
     }
 
 
-    fun fetchBookPaging(url: String) = homeRepository.bookPagingFlow(url = url)
+    private fun fetchBookPaging(url: String) = homeRepository.bookPagingFlow(url = url)
 
     private fun getMenu() = viewModelScope.launch(Dispatchers.IO) {
         loading.postValue(true)

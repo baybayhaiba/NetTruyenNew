@@ -11,17 +11,11 @@
     </data>
 
 
-    <androidx.cardview.widget.CardView
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        app:imageRequest="@{image}" />
 
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            app:imageRequest="@{image}" />
-
-    </androidx.cardview.widget.CardView>
 </layout>
 

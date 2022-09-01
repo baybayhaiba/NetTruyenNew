@@ -158,8 +158,8 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(), ScrollT
             interval(
                 millisecond = 1500,
                 onFinish = {
-                    shimmer.hideShimmer()
                     binding.viewShimmer.isGone = true
+                    shimmer.hideShimmer()
                 },
                 onChangeEachLoop = { mViewModel.loading.value != true },
                 conditionStart = false

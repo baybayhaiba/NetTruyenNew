@@ -2,12 +2,14 @@ package com.example.nettruyennews
 
 import android.app.Application
 import android.provider.Settings
+import com.orhanobut.logger.AndroidLogAdapter
+import com.orhanobut.logger.Logger
 import dagger.hilt.android.HiltAndroidApp
-import io.flutter.FlutterInjector
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.embedding.engine.FlutterEngineCache
 import io.flutter.embedding.engine.FlutterEngineGroup
 import io.flutter.embedding.engine.dart.DartExecutor
+
 
 @HiltAndroidApp
 class BookApp : Application() {
@@ -17,6 +19,7 @@ class BookApp : Application() {
         instance = this
         flutterEngineCache = FlutterEngineCache.getInstance()
         engines = FlutterEngineGroup(this)
+        Logger.addLogAdapter(AndroidLogAdapter())
         loadEngineCache()
     }
 
@@ -46,9 +49,9 @@ class BookApp : Application() {
 
 
         const val fragmentFlutterMain = "flutter_main"
-        const val method_channel_main = "flutter/MethodChannelDemo"
+        const val method_channel = "flutter/MethodChannelDemo"
 
-        fun getInstance(): BookApp = instance ?: synchronized(this){
+        fun getInstance(): BookApp = instance ?: synchronized(this) {
             instance = BookApp()
             instance!!
         }
