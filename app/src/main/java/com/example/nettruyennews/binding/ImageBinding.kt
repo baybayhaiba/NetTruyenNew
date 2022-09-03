@@ -56,7 +56,7 @@ object ImageBinding {
 
             Glide.with(view.context)
                 .load(glideUrl)
-                //.placeholder(R.drawable.loading)
+                .placeholder(R.drawable.loading)
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .override(Target.SIZE_ORIGINAL)
                 .into(view)

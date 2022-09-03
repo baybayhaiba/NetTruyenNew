@@ -2,16 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_favorite"
     android:gravity="center"
     android:orientation="vertical">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="180sp"
-        android:layout_gravity="center"
-        android:layout_marginTop="-40sp"
-        android:src="@drawable/thanos" />
 
     <TextView
         android:layout_width="match_parent"
@@ -19,7 +11,6 @@
         android:fontFamily="monospace"
         android:gravity="center"
         android:text="Empty item"
-        android:textColor="@color/white"
         android:textSize="20sp" />
 
 

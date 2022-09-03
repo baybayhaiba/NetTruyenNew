@@ -180,7 +180,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(), ScrollT
                     false
                 }
 
-                R.id.mnUser -> {
+                R.id.mnSetting -> {
                     val action = HomeFragmentDirections.actionHomeFragmentToFlutterFragment()
                     findNavController().navigate(action)
                     false
@@ -244,7 +244,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(), ScrollT
 
     override fun onScrollToTop() {
         binding.rcvBook.smoothScrollToPosition(0)
-        lifecycleScope.launch{
+        lifecycleScope.launch {
             delay(300)
             binding.appbarLayout.setExpanded(true, true)
         }

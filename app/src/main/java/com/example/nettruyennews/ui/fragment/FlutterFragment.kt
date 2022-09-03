@@ -7,11 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.FragmentContainerView
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.nettruyennews.BookApp
 import com.example.nettruyennews.R
+import com.orhanobut.logger.Logger
 import io.flutter.embedding.android.FlutterFragment
 import io.flutter.plugin.common.MethodChannel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class FlutterFragment : Fragment() {
 
@@ -30,6 +34,9 @@ class FlutterFragment : Fragment() {
 
     private fun setupMethodChannel() {
         channel.setMethodCallHandler { call, result ->
+
+            Logger.d("banh mi su kem => ${call.method}")
+
             if (call.method == "exit") {
                 findNavController().navigateUp()
             }
@@ -60,7 +67,26 @@ class FlutterFragment : Fragment() {
             ?.commit()
 
 
-        channel.invokeMethod("HackerLo~", listOf("H","a","banh334"))
+        val randomScreen = listOf("red", "green", "blue")
+        val randomTheme = listOf("dark", "light")
+
+        lifecycleScope.launch {
+
+            channel.invokeMethod(
+                BookApp.protocol_parameters, """
+            {"initRouter" : "${randomScreen.random()}",
+            "functionName" : "hasagi",
+            "jsonObject" : "hacker lo~"}
+        """.trimIndent()
+            )
+
+            channel.invokeMethod(
+                BookApp.protocol_config, """
+            {"languages" : "VietNam" , "theme" : "${randomTheme.random()}"}
+        """.trimIndent()
+            )
+        }
+
 
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,

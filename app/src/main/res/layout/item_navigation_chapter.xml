@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@drawable/bg_border_selected_button"
+        android:background="@color/cardview_dark_background"
         android:orientation="vertical">
 
         <TextView
@@ -26,7 +26,6 @@
             android:lineSpacingExtra="24sp"
             android:padding="10sp"
             android:text="@{@string/title_detail_book(viewModel.descriptionBook.book.title,viewModel.chapterCurrent.toString())}"
-            android:textColor="@color/white"
             android:textSize="18sp" />
 
         <LinearLayout
@@ -41,12 +40,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8sp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/primary_2"
+                style="@style/TextAppearance.MdcTypographyStyles.Button"
                 android:gravity="center"
                 android:onClick="@{()->viewModel.onClickPreviousChapter()}"
                 android:padding="8sp"
-                android:text="Chap trước"
-                android:textSize="11sp" />
+                android:text="Chap trước" />
 
 
             <Button
@@ -54,12 +52,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8sp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/primary_2"
+                style="@style/TextAppearance.MdcTypographyStyles.Button"
                 android:gravity="center"
                 android:onClick="@{()->viewModel.onClickNextChapter()}"
                 android:padding="8sp"
-                android:text="Chap tiếp"
-                android:textSize="11sp" />
+                android:text="Chap tiếp" />
 
 
         </LinearLayout>

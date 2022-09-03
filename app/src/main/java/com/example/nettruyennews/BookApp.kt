@@ -29,7 +29,6 @@ class BookApp : Application() {
             dartExecutor.executeDartEntrypoint(DartExecutor.DartEntrypoint.createDefault())
         }
 
-
         flutterEngineCache.put(fragmentFlutterMain, flutterEngine)
 
 //        val dartEntrypoint =
@@ -50,6 +49,8 @@ class BookApp : Application() {
 
         const val fragmentFlutterMain = "flutter_main"
         const val method_channel = "flutter/MethodChannelDemo"
+        const val protocol_parameters = "flutter_navigation"
+        const val protocol_config = "flutter_config"
 
         fun getInstance(): BookApp = instance ?: synchronized(this) {
             instance = BookApp()
