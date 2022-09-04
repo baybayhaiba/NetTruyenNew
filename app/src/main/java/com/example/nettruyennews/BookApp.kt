@@ -2,6 +2,14 @@ package com.example.nettruyennews
 
 import android.app.Application
 import android.provider.Settings
+import com.example.nettruyennews.extension.getUrlNettruyen
+import com.example.nettruyennews.extension.instanceRealtime
+import com.example.nettruyennews.extension.instanceStorage
+import com.example.nettruyennews.util.Constant
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.ktx.Firebase
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import dagger.hilt.android.HiltAndroidApp
@@ -21,6 +29,8 @@ class BookApp : Application() {
         engines = FlutterEngineGroup(this)
         Logger.addLogAdapter(AndroidLogAdapter())
         loadEngineCache()
+
+
     }
 
 

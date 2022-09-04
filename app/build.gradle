@@ -50,8 +50,9 @@ kapt {
 
 
 dependencies {
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.google.firebase:firebase-common-ktx:20.1.1'
+
+
+
     def work_version = "2.7.1"
     def lifecycle_version = "2.4.0"
     def nav_version = "2.3.5"
@@ -70,6 +71,8 @@ dependencies {
     //firebase
     implementation platform('com.google.firebase:firebase-bom:29.0.3')
     implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-database-ktx'
+    implementation 'com.google.firebase:firebase-common-ktx:20.1.2'
 
     //ktx
     implementation "androidx.fragment:fragment-ktx:1.4.0"
@@ -119,7 +122,7 @@ dependencies {
     implementation 'com.facebook.shimmer:shimmer:0.5.0@aar'
 
 
-
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.6.1'

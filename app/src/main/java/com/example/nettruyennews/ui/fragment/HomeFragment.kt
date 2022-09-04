@@ -154,12 +154,16 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(), ScrollT
             shimmer.showShimmer(true)
         }
 
+
+        binding.rcvBook.isGone = true
+
         CoroutineScope(Dispatchers.Main).launch {
             interval(
                 millisecond = 1500,
                 onFinish = {
                     binding.viewShimmer.isGone = true
                     shimmer.hideShimmer()
+                    binding.rcvBook.isGone = false
                 },
                 onChangeEachLoop = { mViewModel.loading.value != true },
                 conditionStart = false

@@ -13,8 +13,10 @@ import com.example.nettruyennews.databinding.FragmentSaveBinding
 import com.example.nettruyennews.model.Book
 import com.example.nettruyennews.model.room.BookRoom
 import com.example.nettruyennews.extension.showDialog
+import com.orhanobut.logger.Logger
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+
 
 class SaveFragment : Fragment() {
     private lateinit var binding: FragmentSaveBinding
@@ -35,7 +37,7 @@ class SaveFragment : Fragment() {
         binding.toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
 
         val bookDB = BookDatabase.getInstance(requireContext())
-        bookDB.bookDao.getBooks().observe(this) {
+        bookDB.bookDao.getBooks().observe(viewLifecycleOwner) {
             setupView(it)
         }
 
@@ -56,8 +58,11 @@ class SaveFragment : Fragment() {
     private fun longClick(book: Book): Boolean {
         showDialog(title = "Book", message = "Do you want delete book", okDialog = {
             lifecycleScope.launch(Dispatchers.IO) {
+
+                Logger.d("Book long click $book <--> ${book is BookRoom}",)
+
                 if (book is BookRoom) {
-                    database.bookDao.deleteBook(book)
+                    database.bookDao.deleteBook(book.title)
                 }
             }
         }, cancelDialog = null)
