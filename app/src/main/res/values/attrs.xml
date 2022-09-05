@@ -11,4 +11,10 @@
         <attr name="shortScroll" format="boolean" />
         <attr name="android:padding" />
     </declare-styleable>
+
+
+    <declare-styleable name="ChapterNavigation">
+        <attr name="title" format="string" />
+        <attr name="chapter" format="string" />
+    </declare-styleable>
 </resources>

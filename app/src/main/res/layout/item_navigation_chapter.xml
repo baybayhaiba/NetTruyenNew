@@ -1,31 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <data>
-        <!--  https://stackoverflow.com/questions/54547780/paging-library-when-used-inside-a-nestedscrollview-loads-all-data-->
-
-        <variable
-            name="viewModel"
-            type="com.example.nettruyennews.viewmodel.DetailViewModel" />
-    </data>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
         android:id="@+id/layoutButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
         android:background="@color/cardview_dark_background"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tvTitleAndChapter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:lineSpacingExtra="24sp"
             android:padding="10sp"
-            android:text="@{@string/title_detail_book(viewModel.descriptionBook.book.title,viewModel.chapterCurrent.toString())}"
             android:textSize="18sp" />
 
         <LinearLayout
@@ -36,25 +26,25 @@
             android:padding="16sp">
 
             <Button
+                android:id="@+id/button_previous"
+                style="@style/TextAppearance.MdcTypographyStyles.Button"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8sp"
                 android:layout_weight="1"
-                style="@style/TextAppearance.MdcTypographyStyles.Button"
                 android:gravity="center"
-                android:onClick="@{()->viewModel.onClickPreviousChapter()}"
                 android:padding="8sp"
                 android:text="Chap trước" />
 
 
             <Button
+                android:id="@+id/button_next"
+                style="@style/TextAppearance.MdcTypographyStyles.Button"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8sp"
                 android:layout_weight="1"
-                style="@style/TextAppearance.MdcTypographyStyles.Button"
                 android:gravity="center"
-                android:onClick="@{()->viewModel.onClickNextChapter()}"
                 android:padding="8sp"
                 android:text="Chap tiếp" />
 
