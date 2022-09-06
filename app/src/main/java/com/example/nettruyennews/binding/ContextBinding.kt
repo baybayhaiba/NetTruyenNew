@@ -16,8 +16,9 @@ object ContextBinding {
 
     @JvmStatic
     @BindingAdapter("set_chapter_content")
-    fun bindChapter(view: View, content: String) {
+    fun bindChapter(view: View, content: String?) {
         if (view !is ItemNavigationChapter) return
-        view.setContent(content)
+        content?.let { view.setContent(it) }
+
     }
 }
