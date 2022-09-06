@@ -2,6 +2,7 @@ package com.example.nettruyennews.binding
 
 import android.view.View
 import androidx.databinding.BindingAdapter
+import com.example.nettruyennews.ui.layout.ItemNavigationChapter
 import com.example.nettruyennews.util.show
 
 object ContextBinding {
@@ -10,5 +11,13 @@ object ContextBinding {
     @BindingAdapter("toastView")
     fun bindToast(view: View, text: String?) {
         text?.let { view.context.show(it) }
+    }
+
+
+    @JvmStatic
+    @BindingAdapter("set_chapter_content")
+    fun bindChapter(view: View, content: String) {
+        if (view !is ItemNavigationChapter) return
+        view.setContent(content)
     }
 }

@@ -30,7 +30,7 @@
             tools:context=".DetailFragment" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
+            android:id="@+id/fab_show_information"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
@@ -44,11 +44,10 @@
             android:id="@+id/layout_navigation"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:chapter="Chapter 1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:title="Hacker lo~" />
+            app:set_chapter_content="@{@string/title_detail_book(viewModel.descriptionBook.book.title,viewModel.chapterCurrent.toString())}" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
