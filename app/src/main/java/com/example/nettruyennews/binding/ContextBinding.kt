@@ -15,6 +15,12 @@ object ContextBinding {
 
 
     @JvmStatic
+    @BindingAdapter("android:isVisible")
+    fun setIsVisible(view: View, value: Boolean) {
+        view.visibility = if (value) View.VISIBLE else View.GONE
+    }
+
+    @JvmStatic
     @BindingAdapter("set_chapter_content")
     fun bindChapter(view: View, content: String?) {
         if (view !is ItemNavigationChapter) return

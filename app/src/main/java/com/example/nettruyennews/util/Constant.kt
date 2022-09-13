@@ -1,5 +1,8 @@
 package com.example.nettruyennews.util
 
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
+
 object Constant {
 
 
@@ -11,6 +14,10 @@ object Constant {
     const val VERSION = 1
     const val TAG = "app_nettruyen"
     const val URL_ORIGINAL_CUSTOM = "http://www.nettruyenme.com/"
+
+
+    val USE_FIRST = booleanPreferencesKey("use_first_dataStore")
+    val TEST = stringPreferencesKey("data_store_test")
 
     const val VALUE_PERMISSION = 1
     private const val PERMISSION_READ_EXTERNAL = android.Manifest.permission.READ_EXTERNAL_STORAGE

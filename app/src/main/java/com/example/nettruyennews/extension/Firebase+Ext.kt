@@ -9,6 +9,9 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 
 
 fun Firebase.instanceStorage(): FirebaseStorage {
@@ -18,7 +21,20 @@ fun Firebase.instanceStorage(): FirebaseStorage {
 fun Firebase.instanceRealtime() =
     Firebase.database("https://nettruyenfakes-default-rtdb.asia-southeast1.firebasedatabase.app/")
 
-fun Firebase.getUrlNettruyen( result: (String?) -> Unit ) =
+suspend fun Firebase.url() = suspendCoroutine<String?> { callback ->
+    Firebase.instanceRealtime().getReference("url_nettruyen")
+        .addListenerForSingleValueEvent(object :
+            ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) =
+                callback.resume(snapshot.value as? String)
+
+            override fun onCancelled(error: DatabaseError) = callback.resume(null)
+
+        })
+
+}
+
+fun Firebase.getUrlNettruyen(result: (String?) -> Unit) =
     Firebase.instanceRealtime().getReference("url_nettruyen")
         .addListenerForSingleValueEvent(object :
             ValueEventListener {

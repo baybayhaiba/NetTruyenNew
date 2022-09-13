@@ -6,6 +6,7 @@ import com.example.nettruyennews.repository.DetailRepository
 import com.example.nettruyennews.util.data.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -15,6 +16,7 @@ class DetailViewModel @Inject constructor(private val detailRepository: DetailRe
 
     var currentIndex = MutableLiveData<Int>()
     var descriptionBook: DescriptionBook? = null
+    val navigation = MutableLiveData(false)
 
     val description: DescriptionBook
         get() = descriptionBook!!
@@ -42,6 +44,22 @@ class DetailViewModel @Inject constructor(private val detailRepository: DetailRe
             emit(Resource.success(detailRepository.detail(descriptionBook, currentIndex)))
         } catch (e: Exception) {
             emit(Resource.error(e.toString()))
+        }
+    }
+
+    fun onClickShowNavigation(){
+        if(navigation.value == true) {
+            navigation.value = false
+            return
+        }
+
+
+        navigation.value = true
+
+        viewModelScope.launch {
+            delay(2000)
+
+            navigation.value = false
         }
     }
 

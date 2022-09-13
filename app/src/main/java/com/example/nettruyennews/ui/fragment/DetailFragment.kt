@@ -5,10 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LiveData
 import com.bumptech.glide.Glide
 import com.example.nettruyennews.adapter.AdapterImage
 import com.example.nettruyennews.databinding.FragmentDetailBinding
+import com.example.nettruyennews.extension.DIRECTION_VERTICAL
+import com.example.nettruyennews.extension.listenScroll
 import com.example.nettruyennews.extension.showToast
 import com.example.nettruyennews.ui.base.BaseFragment
 import com.example.nettruyennews.ui.layout.ChapterBehavior
@@ -36,6 +37,7 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>(), C
 
         if (mViewBinding == null) {
             mViewBinding = FragmentDetailBinding.inflate(inflater, container, false)
+
             adapterImage = AdapterImage(
                 onClick = {
                     onClickImage(it)
@@ -44,6 +46,7 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>(), C
 
             registerRecyclerView()
             binding.layoutNavigation.registerListener(this)
+            binding.viewModel = mViewModel
 
             DetailFragmentArgs.fromBundle(requireArguments()).let {
                 val description = it.book
@@ -79,6 +82,13 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>(), C
         binding.rcvImage.adapter = adapterImage
         binding.viewModel = mViewModel
         binding.lifecycleOwner = this
+        binding.rcvImage.listenScroll(scroll = {
+            if (it == DIRECTION_VERTICAL.UP) {
+                mViewModel.navigation.value = false
+            }
+        }, end = {
+            mViewModel.navigation.value = true
+        })
     }
 
 
