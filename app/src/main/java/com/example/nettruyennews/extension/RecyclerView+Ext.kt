@@ -21,7 +21,8 @@ fun RecyclerView.isLastItem(newItems: ((Boolean) -> Unit)) {
 
 
 fun RecyclerView.listenScroll(
-    isShow: ((Boolean) -> Unit)?,
+    end: ((Boolean) -> Unit)?,
+    scroll : ((DIRECTION_VERTICAL) -> Unit)?
 ) {
 
     var isFirst: Boolean = true
@@ -43,25 +44,26 @@ fun RecyclerView.listenScroll(
 //            }
 
             when {
-//                dy > 0 -> {
-//                    //listener(DIRECTION_VERTICAL.DOWN)
-//                    //System.out.println("Scrolled Downwards");
-//                }
-//                dy < 0 -> {
-//                    //listener(DIRECTION_VERTICAL.UP)
-//                    isShow?.invoke(true)
-//                    //System.out.println("Scrolled Upwards");
-//                }
+                dy > 0 -> {
+                   scroll?.invoke(DIRECTION_VERTICAL.DOWN)
+                    //System.out.println("Scrolled Downwards");
+                }
+                dy < 0 -> {
+                    scroll?.invoke(DIRECTION_VERTICAL.UP)
+                    //listener(DIRECTION_VERTICAL.UP)
+                    //isShow?.invoke(true)
+                    //System.out.println("Scrolled Upwards");
+                }
                 else -> {
-                    isShow?.invoke(false)
+                    //isShow?.invoke(false)
                     //listener(DIRECTION_VERTICAL.NOTSCROLL)
                     //System.out.println("No Vertical Scrolled");
                 }
             }
 
 
-            if (!recyclerView.canScrollVertically(1)) {
-                isShow?.invoke(true)
+            if (!recyclerView.canScrollVertically(1) && !isFirst) {
+                end?.invoke(true)
             } else {
                 isFirst = false
             }
