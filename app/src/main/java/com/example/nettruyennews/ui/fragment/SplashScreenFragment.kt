@@ -21,9 +21,7 @@ import com.orhanobut.logger.Logger
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class SplashScreenFragment : Fragment() {
@@ -35,9 +33,8 @@ class SplashScreenFragment : Fragment() {
     ): View? {
 
 
-        BookApp.getInstance().sharePreferences.data.map {
-            Log.d(Constant.TAG, "onCreateView: ${it[Constant.USE_FIRST]} --- ${it[Constant.TEST]}")
-        }
+
+
 
         lifecycleScope.launch {
 
@@ -46,12 +43,17 @@ class SplashScreenFragment : Fragment() {
             }
 
 
-
+//            BookApp.getInstance().sharePreferences.data.catch { exception ->
+//                Logger.e("onCreateView catch ${exception.message}")
+//            }.collect {
+//                Logger.e("onCreateView ${it[Constant.USE_FIRST]}")
+//            }
+//
 //
 //            launch(Dispatchers.IO) {
 //                BookApp.getInstance().sharePreferences.edit { preferences ->
 //                    preferences[Constant.USE_FIRST] = true
-//                    preferences.get()
+//
 //                    preferences[Constant.TEST] = "huy pham"
 //                    Log.d(Constant.TAG, "onCreateView 1: ${preferences[Constant.USE_FIRST]}")
 //                    delay(5000)
@@ -74,13 +76,12 @@ class SplashScreenFragment : Fragment() {
 //            }
 
 
-
             Constant.URL_ORIGINAL = urlFuture.await() ?: Constant.URL_ORIGINAL_CUSTOM
 
 
-                val action =
-                    SplashScreenFragmentDirections.actionSplashScreenFragmentToHomeFragment()
-                findNavController().navigate(action)
+            val action =
+                SplashScreenFragmentDirections.actionSplashScreenFragmentToHomeFragment()
+            findNavController().navigate(action)
         }
 
         return inflater.inflate(R.layout.fragment_splash_screen, container, false)
