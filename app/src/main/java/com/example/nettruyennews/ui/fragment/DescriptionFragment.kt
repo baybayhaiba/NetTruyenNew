@@ -2,6 +2,7 @@ package com.example.nettruyennews.ui.fragment
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.nettruyennews.adapter.AdapterChapter
 import com.example.nettruyennews.databinding.FragmentDescriptionBinding
+import com.example.nettruyennews.extension.show
 import com.example.nettruyennews.model.Book
 import com.example.nettruyennews.model.DescriptionBook
 import com.example.nettruyennews.ui.base.BaseFragment
@@ -44,9 +46,11 @@ class DescriptionFragment : BaseFragment<DescriptionViewModel, FragmentDescripti
                 book = bundle.book
                 rcvChapter.adapter = adapterChapter
 
-                mViewModel.getDescription(book).observe(this@DescriptionFragment) {
+                mViewModel.getDescription(book).observe(viewLifecycleOwner) {
+
                     when (it.status) {
                         Status.ERROR -> {
+                            show(it.message)
                             loading?.dismiss()
                         }
                         Status.LOADING -> loading?.show()
@@ -57,7 +61,7 @@ class DescriptionFragment : BaseFragment<DescriptionViewModel, FragmentDescripti
                     }
                 }
 
-                mViewModel.chapterCurrent.observe(this@DescriptionFragment) {
+                mViewModel.chapterCurrent.observe(viewLifecycleOwner) {
                     val action =
                         DescriptionFragmentDirections.actionDescriptionFragmentToDetailFragment(
                             description!!, it

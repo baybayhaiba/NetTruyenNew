@@ -13,7 +13,7 @@ object Constant {
 
     const val VERSION = 1
     const val TAG = "app_nettruyen"
-    const val URL_ORIGINAL_CUSTOM = "http://www.nettruyenme.com/"
+    const val URL_ORIGINAL_CUSTOM = "https://www.nettruyenme.com/"
 
 
     val USE_FIRST = booleanPreferencesKey("use_first_dataStore")

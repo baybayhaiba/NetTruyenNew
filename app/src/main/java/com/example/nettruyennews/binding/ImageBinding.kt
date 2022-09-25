@@ -9,9 +9,23 @@ import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.request.target.Target
 import com.example.nettruyennews.R
 import com.example.nettruyennews.model.Book
+import com.example.nettruyennews.util.Constant
 import com.example.nettruyennews.util.file.FileUtil
 
 object ImageBinding {
+
+
+//    @JvmStatic
+//    @BindingAdapter("imageCoil")
+//    fun bindImage(imageView: ImageView, url: String) {
+//        imageView.load(url) {
+//            crossfade(true)
+//            placeholder(R.drawable.loading)
+//            addHeader(name = "Referer", value = "http://www.nettruyengo.com/")
+//            size(Size.ORIGINAL)
+//
+//        }
+//    }
 
     @JvmStatic
     @BindingAdapter("imageGlide")
@@ -50,7 +64,7 @@ object ImageBinding {
         if (view is ImageView) {
             val glideUrl = GlideUrl("https:$url") {
                 mapOf(
-                    "Referer" to "http://www.nettruyengo.com/"
+                    "Referer" to Constant.URL_ORIGINAL
                 )
             }
 

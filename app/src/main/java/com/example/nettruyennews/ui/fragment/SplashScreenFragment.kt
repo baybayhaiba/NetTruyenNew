@@ -78,7 +78,6 @@ class SplashScreenFragment : Fragment() {
 
             Constant.URL_ORIGINAL = urlFuture.await() ?: Constant.URL_ORIGINAL_CUSTOM
 
-
             val action =
                 SplashScreenFragmentDirections.actionSplashScreenFragmentToHomeFragment()
             findNavController().navigate(action)

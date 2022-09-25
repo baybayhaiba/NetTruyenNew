@@ -1,11 +1,13 @@
 package com.example.nettruyennews.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.nettruyennews.model.DescriptionBook
 import com.example.nettruyennews.repository.DetailRepository
 import com.example.nettruyennews.util.data.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -23,6 +25,7 @@ class DetailViewModel @Inject constructor(private val detailRepository: DetailRe
     private val index: Int
         get() = currentIndex.value!!
 
+    private var jobNavigation: Job? = null
 
     val chapterCurrent = Transformations.map(currentIndex) {
 
@@ -47,17 +50,24 @@ class DetailViewModel @Inject constructor(private val detailRepository: DetailRe
         }
     }
 
-    fun onClickShowNavigation(){
-        if(navigation.value == true) {
+    fun onClickShowNavigation() {
+
+        if (navigation.value == true) {
             navigation.value = false
+            ///remove before delay
+            jobNavigation?.cancel()
+
             return
         }
 
 
         navigation.value = true
 
-        viewModelScope.launch {
-            delay(2000)
+        jobNavigation = viewModelScope.launch {
+
+
+
+            delay(3000)
 
             navigation.value = false
         }

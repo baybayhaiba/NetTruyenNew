@@ -17,8 +17,10 @@ open class Book(
 }
 
 //extension
-fun Book.room(): BookRoom {
-    return BookRoom(title = title, image = image, link = link.replace(Constant.URL_ORIGINAL, ""))
-}
+fun Book.room(): BookRoom = BookRoom(
+    title = title,
+    image = image,
+    link = link.replace(Constant.URL_ORIGINAL, "")
+)
 
 fun Book.linkBookRoom() = link.replace(Constant.URL_ORIGINAL, "")
