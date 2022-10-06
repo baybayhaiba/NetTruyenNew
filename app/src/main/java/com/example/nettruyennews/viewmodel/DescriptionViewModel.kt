@@ -1,5 +1,6 @@
 package com.example.nettruyennews.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
@@ -137,6 +138,9 @@ constructor(
     }
 
     fun onClickChapterLast() {
+
+        Log.i("hahahaha", "onClickChapterLast: => ${descriptionCurrent != null} ")
+
         descriptionCurrent?.let { onClickChapter(0) }
     }
 

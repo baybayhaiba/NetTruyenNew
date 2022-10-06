@@ -1,5 +1,6 @@
 package com.example.nettruyennews.repository
 
+import android.util.Log
 import com.example.nettruyennews.data.BookDao
 import com.example.nettruyennews.data.BookService
 import com.example.nettruyennews.data.ChapterDao

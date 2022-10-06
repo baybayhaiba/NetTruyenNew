@@ -10,12 +10,12 @@
         <option name="gradleJvm" value="11" />
         <option name="modules">
           <set>
+            <option value="C:/flutter_bin/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_android-2.0.20/android" />
+            <option value="C:/flutter_bin/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_android-2.0.12/android" />
+            <option value="C:/flutter_bin/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-2.0.3+1/android" />
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/flutter_nettruyen/.android/Flutter" />
-            <option value="$PROJECT_DIR$/../../../../../flutter_bin/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_android-2.0.20/android" />
-            <option value="$PROJECT_DIR$/../../../../../flutter_bin/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_android-2.0.12/android" />
-            <option value="$PROJECT_DIR$/../../../../../flutter_bin/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-2.0.3+1/android" />
           </set>
         </option>
       </GradleProjectSettings>

@@ -9,7 +9,7 @@ object Constant {
     lateinit var URL_ORIGINAL: String
     val URL_HOME get() = "$URL_ORIGINAL?page="
     val URL_RANK get() = "$URL_ORIGINAL/tim-truyen?status=-1&sort=10&page="
-
+    const val URL_SAMPLE_IMAGE = "https://picsum.photos/200"
 
     const val VERSION = 1
     const val TAG = "app_nettruyen"

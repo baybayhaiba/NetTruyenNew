@@ -1,5 +1,6 @@
 package com.example.nettruyennews.binding
 
+import android.util.Log
 import android.view.View
 import androidx.databinding.BindingAdapter
 import com.example.nettruyennews.ui.layout.ItemNavigationChapter

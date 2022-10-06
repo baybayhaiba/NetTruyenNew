@@ -29,6 +29,7 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>(), C
     override val mViewModel: DetailViewModel by viewModels()
     override var mViewBinding: FragmentDetailBinding? = null
     private val binding get() = mViewBinding!!
+    private var isFirst = true
     private lateinit var adapterImage: AdapterImage
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +43,7 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>(), C
             adapterImage = AdapterImage(
                 onClick = {
                     onClickImage(it)
-                }, viewModel = mViewModel
+                },
             )
 
             registerRecyclerView()
@@ -88,7 +89,12 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>(), C
                 mViewModel.navigation.value = false
             }
         }, end = {
-            mViewModel.navigation.value = true
+            if (adapterImage.haveImage && !isFirst) {
+                mViewModel.navigation.value = true
+            } else {
+                isFirst = false
+            }
+
         })
     }
 
@@ -116,6 +122,9 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>(), C
     }
 
     private fun onClickImage(image: String) = showToast(image)
-    override fun onClick(behavior: ChapterBehavior) =
-        if (behavior == ChapterBehavior.next) mViewModel.onClickNextChapter() else mViewModel.onClickPreviousChapter()
+    override fun onClick(behavior: ChapterBehavior) {
+        mViewModel.collapse()
+        return if (behavior == ChapterBehavior.next) mViewModel.onClickNextChapter() else mViewModel.onClickPreviousChapter()
+
+    }
 }

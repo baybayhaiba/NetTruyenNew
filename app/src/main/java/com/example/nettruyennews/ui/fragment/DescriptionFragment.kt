@@ -46,7 +46,7 @@ class DescriptionFragment : BaseFragment<DescriptionViewModel, FragmentDescripti
                 book = bundle.book
                 rcvChapter.adapter = adapterChapter
 
-                mViewModel.getDescription(book).observe(viewLifecycleOwner) {
+                mViewModel.getDescription(book).observe(this@DescriptionFragment) {
 
                     when (it.status) {
                         Status.ERROR -> {
@@ -61,7 +61,7 @@ class DescriptionFragment : BaseFragment<DescriptionViewModel, FragmentDescripti
                     }
                 }
 
-                mViewModel.chapterCurrent.observe(viewLifecycleOwner) {
+                mViewModel.chapterCurrent.observe(this@DescriptionFragment) {
                     val action =
                         DescriptionFragmentDirections.actionDescriptionFragmentToDetailFragment(
                             description!!, it
@@ -84,6 +84,7 @@ class DescriptionFragment : BaseFragment<DescriptionViewModel, FragmentDescripti
         mViewBinding?.lifecycleOwner = this
         mViewBinding?.viewModel = mViewModel
         adapterChapter.submit(descriptionBook.chapter)
+
         loading?.dismiss()
     }
 

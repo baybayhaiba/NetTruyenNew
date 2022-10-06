@@ -3,6 +3,7 @@ package com.example.nettruyennews.viewmodel
 import android.util.Log
 import androidx.lifecycle.*
 import com.example.nettruyennews.model.DescriptionBook
+import com.example.nettruyennews.model.linkBookRoom
 import com.example.nettruyennews.repository.DetailRepository
 import com.example.nettruyennews.util.data.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -50,6 +51,19 @@ class DetailViewModel @Inject constructor(private val detailRepository: DetailRe
         }
     }
 
+    fun collapse() {
+
+        Log.i("hahahaha1234", "collapse: ${navigation.value}")
+
+        if (navigation.value == true) {
+            navigation.value = false
+            ///remove before delay
+            jobNavigation?.cancel()
+
+            return
+        }
+    }
+
     fun onClickShowNavigation() {
 
         if (navigation.value == true) {
@@ -66,7 +80,6 @@ class DetailViewModel @Inject constructor(private val detailRepository: DetailRe
         jobNavigation = viewModelScope.launch {
 
 
-
             delay(3000)
 
             navigation.value = false
@@ -75,9 +88,8 @@ class DetailViewModel @Inject constructor(private val detailRepository: DetailRe
 
 
     private fun saveChapter() = viewModelScope.launch {
-
         detailRepository.saveChapter(
-            description.book.link,
+            description.book.linkBookRoom(),
             description.chapter[index]
         )
     }
