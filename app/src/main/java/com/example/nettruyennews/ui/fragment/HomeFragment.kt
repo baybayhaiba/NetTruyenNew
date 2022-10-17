@@ -123,7 +123,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(), ScrollT
 
 
 
-            mViewModel.menu.observe(this) { menuMap ->
+            mViewModel.menu.observe(this) { menuMap ->..
                 val (link, text) = menuMap.unzip()
 
                 showDialog("Information", text, onClick = { category ->
@@ -136,7 +136,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(), ScrollT
                 val (link, text) = rankMap.unzip()
 
                 showDialog("Information", text, onClick = { rank ->
-                    val link = "${link[rank]}&page="
+                    val link = "${link[rank]}?page="
                     mViewModel.getBooks(link)
                 })
             }
