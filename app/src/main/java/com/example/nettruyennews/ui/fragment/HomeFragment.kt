@@ -3,13 +3,11 @@ package com.example.nettruyennews.ui.fragment
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isGone
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
@@ -25,15 +23,19 @@ import com.example.nettruyennews.databinding.FragmentHomeBinding
 import com.example.nettruyennews.extension.*
 import com.example.nettruyennews.model.Book
 import com.example.nettruyennews.ui.base.BaseFragment
-import com.example.nettruyennews.util.*
-import com.example.nettruyennews.util.Constant.TAG
+import com.example.nettruyennews.util.Constant
 import com.example.nettruyennews.util.Constant.URL_ORIGINAL
+import com.example.nettruyennews.util.showDialogWithEditText
 import com.example.nettruyennews.viewmodel.HomeViewModel
 import com.facebook.shimmer.ShimmerFrameLayout
+import com.google.firebase.ktx.Firebase
 import com.mahdikh.vision.scrolltotop.widget.ScrollToTopListener
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -103,7 +105,16 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(), ScrollT
                     mViewModel.loading.value = isLoading
 
                     if (isError) {
-                        show(it.source.refresh.toString())
+
+                        requireContext().showDialogWithEditText { text ->
+                            Firebase.setUrlNettruyen("https://www.$text?page=", onSuccess = { newUrl ->
+                                mViewModel.getBooks(newUrl)
+                            }, onError = { exception ->
+                                show(exception.toString())
+                            })
+                        }
+
+
                     }
                 }
             }
@@ -123,7 +134,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(), ScrollT
 
 
 
-            mViewModel.menu.observe(this) { menuMap ->..
+            mViewModel.menu.observe(this) { menuMap ->
                 val (link, text) = menuMap.unzip()
 
                 showDialog("Information", text, onClick = { category ->

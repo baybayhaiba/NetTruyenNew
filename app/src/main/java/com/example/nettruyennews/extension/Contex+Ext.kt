@@ -6,9 +6,11 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.text.InputType
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.example.nettruyennews.R
@@ -30,6 +32,24 @@ inline fun <reified T> Context.startActivity(bundle: Bundle? = null) {
 
 fun Context.show(text: String) {
     Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+}
+
+fun Context.showDialogWithEditText(text: (String) -> Unit) {
+    val builder = AlertDialog.Builder(this)
+    builder.setTitle("App bị lỗi rồi đưa đường link mới vào đây !")
+
+    val input = EditText(this)
+
+    builder.setView(input)
+
+    builder.setPositiveButton(
+        "OK"
+    ) { _, _ -> text(input.text.toString()) }
+    builder.setNegativeButton(
+        "Cancel"
+    ) { dialog, _ -> dialog.cancel() }
+
+    builder.show()
 }
 
 fun Context.showLoading(): AlertDialog? {

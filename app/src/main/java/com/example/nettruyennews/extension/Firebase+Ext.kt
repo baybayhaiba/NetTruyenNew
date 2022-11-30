@@ -1,6 +1,5 @@
 package com.example.nettruyennews.extension
 
-import com.example.nettruyennews.util.Constant
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -10,7 +9,6 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 
@@ -32,6 +30,14 @@ suspend fun Firebase.url() = suspendCoroutine<String?> { callback ->
 
         })
 
+}
+
+fun Firebase.setUrlNettruyen(text: String, onSuccess: (String) -> Unit, onError: (Exception) -> Unit) {
+    Firebase.instanceRealtime().getReference("url_nettruyen").setValue(text).addOnSuccessListener {
+        onSuccess(text)
+    }.addOnFailureListener {
+        onError(it)
+    }
 }
 
 fun Firebase.getUrlNettruyen(result: (String?) -> Unit) =
