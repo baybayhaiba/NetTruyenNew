@@ -35,7 +35,6 @@ class ConnectNativeProvider extends ChangeNotifier {
 
   void startListen() {
     const MethodChannel(methodChannel).setMethodCallHandler((call) async {
-      print("hahahahahahaha => ${call.method} ---- ${call.arguments}");
 
       if (protocol_parameters == call.method) {
         agr = Agr.fromJson(call.arguments);
